@@ -1,8 +1,15 @@
-# React + Vite
+List of todo's:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[] How to store and use images properly
+[] Create the hero section on the homepage
+[] Create the 'about the gallery / for artists'
+[] Create the 'about the curator / contact the gallery'
+[] Import 2 fonts for styling 
+  
+1. (<style>
+@import url('https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap');
+</style>)
+2. <style>
+@import url('https://fonts.googleapis.com/css2?family=Antic+Didone&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+</style>
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
