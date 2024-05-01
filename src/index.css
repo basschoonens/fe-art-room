@@ -4,23 +4,71 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol {
-  margin: 0;
-  padding: 0;
   font-size: inherit;
   font-weight: inherit;
 }
 
+/* Typography */
+:root {
+  --font-family: 'Antic Didone', sans-serif;
+  --font-family-alt: 'Hind Siliguri', sans-serif;
+}
 
+/* Spacing */
+:root {
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 40px;
+}
 
+/* Colors */
+:root {
+  --color-primary: #ECD5BB;
+  --color-secondary: #54627B;
+  --color-light: #C4DBE0;
+  --color-dark: #710117;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+}
+
+/* Borders */
+:root {
+  --border-sm: 1px solid;
+  --border-md: 2px solid;
+  --border-lg: 3px solid;
+}
+
+/* Shadows */
+:root {
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Breakpoints */
+:root {
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+/* Icons */
+:root {
+  --icon-small: 16px;
+  --icon-medium: 24px;
+  --icon-large: 32px;
+}
+
+:root {
+  --navbar-height: 80px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

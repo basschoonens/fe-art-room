@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-height: var(--navbar-height);
+    background: rgb(44,47,57);
+    background: var(--color-secondary);
+}
+
+span {
+max-height: (var(--navbar-height);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+    list-style: none;
+}
+
+.default-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    border-bottom: 1px solid transparent;
+}
+
+.active-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    border-bottom: 1px solid white;
+}
+

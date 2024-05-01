@@ -11,15 +11,14 @@ import Profile from "./pages/registration/Profile.jsx";
 import Order from "./pages/orders/Order.jsx";
 import Purchased from "./pages/orders/Purchased.jsx";
 import NotFound from "./pages/notfound/NotFound.jsx";
-import {useTheme} from "./utils/Theme.jsx";
+import Navigation from "./components/navigation/Navigation.jsx";
+
 
 function App() {
 
-    const theme = useTheme();
-
     return (
-        <div style={{ fontFamily: theme.typography.fontFamily, color: theme.colors.primary }}>
-                <h1>Dit is mijn eerste pagina</h1>
+        <>
+                <Navigation/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/maingallery" element={<MainGallery/>}/>
@@ -33,7 +32,7 @@ function App() {
                     <Route path="/purchased" element={<Purchased/>}/>
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
-        </div>
+        </>
     )
 }
 

@@ -1,4 +1,7 @@
-.hero-section {
-    padding: 50px 50px;
-    text-align: center;
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
