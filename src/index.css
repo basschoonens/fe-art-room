@@ -32,6 +32,7 @@
   --color-white: #ffffff;
   --color-black: #000000;
   --color-transparent: transparent;
+  --color-gradient: linear-gradient(45deg, hsla(32, 56%, 83%, 1) 18%, hsla(0, 0%, 100%, 1) 98%);
 }
 
 /* Borders */
@@ -68,7 +69,7 @@
   --navbar-height: 80px;
 }
 
-img {
+:root img {
   max-width: 100%;
-  height: auto;
+  max-height: inherit;
 }
