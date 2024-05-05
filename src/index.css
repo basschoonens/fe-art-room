@@ -14,6 +14,12 @@
   --font-family-alt: 'Hind Siliguri', sans-serif;
 }
 
+:root {
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 24px;
+}
+
 /* Spacing */
 :root {
   --spacing-xs: 8px;

@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100vw;
     max-height: var(--navbar-height);
     background: var(--color-secondary);
 }
@@ -23,8 +24,9 @@
 
 .icon-links {
     display: flex;
-    margin-left: var(--spacing-md);
+    justify-content: space-between;
     list-style: none;
+    width: 50px;
     margin-right: 20px;
 }
 
@@ -32,15 +34,21 @@
     color: var(--color-primary);
     font-family: var(--font-family);
     text-decoration: none;
-    font-size: 1.5em;
-    border-bottom: 1px solid transparent;
+    font-size: var(--font-size-large);
 }
 
 .active-link {
     color: var(--color-primary);
     font-family: var(--font-family);
+    font-size: var(--font-size-large);
     text-decoration: none;
-    font-size: 1.5em;
-    border-bottom: 1px solid var(--color-primary);
+    border-bottom: 2px solid var(--color-dark);
 }
 
+@media screen and (min-width: 1440px) {
+    .navbar {
+        justify-content: center;
+        width: 1440px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Increase shadow intensity for wider screens */
+    }
+}
