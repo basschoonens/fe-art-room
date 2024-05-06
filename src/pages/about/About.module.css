@@ -1,0 +1,90 @@
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    background: var(--color-transparent);
+}
+
+.galleryInfoContainer,
+.galleryContactContainer{
+    display: flex;
+    flex-direction: column;
+    max-width: inherit;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.galleryContactContainer{
+    border: solid 5px var(--color-light);
+}
+
+.welcomeContainer,
+.userContainer,
+.artistContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: inherit;
+    background: var(--color-transparent);
+    padding: 20px 20px;
+    margin: 20px 0;
+    border: solid 5px var(--color-light);
+    border-radius: 5px;
+}
+
+.welcomeContainerContents,
+.userContainerContents,
+.artistContainerContents{
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+}
+
+.contactContainerContents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: inherit;
+    padding: 20px 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: var(--font-family);
+    font-weight: 700;
+    color: var(--color-dark);
+    padding: 20px 0 0 20px;
+}
+
+p {
+    font-family: var(--font-family-alt);
+    font-weight: 400;
+    color: var(--color-black);
+    padding: 20px 0 0 20px;
+}
+
+.contactForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.inputField,
+.textAreaField {
+    margin: 20px 0; /* Add some margin for spacing */
+    padding: 24px; /* Increase padding for better visual appearance */
+    width: 100%; /* Use full width */
+    max-width: 600px; /* Maximum width */
+    min-width: 200px; /* Minimum width */
+    font-family: var(--font-family-alt); /* Apply custom font */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    border: 2px solid var(--color-light); /* Add border */
+}

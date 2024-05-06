@@ -1,0 +1,6 @@
+.navbarLogoImg {
+    cursor: pointer;
+    max-width: 100%;
+    max-height: inherit;
+    margin-left: 20px;
+}

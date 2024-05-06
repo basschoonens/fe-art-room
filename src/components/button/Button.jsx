@@ -1,9 +1,13 @@
-import './Button.module.css';
 import React from 'react';
+import styles from './Button.module.css';
 
+export default function Button({ id, type, onClick, text, className }) {
+    // Concatenate the original button class name with the provided className
+    const buttonClassName = `${styles.button}.${className}`;
 
-export default function Button({id, type, onClick, text}) {
     return (
-        <button id={id} type={type} onClick={onClick}>{text}</button>
-    )
+        <button className={buttonClassName} id={id} type={type} onClick={onClick}>
+            {text}
+        </button>
+    );
 }

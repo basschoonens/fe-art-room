@@ -8,13 +8,7 @@
     background: var(--color-secondary);
 }
 
-.navbar-logo-img {
-    max-width: 100%;
-    max-height: inherit;
-    margin-left: 20px;
-}
-
-.nav-links {
+.navLinks {
     display: flex;
     justify-content: space-evenly;
     list-style: none;
@@ -22,7 +16,7 @@
     flex-grow: 1;
 }
 
-.icon-links {
+.iconLinks {
     display: flex;
     justify-content: space-between;
     list-style: none;
@@ -30,14 +24,14 @@
     margin-right: 20px;
 }
 
-.default-link {
+.defaultLink {
     color: var(--color-primary);
     font-family: var(--font-family);
     text-decoration: none;
     font-size: var(--font-size-large);
 }
 
-.active-link {
+.activeLink {
     color: var(--color-primary);
     font-family: var(--font-family);
     font-size: var(--font-size-large);

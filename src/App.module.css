@@ -1,4 +1,4 @@
-.app-container {
+.appContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (min-width: 1440px) {
-    .app-container {
+    .appContainer {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Increase shadow intensity for wider screens */
     }
 }

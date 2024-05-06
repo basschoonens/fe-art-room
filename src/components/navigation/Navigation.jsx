@@ -1,31 +1,29 @@
-import './Navigation.css';
+import styles from './Navigation.module.css';
 import Logo from '../logo/Logo.jsx';
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import shoppingCart from '../../assets/shopping_cart_FILL0_wght400_GRAD0_opsz24.svg';
 import profile from '../../assets/person_FILL0_wght400_GRAD0_opsz24.svg';
 
-
 export default function Navigation() {
-
     return (
         <nav>
-            <div className="navbar">
-                <Logo />
-                <ul className="nav-links">
+            <div className={styles.navbar}>
+                <Logo/>
+                <ul className={styles.navLinks}>
                     <li>
-                        <NavLink className={({isActive}) => isActive ? "active-link" : "default-link"}
+                        <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
                                  to="/">For artlovers</NavLink>
                     </li>
                     <li>
-                        <NavLink className={({isActive}) => isActive ? "active-link" : "default-link"} to="/artist">For artists</NavLink>
+                        <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink} to="/artist">For
+                            artists</NavLink>
                     </li>
                     <li>
-                        <NavLink className={({isActive}) => isActive ? "active-link" : "default-link"}
+                        <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
                                  to="/about">About the gallery</NavLink>
                     </li>
                 </ul>
-                {/*TODO Deze icons nog in kleur aanpassen*/}
-                <ul className="icon-links">
+                <ul className={styles.iconLinks}>
                     <li>
                         <img src={shoppingCart} alt="Shopping Cart"/>
                     </li>

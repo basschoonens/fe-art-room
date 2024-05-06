@@ -1,4 +1,4 @@
-import './Slider.css';
+import './Slider.module.css';
 import React, { useState, useEffect } from 'react';
 
 const Slider = ({ imageUrls }) => {
