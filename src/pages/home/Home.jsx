@@ -1,8 +1,8 @@
-import './Home.css';
+import HomeCSS from './Home.module.css';
 import artist from '../../assets/artist.jpg';
 import curator from '../../assets/curator.jpg'
 import Button from "../../components/button/Button.jsx";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function Home() {
 
@@ -10,20 +10,23 @@ export default function Home() {
 
 
     return (
-        <div className="page-container">
+        <div className={HomeCSS.pageContainer}>
             <section>
                 HERO SECTION
             </section>
-            <section className="gallery-info">
-                    <span className="to-artist-image"><img id="artist" src={artist} alt="gallery image"/></span>
-                    <Button text="For artists" type="button" onClick={() => navigate("/artist")}/>
+            <section className={HomeCSS.artistContainer}>
+                <span className={HomeCSS.toArtistImage}>
+                    <img id="artist-image" src={artist} alt="gallery image"/>
+                    <Button id={HomeCSS.artistButton} text="For artists" type="button"
+                            onClick={() => navigate("/artist")}/>
+                </span>
             </section>
-            <section className="curator-info">
-                <div className="image-container">
-                    <span className="contact-curator-image"><img id="curator" src={curator} alt="curator image"/></span>
-                    {/*TODO - Contact formulier & pagina maken en linken*/}
-                    <Button text="Contact the curator" type="button" onClick={() => navigate("/about")}/>
-                </div>
+            <section className={HomeCSS.curatorContainer}>
+                    <span className={HomeCSS.toCuratorImage}>
+                        <img id="curator-image" src={curator} alt="curator image"/>
+                        <Button id={HomeCSS.curatorButton} text="Contact the curator" type="button"
+                                onClick={() => navigate("/about")}/>
+                    </span>
             </section>
         </div>
     )

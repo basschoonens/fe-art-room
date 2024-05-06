@@ -1,6 +1,4 @@
-/*// Create styling for the button component*/
-
-.button {
+button {
     background-color: var(--color-dark);
     border: solid 1px var(--color-light);
     color: var(--color-primary);

@@ -1,10 +1,9 @@
-// create a generic button component that can be reused everywhere in the app.
-
+import './Button.module.css';
 import React from 'react';
-import './Button.css';
 
-export default function Button({text, onClick, type}) {
+
+export default function Button({id, type, onClick, text}) {
     return (
-        <button className="button" type={type} onClick={onClick}>{text}</button>
+        <button id={id} type={type} onClick={onClick}>{text}</button>
     )
 }
