@@ -1,0 +1,15 @@
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, hsla(32, 56%, 83%, 1) 18%, hsla(0, 0%, 100%, 1) 98%);
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 1440px) {
+    .appContainer {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Increase shadow intensity for wider screens */
+    }
+}

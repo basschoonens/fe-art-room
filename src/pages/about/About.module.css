@@ -1,0 +1,119 @@
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    background: var(--color-transparent);
+}
+
+.galleryInfoContainer,
+.galleryContactContainer{
+    display: flex;
+    flex-direction: column;
+    max-width: inherit;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.galleryContactContainer{
+    border: solid 5px var(--color-light);
+}
+
+.welcomeContainer,
+.userContainer,
+.artistContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: inherit;
+    background: var(--color-transparent);
+    padding: 20px 20px;
+    margin: 20px 0;
+    border: solid 5px var(--color-light);
+    border-radius: 5px;
+}
+
+.welcomeContainerContents,
+.userContainerContents,
+.artistContainerContents{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 100%;
+}
+
+.welcomeContainerContents p,
+.userContainerContents p,
+.artistContainerContents p{
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}
+
+.welcomeContainerContents span,
+.userContainerContents span,
+.artistContainerContents span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30vw;
+    max-height: 300px;
+}
+
+/*TODO - add border radius to index.css*/
+/*TODO - add box-shadow to index.css*/
+
+.welcomeContainerContents img,
+.userContainerContents img,
+.artistContainerContents img {
+    border-radius: var(--spacing-xs);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.contactContainerContents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: inherit;
+    padding: 20px 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: var(--font-family);
+    font-weight: 700;
+    color: var(--color-dark);
+    padding: 20px;
+}
+
+p {
+    font-family: var(--font-family-alt);
+    font-weight: 400;
+    color: var(--color-black);
+    padding: 20px 0 0 20px;
+}
+
+.contactForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.inputField,
+.textAreaField {
+    margin: 20px 0;
+    padding: 24px;
+    width: 100%;
+    max-width: 600px;
+    min-width: 200px;
+    font-family: var(--font-family-alt);
+    border-radius: 8px;
+    border: 2px solid var(--color-light);
+}
