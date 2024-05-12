@@ -48,6 +48,12 @@
   --border-lg: 3px solid;
 }
 
+:root {
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 8px;
+}
+
 /* Shadows */
 :root {
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -66,6 +72,7 @@
 
 :root {
   --navbar-height: 80px;
+  --footer-height: auto;
 }
 
 :root img {

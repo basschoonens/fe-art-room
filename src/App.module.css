@@ -10,6 +10,6 @@
 
 @media screen and (min-width: 1440px) {
     .appContainer {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Increase shadow intensity for wider screens */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
 }
