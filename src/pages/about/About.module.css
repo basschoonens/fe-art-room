@@ -18,7 +18,7 @@
 }
 
 .galleryContactContainer{
-    border: solid 5px var(--color-light);
+    border: solid var(--border-lg) var(--color-light);
 }
 
 .welcomeContainer,

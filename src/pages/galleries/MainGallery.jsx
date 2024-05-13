@@ -1,62 +1,80 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
+import ArtworkCard from "../../components/ArtworkCard/ArtworkCard.jsx";
+import styles from './MainGallery.module.css';
+import {shuffleArray} from "../../helpers/shuffleArray.js";
 
 export default function MainGallery() {
 
-    const [artwork, setArtwork] = useState([]);
-    const [imageData, setImageData] = useState('');
+    const [artworks, setArtworks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const artworksPerPage = 6;
 
-    async function fetchArtworks() {
-        try {
-            const response = await axios.get('http://localhost:8080/artworks');
-            setArtwork(response.data);
-            console.log(response.data);
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
-    async function fetchImageData(id) {
-        setError(null);
-
-        try {
+    useEffect(() => {
+        const fetchArtworks = async () => {
             setLoading(true);
-            const download = await axios.get(`http://localhost:8080/artworks/${id}/image`, {
-                responseType: 'arraybuffer'
-            });
-            const blob = new Blob([download.data], {type: 'image/png'});
-            const dataUrl = URL.createObjectURL(blob);
-            setImageData(dataUrl);
-        } catch (e) {
-            setError(e);
-        } finally {
-            setLoading(false);
+            setError(null);
+
+            try {
+                const response = await axios.get(`http://localhost:8080/artworks`);
+                const shuffledArtworks = shuffleArray(response.data);
+                setArtworks(shuffledArtworks);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchArtworks();
+
+    }, []);
+
+    const nextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
+
+    const prevPage = () => {
+        setCurrentPage(currentPage - 1);
+    };
+
+    const startIndex = (currentPage - 1) * artworksPerPage;
+    const endIndex = Math.min(currentPage * artworksPerPage, artworks.length);
+
+    const currentArtworks = artworks.slice(startIndex, endIndex);
+
+    useEffect(() => {
+        if (currentArtworks.length === 0 && currentPage > 1) {
+            setCurrentPage(currentPage - 1);
         }
-    }
+    }, [currentArtworks, currentPage]);
 
     return (
         <>
-            <div className="page-container">
+            <div className={styles.pageContainer}>
                 <h1>Main Gallery</h1>
-                <button onClick={fetchArtworks}>See all artworks</button>
-            </div>
-            <div>
-                {artwork.map(art => (
-                    <div key={art.id}>
-                        <h2>{art.title}</h2>
-                        <p>{art.description}</p>
-                        <p>{art.artist}</p>
-                        <p>{art.dateCreated}</p>
-                        {art.image && <img src={`http://localhost:8080/artworks/${art.id}/image`}
-                                           alt="artwork"
-                                           onClick={() => fetchImageData(art.id)}
-                        />}
-                        {loading && <p>Loading...</p>}
-                        {error && <p>{error.message}</p>}
+                <p>For more information on prices, and to leave comments and reviews please register or login</p>
+                {loading && <p>Loading...</p>}
+                {error && <p>Error: {error.message}</p>}
+                {!loading && !error && artworks.length === 0 && <p>No artworks found</p>}
+                <div>
+                    <div className={styles.cardContainer}>
+                        {currentArtworks.map(art => (
+                            <ArtworkCard
+                                key={art.id}
+                                title={art.title}
+                                artist={art.artist}
+                                imageUrl={`http://localhost:8080/artworks/${art.id}/image`}
+                            />
+                        ))}
                     </div>
-                ))}
+                </div>
+                <div className={styles.buttonsContainer}>
+                    <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
+                    <button onClick={nextPage}>Next</button>
+                </div>
             </div>
         </>
     )

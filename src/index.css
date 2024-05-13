@@ -44,8 +44,8 @@
 /* Borders */
 :root {
   --border-sm: 1px solid;
-  --border-md: 2px solid;
-  --border-lg: 3px solid;
+  --border-md: 3px solid;
+  --border-lg: 5px solid;
 }
 
 :root {
