@@ -4,8 +4,10 @@
     align-items: center;
     justify-content: center;
     max-width: 1200px;
+    width: 100%;
     background: var(--color-transparent);
     margin: 0 20px;
+    padding: var(--spacing-md);
 }
 
 .cardContainer{

@@ -14,7 +14,7 @@ export default function Navigation() {
                                  to="/maingallery">For artlovers</NavLink>
                     </li>
                     <li>
-                        <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink} to="/artist">For
+                        <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink} to="/artistgallery">For
                             artists</NavLink>
                     </li>
                     <li>
@@ -24,10 +24,10 @@ export default function Navigation() {
                 </ul>
                 <ul className={styles.iconLinks}>
                     <li>
-                        <FaShoppingCart className={styles.icon}/> {/* Using FaShoppingCart icon */}
+                        <FaShoppingCart className={styles.icon}/>
                     </li>
                     <li>
-                        <FaUser className={styles.icon}/> {/* Using FaUser icon */}
+                        <FaUser className={styles.icon}/>
                     </li>
                 </ul>
             </div>

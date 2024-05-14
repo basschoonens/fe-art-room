@@ -1,8 +1,8 @@
-import styles from './ArtworkCard.module.css';
+import styles from './UserArtworkCard.module.css';
 import React from 'react';
 
 
-const ArtworkCard = ({ title, artist, imageUrl }) => {
+const UserArtworkCard = ({ title, artist, imageUrl }) => {
     return (
         <div className={styles.artworkCard}>
             <img src={imageUrl} alt={title}/>
@@ -18,4 +18,4 @@ const ArtworkCard = ({ title, artist, imageUrl }) => {
     );
 };
 
-export default ArtworkCard;
+export default UserArtworkCard;

@@ -1,7 +1,7 @@
+import styles from './MainGallery.module.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import ArtworkCard from "../../components/ArtworkCard/ArtworkCard.jsx";
-import styles from './MainGallery.module.css';
+import UserArtworkCard from "../../components/ArtworkCard/UserArtworkCard.jsx";
 import {shuffleArray} from "../../helpers/shuffleArray.js";
 
 export default function MainGallery() {
@@ -28,7 +28,7 @@ export default function MainGallery() {
             }
         };
 
-        fetchArtworks();
+        void fetchArtworks();
 
     }, []);
 
@@ -62,7 +62,7 @@ export default function MainGallery() {
                 <div>
                     <div className={styles.cardContainer}>
                         {currentArtworks.map(art => (
-                            <ArtworkCard
+                            <UserArtworkCard
                                 key={art.id}
                                 title={art.title}
                                 artist={art.artist}

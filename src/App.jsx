@@ -14,7 +14,7 @@ import About from "./pages/about/About.jsx";
 import NotFound from "./pages/notfound/NotFound.jsx";
 import Navigation from "./components/navigation/Navigation.jsx";
 import Footer from "./components/footer/Footer.jsx";
-
+import AddNewArtwork from "./pages/artworks/AddNewArtwork.jsx";
 
 
 function App() {
@@ -26,7 +26,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/maingallery" element={<MainGallery/>}/>
-                    <Route path="/usergallery" element={<ArtistGallery/>}/>
+                    <Route path="/artistgallery" element={<ArtistGallery/>}/>
+                    <Route path="/artist/:id" element={<Artist/>}/>
+                    <Route path="/artist/addnewartwork" element={<AddNewArtwork/>}/>
                     <Route path="/artist" element={<Artist/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
