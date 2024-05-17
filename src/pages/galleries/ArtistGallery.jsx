@@ -18,7 +18,6 @@ export default function ArtistGallery() {
                 console.error(error);
             }
         }
-
     }, []);
 
     return (

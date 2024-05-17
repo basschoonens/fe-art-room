@@ -32,6 +32,12 @@
     height: 24px;
 }
 
+.icon:hover {
+    fill: var(--color-primary);
+    stroke: var(--color-primary);
+    cursor: pointer;
+}
+
 .defaultLink {
     color: var(--color-primary);
     font-family: var(--font-family);

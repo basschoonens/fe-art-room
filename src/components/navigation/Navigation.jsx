@@ -1,9 +1,15 @@
 import styles from './Navigation.module.css';
 import Logo from '../logo/Logo.jsx';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate} from "react-router-dom";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import {useContext} from "react";
 
 export default function Navigation() {
+
+    const navigate = useNavigate();
+    const {isAuth} = useContext(AuthContext);
+
     return (
         <nav>
             <div className={styles.navbar}>
@@ -13,21 +19,33 @@ export default function Navigation() {
                         <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
                                  to="/maingallery">For artlovers</NavLink>
                     </li>
-                    <li>
-                        <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink} to="/artistgallery">For
-                            artists</NavLink>
-                    </li>
+                    {isAuth && (
+                        <li>
+                            <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
+                                     to="/artistgallery">For
+                                artists</NavLink>
+                        </li>
+                    )}
                     <li>
                         <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
                                  to="/about">About the gallery</NavLink>
                     </li>
                 </ul>
                 <ul className={styles.iconLinks}>
+                    {/*TODO Checken of dit de manier is om een slechts Artist weer te geven als een artist is ingelogd*/}
                     <li>
-                        <FaShoppingCart className={styles.icon}/>
+                        {isAuth.role === 'artist' ? (
+                            <FaShoppingCart onClick={() => navigate("/shoppingcart")} className={styles.icon}/>
+                        ) : (
+                            <FaShoppingCart onClick={() => navigate("/login")} className={styles.icon}/>
+                        )}
                     </li>
                     <li>
-                        <FaUser className={styles.icon}/>
+                        {isAuth ? (
+                            <FaUser onClick={() => navigate("/profile")} className={styles.icon} />
+                        ) : (
+                            <FaUser onClick={() => navigate("/login")} className={styles.icon} />
+                        )}
                     </li>
                 </ul>
             </div>

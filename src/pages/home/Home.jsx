@@ -17,7 +17,7 @@ export default function Home() {
                 <span className={styles.toArtistImage}>
                     <img id="artist-image" src={artist} alt="gallery image"/>
                     <Button id={styles.artistButton} text="For artists" type="button"
-                            onClick={() => navigate("/artist")}/>
+                            onClick={() => navigate("/artistgallery")}/>
                 </span>
             </section>
             <section className={styles.curatorContainer}>
