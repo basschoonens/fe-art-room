@@ -1,10 +1,11 @@
 import {createContext, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 export const AuthContext = createContext({
     isAuth: false,
     user: null,
-    role: '',
     login: () => {},
     logout: () => {},
 });
@@ -16,17 +17,32 @@ function AuthContextProvider({ children }) {
     });
     const navigate = useNavigate();
 
-    function login() {
-        setAuth({
-            ...auth,
-            isAuth: true,
-            user: {
-                username: "",
-                email: "",
-                id: "",
-                role: ""
-            },
-        });
+    const login = async (jwt) => {
+        const decodedToken = (jwtDecode(jwt));
+        localStorage.setItem(('jwt'), jwt)
+        try {
+            const response = await axios.get(`http://localhost:8080/users/${decodedToken.sub}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${jwt}`,
+                },
+            });
+            console.log(response.data);
+            setAuth({
+                ...auth,
+                isAuth: true,
+                user: {
+                    username: response.data.username,
+                    email: response.data.email,
+                    // id: response.data.id,
+                    authority: response.data.authority,
+                },
+            });
+        } catch (error) {
+                console.error(error);
+        }
+
+
         console.log('Gebruiker is ingelogd!');
         navigate('/profile');
     }
@@ -44,7 +60,6 @@ function AuthContextProvider({ children }) {
     const contextData = {
         isAuth: auth.isAuth,
         user: auth.user,
-        role: auth.role,
         login,
         logout,
     };

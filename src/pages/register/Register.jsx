@@ -7,7 +7,7 @@ const Register = () => {
     const password = watch('password');
     const [selectedRole, setSelectedRole] = React.useState('');
 
-    const onSubmit = async (data) => {
+    const handleRegister = async (data) => {
         const userData = {
             username: data.username,
             email: data.email,
@@ -19,13 +19,12 @@ const Register = () => {
 
         try {
             const response = await axios.post(url, userData);
-            if (response.status === 200) {
+            if (response.status === 201) {
                 console.log(`${selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)} created successfully`);
             }
         } catch (error) {
             console.error(error);
         }
-
         console.log(data);
     };
 
@@ -36,7 +35,7 @@ const Register = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(handleRegister)}>
             <div>
                 <label>I am an</label>
                 <input

@@ -1,26 +1,43 @@
-// src/Login.js
-import React from 'react';
+import React, {useContext} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
+    const {login} = useContext(AuthContext);
 
-    const onSubmit = data => {
+    const handleLogin = async(data) => {
+        try {
+            const response = await axios.post('http://localhost:8080/authenticate', {
+                username: data.username,
+                password: data.password
+            });
+            console.log(response)
+            if (response.status === 200) {
+            login(response.data.jwt);
+            }
+            console.log("User logged in successfully");
+            } catch (error) {
+               console.error(error);
+        }
+
         console.log(data);
-        // Here you would usually send a request to your server to log the user in
+        // Here you would usually send a request to your server to log the user in\
+
     };
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleLogin)}>
                 <div>
-                    <label>Email</label>
-                    <input {...register("email", {
-                        required: "Email is required",
-                        pattern: {
-                            value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                            message: "Entered value does not match email format"
+                    <label>Username</label>
+                    <input {...register("username", {
+                        required: "Username is required",
+                        minLength: {
+                            value: 3,
+                            message: "Username must be at least 3 characters long"
                         }
                     })} />
                     {errors.email && <p>{errors.email.message}</p>}
