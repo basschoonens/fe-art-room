@@ -1,8 +1,7 @@
 import styles from './Navigation.module.css';
 import Logo from '../logo/Logo.jsx';
 import { NavLink } from "react-router-dom";
-import shoppingCart from '../../assets/shopping_cart_FILL0_wght400_GRAD0_opsz24.svg';
-import profile from '../../assets/person_FILL0_wght400_GRAD0_opsz24.svg';
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 
 export default function Navigation() {
     return (
@@ -12,7 +11,7 @@ export default function Navigation() {
                 <ul className={styles.navLinks}>
                     <li>
                         <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
-                                 to="/">For artlovers</NavLink>
+                                 to="/maingallery">For artlovers</NavLink>
                     </li>
                     <li>
                         <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink} to="/artist">For
@@ -25,10 +24,10 @@ export default function Navigation() {
                 </ul>
                 <ul className={styles.iconLinks}>
                     <li>
-                        <img src={shoppingCart} alt="Shopping Cart"/>
+                        <FaShoppingCart className={styles.icon}/> {/* Using FaShoppingCart icon */}
                     </li>
                     <li>
-                        <img src={profile} alt="Profile"/>
+                        <FaUser className={styles.icon}/> {/* Using FaUser icon */}
                     </li>
                 </ul>
             </div>

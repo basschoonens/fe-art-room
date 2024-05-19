@@ -1,7 +1,6 @@
 .navbar {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     width: 100vw;
     max-height: var(--navbar-height);
@@ -18,10 +17,19 @@
 
 .iconLinks {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     list-style: none;
-    width: 50px;
+    width: 10%;
+    gap: var(--spacing-sm);
     margin-right: 20px;
+}
+
+.icon {
+    fill: var(--color-light);
+    stroke: var(--color-light);
+    stroke-width: var(--border-lg);
+    width: 24px;
+    height: 24px;
 }
 
 .defaultLink {

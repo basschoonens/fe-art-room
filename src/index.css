@@ -44,8 +44,14 @@
 /* Borders */
 :root {
   --border-sm: 1px solid;
-  --border-md: 2px solid;
-  --border-lg: 3px solid;
+  --border-md: 3px solid;
+  --border-lg: 5px solid;
+}
+
+:root {
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 8px;
 }
 
 /* Shadows */
@@ -66,6 +72,7 @@
 
 :root {
   --navbar-height: 80px;
+  --footer-height: auto;
 }
 
 :root img {

@@ -18,7 +18,7 @@
 }
 
 .galleryContactContainer{
-    border: solid 5px var(--color-light);
+    border: solid var(--border-lg) var(--color-light);
 }
 
 .welcomeContainer,
@@ -69,7 +69,7 @@
 .welcomeContainerContents img,
 .userContainerContents img,
 .artistContainerContents img {
-    border-radius: var(--spacing-xs);
+    border-radius: var(--border-radius-sm);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
