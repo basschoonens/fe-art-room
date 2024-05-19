@@ -1,7 +1,8 @@
-import {createContext, useState} from 'react';
+import {createContext, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import {checkTokenValidity} from "../helpers/checkTokenValidity.js";
 
 export const AuthContext = createContext({
     isAuth: false,
@@ -14,8 +15,18 @@ function AuthContextProvider({ children }) {
     const [auth, setAuth] = useState({
         isAuth: false,
         user: '',
+        status: 'pending',
     });
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('jwt');
+        if (storedToken && checkTokenValidity(storedToken)) {
+            void login(storedToken);
+        } else {
+            void logout();
+        }
+    }, []);
 
     const login = async (jwt) => {
         const decodedToken = (jwtDecode(jwt));
@@ -34,17 +45,14 @@ function AuthContextProvider({ children }) {
                 user: {
                     username: response.data.username,
                     email: response.data.email,
-                    // id: response.data.id,
                     authority: response.data.authority,
                 },
+                status: 'done',
             });
         } catch (error) {
                 console.error(error);
         }
-
-
         console.log('Gebruiker is ingelogd!');
-        navigate('/profile');
     }
 
     function logout() {
@@ -52,9 +60,11 @@ function AuthContextProvider({ children }) {
             ...auth,
             isAuth: false,
             user: '',
+            status: 'done',
         });
+        localStorage.removeItem('jwt');
+        navigate('/login')
         console.log('Gebruiker is uitgelogd!');
-        navigate('/');
     }
 
     const contextData = {
@@ -65,7 +75,7 @@ function AuthContextProvider({ children }) {
     };
     return (
         <AuthContext.Provider value={contextData}>
-            {children}
+            {auth.status === 'done' ? children : <p>Loading...</p>}
         </AuthContext.Provider>
     );
 }

@@ -1,12 +1,13 @@
 import React, {useContext} from 'react';
 import {useForm} from 'react-hook-form';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext.jsx";
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
+    const {navigate} = useNavigate();
 
     const handleLogin = async(data) => {
         try {
@@ -17,6 +18,7 @@ const Login = () => {
             console.log(response)
             if (response.status === 200) {
             login(response.data.jwt);
+            navigate('/profile');
             }
             console.log("User logged in successfully");
             } catch (error) {
