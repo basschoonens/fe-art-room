@@ -3,7 +3,7 @@ import Button from "../../components/button/Button.jsx";
 import {useEffect} from "react";
 import axios from "axios";
 import {FaEdit, FaTrash} from "react-icons/fa";
-import ArtistArtworkCard from "../../components/ArtworkCard/ArtistArtworkCard.jsx";
+import ArtistArtworkCard from "../../components/artworkCard/ArtistArtworkCard.jsx";
 
 export default function ArtistGallery() {
 

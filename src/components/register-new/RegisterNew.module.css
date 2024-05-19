@@ -1,0 +1,100 @@
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    background: var(--color-transparent);
+    margin: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    font-family: var(--font-family-alt);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-md) var(--color-light);
+    box-shadow: var(--shadow-md);
+}
+
+.registerHeading {
+    text-align: center;
+    width: 100%;
+}
+
+.roleContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    font-size: var(--font-size-medium);
+}
+
+.checkboxWrapper {
+    display: flex;
+    align-items: center;
+    margin: var(--spacing-xs) 0;
+}
+
+.checkboxInput {
+    display: none;
+}
+
+.customCheckbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-dark);
+    border-radius: 4px; /* Use border-radius: 50% if you prefer rounded corners */
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.customCheckbox::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--color-dark);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease;
+}
+
+.checkboxInput:checked + .customCheckbox::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.checkboxLabel {
+    font-family: var(--font-family-alt);
+    font-size: var(--font-size-medium);
+    cursor: pointer;
+}
+
+.inputField {
+    margin: var(--spacing-sm) 0;
+    padding: var(--spacing-sm);
+    width: 100%;
+    min-width: 150px;
+    font-family: var(--font-family-alt);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-md) var(--color-light);
+}
+
+.errorMessage {
+    padding: 4px; /* Adjust the value as needed */
+    border: var(--border-sm) var(--color-dark);
+    color: var(--color-dark); /* Optional: Set the color for error messages */
+    font-size: var(--font-size-small); /* Optional: Set the font size for error messages */
+}
+
+
+@media (min-width: 768px) {
+    .registerForm {
+        width: 600px;
+    }
+
+    .roleContainer {
+        width: 600px;
+    }
+}

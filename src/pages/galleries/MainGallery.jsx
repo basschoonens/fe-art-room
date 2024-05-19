@@ -1,14 +1,13 @@
 import styles from './MainGallery.module.css';
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import UserArtworkCard from "../../components/ArtworkCard/UserArtworkCard.jsx";
-import {shuffleArray} from "../../helpers/shuffleArray.js";
+import UserArtworkCard from "../../components/artworkCard/UserArtworkCard.jsx";
+import shuffleArray from "../../helpers/shuffleArray.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
 
 export default function MainGallery() {
 
     const { isAuth } = useContext(AuthContext);
-
     const [artworks, setArtworks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -16,14 +15,17 @@ export default function MainGallery() {
     const artworksPerPage = 6;
 
     useEffect(() => {
+
+        const controller = new AbortController();
+
         const fetchArtworks = async () => {
             setLoading(true);
             setError(null);
-
             try {
-                const response = await axios.get(`http://localhost:8080/artworks`);
+                const response = await axios.get(`http://localhost:8080/artworks`, { signal: controller.signal });
                 const shuffledArtworks = shuffleArray(response.data);
                 setArtworks(shuffledArtworks);
+                console.log(shuffledArtworks)
             } catch (error) {
                 setError(error);
             } finally {
@@ -33,6 +35,9 @@ export default function MainGallery() {
 
         void fetchArtworks();
 
+        return () => {
+            controller.abort();
+        };
     }, []);
 
     const nextPage = () => {

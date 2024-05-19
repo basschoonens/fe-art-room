@@ -24,7 +24,7 @@
 :root {
   --spacing-xs: 8px;
   --spacing-sm: 16px;
-  --spacing-md: 24px;
+  --spacing-md: 20px;
   --spacing-lg: 32px;
   --spacing-xl: 40px;
 }
@@ -78,4 +78,11 @@
 :root img {
   max-width: 100%;
   max-height: inherit;
+}
+
+:root h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  color: var(--color-dark);
+  padding: 20px;
 }
