@@ -1,0 +1,61 @@
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 1200px;
+    background: var(--color-transparent);
+    margin: 0 20px;
+    padding: var(--spacing-md);
+}
+
+.welcomeContainer{
+    display: flex;
+    flex-direction: row;
+    flex-basis: auto;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1200px;
+    border: var(--border-md) var(--color-light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+}
+
+.welcomeContainer li {
+    font-family: var(--font-family-alt);
+}
+
+.welcomeMessage{
+    display: flex;
+    flex-basis: auto;
+    align-content: flex-start;
+}
+
+#profileImage{
+    border-radius: 50%;
+}
+
+
+.toolsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+}
+
+.appTools,
+.profileTools{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: inherit;
+    background: var(--color-transparent);
+    padding: 20px 20px;
+    margin: 20px 0;
+    border: var(--border-lg) var(--color-light);
+    border-radius: 5px;
+}

@@ -15,7 +15,7 @@ import Footer from "./components/footer/Footer.jsx";
 import AddNewArtwork from "./pages/artworks/AddNewArtwork.jsx";
 import {AuthContext} from "./context/AuthContext.jsx";
 import {useContext} from "react";
-import RegisterNew from "./components/register-new/RegisterNew.jsx";
+import Register from "./pages/register/Register.jsx";
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
                     <Route path="/artistgallery" element={isAuth ? <ArtistGallery/> : <Navigate to="/"/>} />
                     <Route path="/artist/addnewartwork" element={<AddNewArtwork/>}/>
                     <Route path="/login" element={<Login/>}/>
-                    <Route path="/register" element={<RegisterNew />}/>
+                    <Route path="/register" element={<Register />}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/shoppingcart" element={<ShoppingCart/>}/>
                     <Route path="/order" element={<Order/>}/>

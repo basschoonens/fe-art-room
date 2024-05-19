@@ -1,13 +1,15 @@
+import styles from './Login.module.css';
 import React, {useContext} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import WelcomeContent from "../../components/welcome/WelcomeContent.jsx";
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
-    const {navigate} = useNavigate();
+    const navigate = useNavigate();
 
     const handleLogin = async(data) => {
         try {
@@ -24,14 +26,14 @@ const Login = () => {
             } catch (error) {
                console.error(error);
         }
-
         console.log(data);
         // Here you would usually send a request to your server to log the user in\
 
     };
 
     return (
-        <>
+        <div className={styles.pageContainer}>
+            <WelcomeContent/>
             <form onSubmit={handleSubmit(handleLogin)}>
                 <div>
                     <label>Username</label>
@@ -53,7 +55,7 @@ const Login = () => {
                 <button type="submit">Login</button>
             </form>
             <p>Please register <Link to="/register">here</Link> if you don't have an account yet.</p>
-        </>
+        </div>
     );
 };
 

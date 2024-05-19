@@ -86,3 +86,10 @@
   color: var(--color-dark);
   padding: 20px;
 }
+
+:root p {
+  font-family: var(--font-family-alt);
+  font-weight: 400;
+  color: var(--color-black);
+  padding: 20px;
+}
