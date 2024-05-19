@@ -1,10 +1,13 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
-import ArtworkCard from "../../components/ArtworkCard/ArtworkCard.jsx";
 import styles from './MainGallery.module.css';
+import {useContext, useEffect, useState} from "react";
+import axios from "axios";
+import UserArtworkCard from "../../components/ArtworkCard/UserArtworkCard.jsx";
 import {shuffleArray} from "../../helpers/shuffleArray.js";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 export default function MainGallery() {
+
+    const { isAuth } = useContext(AuthContext);
 
     const [artworks, setArtworks] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -28,7 +31,7 @@ export default function MainGallery() {
             }
         };
 
-        fetchArtworks();
+        void fetchArtworks();
 
     }, []);
 
@@ -62,7 +65,7 @@ export default function MainGallery() {
                 <div>
                     <div className={styles.cardContainer}>
                         {currentArtworks.map(art => (
-                            <ArtworkCard
+                            <UserArtworkCard
                                 key={art.id}
                                 title={art.title}
                                 artist={art.artist}
@@ -71,10 +74,10 @@ export default function MainGallery() {
                         ))}
                     </div>
                 </div>
-                <div className={styles.buttonsContainer}>
-                    <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
-                    <button onClick={nextPage}>Next</button>
-                </div>
+                    <div className={styles.buttonsContainer}>
+                        <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
+                        <button onClick={nextPage}>Next</button>
+                    </div>
             </div>
         </>
     )

@@ -1,0 +1,62 @@
+.artworkCard {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 300px;
+    justify-content: space-between;
+    border: var(--border-lg);
+    border-color: var(--color-light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.artworkCard img {
+    width: 100%;
+    padding: var(--spacing-sm);
+    height: auto;
+    object-fit: contain;
+    margin: auto;
+}
+
+.artworkDetails {
+    padding: 10px;
+}
+
+.artworkDetails h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.artworkDetails p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.iconsContainer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 20px;
+    margin-right: 5px;
+    border: var(--border-md) var(--color-light);
+    padding: 5px;
+    fill: var(--color-light);
+    stroke: var(--color-light);
+    stroke-width: var(--border-lg);
+    width: 24px;
+    height: 24px;
+}
+
+/*TODO - add media query for smaller screens*/
+
+@media (max-width: 768px) {
+    .artworkCard {
+        width: 100%;
+    }
+}

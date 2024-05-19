@@ -1,0 +1,50 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    background: var(--color-transparent);
+    margin: 0 20px;
+}
+
+.addArtworkForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--spacing-md);
+    position: relative;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin-top: var(--spacing-md);
+    position: relative;
+}
+
+.addImageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--spacing-md);
+    position: relative;
+
+}
+
+.addFieldsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin-top: var(--spacing-md);
+    position: relative;
+}

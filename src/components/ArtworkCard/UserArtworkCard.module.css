@@ -1,7 +1,7 @@
 .artworkCard {
     display: flex;
     flex-direction: column;
-    flex-basis: 30%;
+    flex-basis: 300px;
     justify-content: space-between;
     border: var(--border-lg);
     border-color: var(--color-light);
@@ -16,8 +16,8 @@
     width: 100%;
     padding: var(--spacing-sm);
     height: auto;
-    object-fit: contain; /* Ensure the image maintains its aspect ratio */
-    margin: auto; /* Center the image vertically */
+    object-fit: contain;
+    margin: auto;
 }
 
 .artworkDetails {
@@ -36,17 +36,17 @@
 
 .iconsContainer {
     position: absolute;
-    bottom: 10px; /* Adjust as needed to control the distance from the bottom */
-    right: 10px; /* Adjust as needed to control the distance from the right */
+    bottom: 10px;
+    right: 10px;
     display: flex;
     align-items: center;
 }
 
 .icon {
-    font-size: 20px; /* Adjust the size of the icons as needed */
-    margin-right: 5px; /* Adjust as needed to control the spacing between icons */
-    border: var(--border-md) var(--color-light); /* Add border to the icons */
-    padding: 5px; /* Add padding to the icons */
+    font-size: 20px;
+    margin-right: 5px;
+    border: var(--border-md) var(--color-light);
+    padding: 5px;
 }
 
 /*TODO - add media query for smaller screens*/
