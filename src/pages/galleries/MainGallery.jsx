@@ -1,7 +1,7 @@
 import styles from './MainGallery.module.css';
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import UserArtworkCard from "../../components/artworkCard/UserArtworkCard.jsx";
+import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/UserArtworkCard.jsx";
 import shuffleArray from "../../helpers/shuffleArray.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
 

@@ -1,9 +1,9 @@
 import styles from './UserArtworkCard.module.css';
 import React, {useContext} from 'react';
-import {AuthContext} from "../../context/AuthContext.jsx";
+import {AuthContext} from "../../../../context/AuthContext.jsx";
 
 
-const UserArtworkCard = ({title, artist, imageUrl}) => {
+export default function UserArtworkCard({title, artist, imageUrl}){
 
     const { isAuth } = useContext(AuthContext)
 
@@ -23,5 +23,3 @@ const UserArtworkCard = ({title, artist, imageUrl}) => {
         </div>
     );
 };
-
-export default UserArtworkCard;

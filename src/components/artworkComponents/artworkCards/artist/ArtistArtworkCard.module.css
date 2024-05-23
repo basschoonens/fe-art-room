@@ -7,6 +7,7 @@
     border-color: var(--color-light);
     border-radius: 8px;
     overflow: hidden;
+    height: auto;
     box-shadow: var(--shadow-md);
     position: relative;
 }
@@ -53,10 +54,10 @@
     height: 24px;
 }
 
-/*TODO - add media query for smaller screens*/
+/*!*TODO - add media query for smaller screens*!*/
 
-@media (max-width: 768px) {
-    .artworkCard {
-        width: 100%;
-    }
-}
+/*@media (max-width: 768px) {*/
+/*    .artworkCard {*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/

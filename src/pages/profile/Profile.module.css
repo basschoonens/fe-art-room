@@ -9,18 +9,3 @@
     margin: 0 20px;
     padding: var(--spacing-md);
 }
-
-.welcomeContainer li {
-    font-family: var(--font-family-alt);
-}
-
-.welcomeMessage{
-    display: flex;
-    flex-basis: auto;
-    flex-direction: column;
-    align-content: flex-start;
-}
-
-#profileImage{
-    border-radius: 50%;
-}

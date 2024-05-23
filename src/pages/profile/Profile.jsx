@@ -1,8 +1,7 @@
 import styles from './Profile.module.css';
 import {AuthContext} from "../../context/AuthContext.jsx";
 import {useContext} from "react";
-import Register from "../register/Register.jsx";
-import WelcomeContent from "../../components/welcome/WelcomeContent.jsx";
+import WelcomeContent from "../../components/welcomeContentBar/WelcomeContent.jsx";
 
 export default function Profile() {
 
