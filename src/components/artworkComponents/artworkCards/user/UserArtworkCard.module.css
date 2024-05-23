@@ -20,9 +20,15 @@
     margin: auto;
 }
 
+.artworkImage:hover {
+    cursor: pointer;
+}
+
 .artworkDetails {
     padding: 10px;
 }
+
+
 
 .artworkDetails h3 {
     margin: 0;
@@ -48,11 +54,3 @@
     border: var(--border-md) var(--color-light);
     padding: 5px;
 }
-
-/*TODO - add media query for smaller screens*/
-
-/*@media (max-width: 768px) {*/
-/*    .artworkCard {*/
-/*        width: 100%;*/
-/*    }*/
-/*}*/

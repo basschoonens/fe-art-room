@@ -19,7 +19,7 @@ import Register from "./pages/register/Register.jsx";
 
 
 function App() {
-    const {isAuth} = useContext(AuthContext);
+    const {isAuth, user} = useContext(AuthContext);
 
     return (
         <>
@@ -28,7 +28,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/maingallery" element={<MainGallery/>}/>
-                    <Route path="/artistgallery" element={isAuth ? <ArtistGallery/> : <Navigate to="/"/>} />
+                    <Route path="/artistgallery" element={isAuth && user.authority === "ROLE_ARTIST" ? <ArtistGallery/> : <Navigate to="/"/>} />
                     <Route path="/artist/addnewartwork" element={<AddNewArtwork/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register />}/>
