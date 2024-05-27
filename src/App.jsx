@@ -16,7 +16,8 @@ import AddNewArtwork from "./pages/artworks/AddNewArtwork.jsx";
 import {AuthContext} from "./context/AuthContext.jsx";
 import React, {useContext} from "react";
 import Register from "./pages/register/Register.jsx";
-import MainGalleryTest from "./pages/galleries/MainGalleryTest.jsx";
+import MainGallery from "./pages/galleries/MainGallery.jsx";
+import UserArtworkDetailsModal from "./components/artworkComponents/artworksModals/UserArtworkDetailsModal.jsx";
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
                 <Navigation/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path="/maingallery" element={<MainGalleryTest/>}/>
+                    <Route path="/maingallery" element={<MainGallery/>}/>
+                    <Route path="/maingallery/:id" element={<UserArtworkDetailsModal />} />
                     <Route path="/artistgallery" element={isAuth && user.authority === "ROLE_ARTIST" ? <ArtistGallery/> : <Navigate to="/"/>} />
                     <Route path="/artist/addnewartwork" element={<AddNewArtwork/>}/>
                     <Route path="/login" element={<Login/>}/>

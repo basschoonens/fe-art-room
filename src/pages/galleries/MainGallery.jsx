@@ -7,7 +7,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 
 export default function MainGallery() {
 
-    const { isAuth } = useContext(AuthContext);
+    // const { isAuth } = useContext(AuthContext);
     const [artworks, setArtworks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -72,6 +72,7 @@ export default function MainGallery() {
                         {currentArtworks.map(art => (
                             <UserArtworkCard
                                 key={art.id}
+                                id={art.id}
                                 title={art.title}
                                 artist={art.artist}
                                 imageUrl={`http://localhost:8080/artworks/${art.id}/image`}
