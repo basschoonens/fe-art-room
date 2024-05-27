@@ -32,7 +32,7 @@ function App() {
                     <Route path="/maingallery" element={<MainGallery/>}/>
                     <Route path="/maingallery/:id" element={<UserArtworkDetailsModal />} />
                     <Route path="/artistgallery" element={isAuth && user.authority === "ROLE_ARTIST" ? <ArtistGallery/> : <Navigate to="/"/>} />
-                    <Route path="/artist/addnewartwork" element={<AddNewArtwork/>}/>
+                    <Route path="/artistgallery/addnewartwork" element={<AddNewArtwork/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register />}/>
                     <Route path="/profile" element={<Profile/>}/>

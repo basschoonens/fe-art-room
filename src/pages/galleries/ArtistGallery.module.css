@@ -10,6 +10,17 @@
   padding: var(--spacing-md);
 }
 
+.artworksContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-basis: auto;
+  justify-content: space-evenly;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+
 .buttonsContainer {
   display: flex;
   flex-direction: row;
@@ -44,16 +55,5 @@
 .sortingLinks p{
   align-content: center;
   margin: auto;
-}
-
-.artworksContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  flex-basis: auto;
-  justify-content: space-evenly;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
 }
 

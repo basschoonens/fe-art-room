@@ -1,23 +1,33 @@
 import styles from './ArtistGallery.module.css';
 import Button from "../../components/button/Button.jsx";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {FaEdit, FaTrash} from "react-icons/fa";
 import ArtistArtworkCard from "../../components/artworkComponents/artworkCards/artist/ArtistArtworkCard.jsx";
 
 export default function ArtistGallery() {
 
+
+    const [artworks, setArtworks] = useState([]);
+
     useEffect(() => {
-        // fetch artworks by artist
         const fetchArtistArtworks = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/artworks/artist`);
+                const token = localStorage.getItem('jwt');
+                const response = await axios.get(`http://localhost:8080/artworks/user/artworks`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    }
+                });
                 const data = response.data;
                 console.log(data);
+                setArtworks(data)
             } catch (error) {
                 console.error(error);
             }
         }
+        void fetchArtistArtworks();
     }, []);
 
     return (
@@ -35,14 +45,19 @@ export default function ArtistGallery() {
                             <li>Price</li>
                         </ul>
             </section>
+
             <section className={styles.artworksContainer}>
-                <div className={styles.artworkCard}>
-                    <ArtistArtworkCard
-                        title="Artwork title"
-                        imageUrl="https://via.placeholder.com/150"
-                    />
-                </div>
+                {artworks.map((artwork) => (
+                    <div key={artwork.id} className={styles.artworkCard}>
+                        <ArtistArtworkCard
+                            title={artwork.title}
+                            artist={artwork.artist}
+                            price={artwork.price}
+                            imageUrl={`http://localhost:8080/artworks/${artwork.id}/image`}
+                        />
+                    </div>
+                ))}
             </section>
         </div>
-    )
+    );
 }

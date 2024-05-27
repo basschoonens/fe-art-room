@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     flex-basis: 300px;
+    height: auto;
     justify-content: space-between;
     border: var(--border-lg);
     border-color: var(--color-light);
     border-radius: 8px;
     overflow: hidden;
-    height: auto;
     box-shadow: var(--shadow-md);
     position: relative;
 }
@@ -18,6 +18,10 @@
     height: auto;
     object-fit: contain;
     margin: auto;
+}
+
+.artworkImage:hover {
+    cursor: pointer;
 }
 
 .artworkDetails {
@@ -47,17 +51,4 @@
     margin-right: 5px;
     border: var(--border-md) var(--color-light);
     padding: 5px;
-    fill: var(--color-light);
-    stroke: var(--color-light);
-    stroke-width: var(--border-lg);
-    width: 24px;
-    height: 24px;
 }
-
-/*!*TODO - add media query for smaller screens*!*/
-
-/*@media (max-width: 768px) {*/
-/*    .artworkCard {*/
-/*        width: 100%;*/
-/*    }*/
-/*}*/

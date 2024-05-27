@@ -17,7 +17,6 @@ export default function AddNewArtwork() {
         <div className={styles.pageContainer}>
             <h1>Add new Artwork</h1>
             <form className={styles.addArtworkForm} onSubmit={handleSubmit(onSubmit)}>
-
                     <div className={styles.addImageContainer}>
                         <label>Upload image :</label>
                         <input
@@ -75,7 +74,7 @@ export default function AddNewArtwork() {
                                 placeholder={"Enter description"}
                             />
                             {errors.description && <p>This field is required</p>}
-
+                            <button type={"cancel"}>Cancel</button>
                             <button type="submit">Submit</button>
                         </div>
                 </div>

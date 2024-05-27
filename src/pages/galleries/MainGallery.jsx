@@ -3,7 +3,6 @@ import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/UserArtworkCard.jsx";
 import shuffleArray from "../../helpers/shuffleArray.js";
-import {AuthContext} from "../../context/AuthContext.jsx";
 
 export default function MainGallery() {
 
