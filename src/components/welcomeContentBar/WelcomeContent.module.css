@@ -1,0 +1,61 @@
+.welcomeContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    background: var(--color-transparent);
+    border: var(--border-md) var(--color-light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-sm);
+    margin: var(--spacing-md) auto;
+}
+
+.welcomeLoggedIn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#welcomeContainer li {
+    font-family: var(--font-family-alt);
+}
+
+.welcomeMessage{
+    display: flex;
+    flex-basis: auto;
+    align-content: flex-start;
+}
+
+#profileImage{
+    border-radius: 50%;
+}
+
+
+.toolsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+.appTools,
+.profileTools{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-width: inherit;
+    background: var(--color-transparent);
+    list-style: none;
+}
+
+@media screen and (min-width: var(--breakpoint-xl)) {
+    .welcomeContainer{
+        max-width: 1200px;
+        margin: var(--spacing-md) auto;
+    }
+}

@@ -18,13 +18,14 @@
   --font-size-small: 14px;
   --font-size-medium: 16px;
   --font-size-large: 24px;
+  --font-size-xlarge: 32px;
 }
 
 /* Spacing */
 :root {
   --spacing-xs: 8px;
   --spacing-sm: 16px;
-  --spacing-md: 24px;
+  --spacing-md: 20px;
   --spacing-lg: 32px;
   --spacing-xl: 40px;
 }
@@ -68,6 +69,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1440px;
 }
 
 :root {
@@ -79,3 +81,19 @@
   max-width: 100%;
   max-height: inherit;
 }
+
+:root h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  color: var(--color-dark);
+  padding: 20px;
+}
+
+:root p {
+  font-family: var(--font-family-alt);
+  font-weight: 400;
+  color: var(--color-black);
+  padding: var(--spacing-md);
+}
+
+/*TODO Inputfields styling global instellen*/

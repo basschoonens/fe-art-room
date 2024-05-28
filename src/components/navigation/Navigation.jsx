@@ -8,7 +8,7 @@ import {useContext} from "react";
 export default function Navigation() {
 
     const navigate = useNavigate();
-    const {isAuth} = useContext(AuthContext);
+    const {isAuth,user} = useContext(AuthContext);
 
     return (
         <nav>
@@ -34,7 +34,7 @@ export default function Navigation() {
                 <ul className={styles.iconLinks}>
                     {/*TODO Checken of dit de manier is om een slechts Artist weer te geven als een artist is ingelogd*/}
                     <li>
-                        {isAuth.role === 'artist' ? (
+                        {isAuth && user.authority === 'ROLE_ARTIST' ? (
                             <FaShoppingCart onClick={() => navigate("/shoppingcart")} className={styles.icon}/>
                         ) : (
                             <FaShoppingCart onClick={() => navigate("/login")} className={styles.icon}/>
