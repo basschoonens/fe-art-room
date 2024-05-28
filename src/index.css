@@ -91,7 +91,7 @@
   font-family: var(--font-family-alt);
   font-weight: 400;
   color: var(--color-black);
-  padding: 20px;
+  padding: var(--spacing-md);
 }
 
 /*TODO Inputfields styling global instellen*/

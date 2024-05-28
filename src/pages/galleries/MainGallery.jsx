@@ -1,7 +1,7 @@
 import styles from './MainGallery.module.css';
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/UserArtworkCard.jsx";
+import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/userArtworkCard/UserArtworkCard.jsx";
 import shuffleArray from "../../helpers/shuffleArray.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
 
@@ -63,7 +63,7 @@ export default function MainGallery() {
         <>
             <div className={styles.pageContainer}>
                 <h1>Main Gallery</h1>
-                {isAuth ? <p>Welcome back! You can now leave comments and reviews</p> :
+                {isAuth ? <p>Welcome back! Please leave a review and comment of the best art</p> :
                 <p>For more information on prices, and to leave comments and reviews please register or login</p>}
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error.message}</p>}

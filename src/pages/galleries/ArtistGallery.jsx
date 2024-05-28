@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {FaEdit, FaTrash} from "react-icons/fa";
 import ArtistArtworkCard from "../../components/artworkComponents/artworkCards/artist/ArtistArtworkCard.jsx";
-import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/UserArtworkCard.jsx";
+import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/userArtworkCard/UserArtworkCard.jsx";
 
 export default function ArtistGallery() {
 
