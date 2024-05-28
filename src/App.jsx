@@ -2,7 +2,7 @@ import styles from './App.module.css'
 import {Routes, Route, Navigate} from "react-router-dom";
 import ShoppingCart from "./pages/orders/shoppingcart/ShoppingCart.jsx";
 import Home from "./pages/home/Home.jsx";
-// import MainGallery from "./pages/galleries/MainGallery.jsx";
+import MainGallery from "./pages/galleries/MainGallery.jsx";
 import ArtistGallery from "./pages/galleries/ArtistGallery.jsx";
 import Login from "./pages/login/Login.jsx";
 import Profile from "./pages/profile/Profile.jsx";
@@ -16,8 +16,8 @@ import AddNewArtwork from "./pages/artworks/AddNewArtwork.jsx";
 import {AuthContext} from "./context/AuthContext.jsx";
 import React, {useContext} from "react";
 import Register from "./pages/register/Register.jsx";
-import MainGallery from "./pages/galleries/MainGallery.jsx";
-import UserArtworkDetailsModal from "./components/artworkComponents/artworksModals/UserArtworkDetailsModal.jsx";
+import UserArtworkDetails from "../src/pages/galleries/artworkDetails/UserArtworkDetails.jsx";
+
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/maingallery" element={<MainGallery/>}/>
-                    <Route path="/maingallery/:id" element={<UserArtworkDetailsModal />} />
+                    <Route path="/maingallery/:id" element={<UserArtworkDetails />} />
                     <Route path="/artistgallery" element={isAuth && user.authority === "ROLE_ARTIST" ? <ArtistGallery/> : <Navigate to="/"/>} />
                     <Route path="/artistgallery/addnewartwork" element={<AddNewArtwork/>}/>
                     <Route path="/login" element={<Login/>}/>

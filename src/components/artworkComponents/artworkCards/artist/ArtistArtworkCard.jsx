@@ -1,5 +1,6 @@
 import styles from './ArtistArtworkCard.module.css';
 import React from 'react';
+import {currencyFormat} from "../../../../helpers/currencyFormat.js";
 
 
 
@@ -11,7 +12,7 @@ export default function ArtistArtworkCard({id, title, price, imageUrl}){
             <img src={imageUrl} alt={title}/>
             <div className={styles.artworkDetails}>
                 <h3>{title}</h3>
-                <p>{price}</p>
+                <p>{currencyFormat(price)}</p>
             </div>
         </div>
     );

@@ -3,10 +3,11 @@ import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/UserArtworkCard.jsx";
 import shuffleArray from "../../helpers/shuffleArray.js";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 export default function MainGallery() {
 
-    // const { isAuth } = useContext(AuthContext);
+    const { isAuth } = useContext(AuthContext);
     const [artworks, setArtworks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -62,7 +63,8 @@ export default function MainGallery() {
         <>
             <div className={styles.pageContainer}>
                 <h1>Main Gallery</h1>
-                <p>For more information on prices, and to leave comments and reviews please register or login</p>
+                {isAuth ? <p>Welcome back! You can now leave comments and reviews</p> :
+                <p>For more information on prices, and to leave comments and reviews please register or login</p>}
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error.message}</p>}
                 {!loading && !error && artworks.length === 0 && <p>No artworks found</p>}

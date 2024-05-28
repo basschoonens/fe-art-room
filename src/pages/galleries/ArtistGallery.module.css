@@ -10,12 +10,12 @@
   padding: var(--spacing-md);
 }
 
-.artworksContainer {
+.cardContainer{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
-  flex-basis: auto;
+  flex-basis: 300px;
+  height: auto;
   justify-content: space-evenly;
   gap: var(--spacing-md);
   padding: var(--spacing-md);
