@@ -58,3 +58,9 @@
     border: var(--border-md) var(--color-light);
     padding: 5px;
 }
+
+.icon:hover {
+    cursor: pointer;
+    background-color: var(--color-light);
+    border: var(--border-md) var(--color-primary);
+}

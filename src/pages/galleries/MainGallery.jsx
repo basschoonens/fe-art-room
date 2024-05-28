@@ -7,12 +7,13 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 
 export default function MainGallery() {
 
-    const { isAuth } = useContext(AuthContext);
+    const {isAuth, user} = useContext(AuthContext);
     const [artworks, setArtworks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const artworksPerPage = 6;
+    const [updateArtwork, toggleUpdateArtwork] = useState(false);
 
     useEffect(() => {
 
@@ -28,17 +29,17 @@ export default function MainGallery() {
                 console.log(shuffledArtworks)
             } catch (error) {
                 setError(error);
+                console.log(error);
             } finally {
                 setLoading(false);
             }
         };
-
         void fetchArtworks();
-
         return () => {
             controller.abort();
         };
     }, []);
+
 
     const nextPage = () => {
         setCurrentPage(currentPage + 1);
@@ -63,8 +64,8 @@ export default function MainGallery() {
         <>
             <div className={styles.pageContainer}>
                 <h1>Main Gallery</h1>
-                {isAuth ? <p>Welcome back! Please leave a review and comment of the best art</p> :
-                <p>For more information on prices, and to leave comments and reviews please register or login</p>}
+                {isAuth ? <p>Welcome {user.username}! Please leave a review and comment of the best art you find here</p> :
+                    <p>For more information on prices, and to leave comments and reviews please register or login</p>}
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error.message}</p>}
                 {!loading && !error && artworks.length === 0 && <p>No artworks found</p>}
@@ -76,15 +77,17 @@ export default function MainGallery() {
                                 id={art.id}
                                 title={art.title}
                                 artist={art.artist}
+                                rating={art.averageRating}
+                                toggleUpdateArtwork={toggleUpdateArtwork}
                                 imageUrl={`http://localhost:8080/artworks/${art.id}/image`}
                             />
                         ))}
                     </div>
                 </div>
-                    <div className={styles.buttonsContainer}>
-                        <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
-                        <button onClick={nextPage}>Next</button>
-                    </div>
+                <div className={styles.buttonsContainer}>
+                    <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
+                    <button onClick={nextPage}>Next</button>
+                </div>
             </div>
         </>
     )
