@@ -20,8 +20,6 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     }, [cart]);
 
-    console.log('Cart:', cart)
-
     const addToCart = (item) => {
         console.log('Adding item to cart:', item)
         setCart([...cart, item]);
@@ -51,14 +49,14 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    const [cartUpdateCounter, setCartUpdateCounter] = useState(0);
-
-    const updateCart = () => {
-        setCartUpdateCounter(prevCounter => prevCounter + 1);
-    };
+    // const [cartUpdateCounter, setCartUpdateCounter] = useState(0);
+    //
+    // const updateCart = () => {
+    //     setCartUpdateCounter(prevCounter => prevCounter + 1);
+    // };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, placeOrder, updateCart }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, placeOrder}}>
             {children}
         </CartContext.Provider>
     );

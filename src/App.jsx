@@ -26,7 +26,6 @@ function App() {
     return (
         <>
             <div className={styles.appContainer}>
-                <CartProvider>
                     <Navigation/>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
@@ -46,7 +45,6 @@ function App() {
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>
                     <Footer/>
-                </CartProvider>
             </div>
         </>
     )

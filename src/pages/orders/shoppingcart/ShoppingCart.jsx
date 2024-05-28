@@ -6,8 +6,6 @@ const ShoppingCart = () => {
     const { cart, removeFromCart } = useCart();
     const [artworks, setArtworks] = useState([]);
 
-    console.log('Cart:', cart);
-
     useEffect(() => {
         const fetchArtworkDetails = async () => {
             try {
