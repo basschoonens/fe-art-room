@@ -1,11 +1,14 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
-export const CartContext = createContext();
+const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
+    console.log('Cart:', cart)
+
     const addToCart = (item) => {
+        console.log('Adding item to cart:', item)
         setCart([...cart, item]);
     };
 
@@ -17,9 +20,35 @@ export const CartProvider = ({ children }) => {
         setCart([]);
     };
 
+    const placeOrder = async () => {
+        try {
+            const response = await fetch('http://your-backend-url/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cart),
+            });
+            if (!response.ok) throw new Error('Order placement failed');
+            clearCart(); // Clear the cart after successful order placement
+        } catch (error) {
+            console.error('Error placing order:', error);
+        }
+    };
+
+    const [cartUpdateCounter, setCartUpdateCounter] = useState(0);
+
+    const updateCart = () => {
+        setCartUpdateCounter(prevCounter => prevCounter + 1);
+    };
+
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, placeOrder, updateCart }}>
             {children}
         </CartContext.Provider>
     );
+};
+
+export const useCart = () => {
+    return useContext(CartContext);
 };

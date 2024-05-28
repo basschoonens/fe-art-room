@@ -17,7 +17,7 @@ import {AuthContext} from "./context/AuthContext.jsx";
 import React, {useContext} from "react";
 import Register from "./pages/register/Register.jsx";
 import UserArtworkDetails from "../src/pages/galleries/artworkDetails/UserArtworkDetails.jsx";
-
+import {CartProvider} from "./context/CartContext.jsx";
 
 
 function App() {
@@ -26,23 +26,27 @@ function App() {
     return (
         <>
             <div className={styles.appContainer}>
-                <Navigation/>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/maingallery" element={<MainGallery/>}/>
-                    <Route path="/maingallery/:id" element={<UserArtworkDetails />} />
-                    <Route path="/artistgallery" element={isAuth && user.authority === "ROLE_ARTIST" ? <ArtistGallery/> : <Navigate to="/"/>} />
-                    <Route path="/artistgallery/addnewartwork" element={<AddNewArtwork/>}/>
-                    <Route path="/login" element={<Login/>}/>
-                    <Route path="/register" element={<Register />}/>
-                    <Route path="/profile" element={<Profile/>}/>
-                    <Route path="/shoppingcart" element={<ShoppingCart/>}/>
-                    <Route path="/order" element={<Order/>}/>
-                    <Route path="/purchased" element={<Purchased/>}/>
-                    <Route path="/about" element={<About/>}/>
-                    <Route path="*" element={<NotFound/>}/>
-                </Routes>
-                <Footer/>
+                <CartProvider>
+                    <Navigation/>
+                    <Routes>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/maingallery" element={<MainGallery/>}/>
+                        <Route path="/maingallery/:id" element={<UserArtworkDetails/>}/>
+                        <Route path="/artistgallery"
+                               element={isAuth && user.authority === "ROLE_ARTIST" ? <ArtistGallery/> :
+                                   <Navigate to="/"/>}/>
+                        <Route path="/artistgallery/addnewartwork" element={<AddNewArtwork/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
+                        <Route path="/shoppingcart" element={<ShoppingCart/>}/>
+                        <Route path="/order" element={<Order/>}/>
+                        <Route path="/purchased" element={<Purchased/>}/>
+                        <Route path="/about" element={<About/>}/>
+                        <Route path="*" element={<NotFound/>}/>
+                    </Routes>
+                    <Footer/>
+                </CartProvider>
             </div>
         </>
     )
