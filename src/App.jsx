@@ -7,7 +7,7 @@ import ArtistGallery from "./pages/galleries/ArtistGallery.jsx";
 import Login from "./pages/login/Login.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import Order from "./pages/orders/order/Order.jsx";
-import Purchased from "./pages/orders/purchased/Purchased.jsx";
+import Confirmation from "./pages/orders/confirmation/Confirmation.jsx";
 import About from "./pages/about/About.jsx";
 import NotFound from "./pages/notfound/NotFound.jsx";
 import Navigation from "./components/navigation/Navigation.jsx";
@@ -40,7 +40,7 @@ function App() {
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/shoppingcart" element={<ShoppingCart/>}/>
                         <Route path="/order" element={<Order/>}/>
-                        <Route path="/purchased" element={<Purchased/>}/>
+                        <Route path="/purchased" element={<Confirmation/>}/>
                         <Route path="/about" element={<About/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>

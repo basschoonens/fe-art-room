@@ -13,7 +13,6 @@ export default function MainGallery() {
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const artworksPerPage = 6;
-    const [updateArtwork, toggleUpdateArtwork] = useState(false);
 
     useEffect(() => {
 
@@ -78,7 +77,6 @@ export default function MainGallery() {
                                 title={art.title}
                                 artist={art.artist}
                                 rating={art.averageRating}
-                                toggleUpdateArtwork={toggleUpdateArtwork}
                                 imageUrl={`http://localhost:8080/artworks/${art.id}/image`}
                             />
                         ))}

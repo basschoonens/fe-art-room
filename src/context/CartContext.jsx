@@ -6,9 +6,11 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
+    const [artworks, setArtworks] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Load cart items from local storage when component mounts
         const storedCart = localStorage.getItem(CART_STORAGE_KEY);
         if (storedCart) {
             setCart(JSON.parse(storedCart));
@@ -48,12 +50,6 @@ export const CartProvider = ({ children }) => {
             console.error('Error placing order:', error);
         }
     };
-
-    // const [cartUpdateCounter, setCartUpdateCounter] = useState(0);
-    //
-    // const updateCart = () => {
-    //     setCartUpdateCounter(prevCounter => prevCounter + 1);
-    // };
 
     return (
         <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, placeOrder}}>

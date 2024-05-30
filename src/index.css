@@ -93,7 +93,12 @@
   font-family: var(--font-family-alt);
   font-weight: 400;
   color: var(--color-black);
-  padding: var(--spacing-md);
+}
+
+:root ul li {
+  font-family: var(--font-family-alt);
+  font-weight: 400;
+  color: var(--color-black);
 }
 
 /*TODO Inputfields styling global instellen*/
