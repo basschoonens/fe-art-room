@@ -40,7 +40,7 @@ function App() {
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/shoppingcart" element={<ShoppingCart/>}/>
                         <Route path="/order" element={<Order/>}/>
-                        <Route path="/purchased" element={<Confirmation/>}/>
+                        <Route path="/confirmation" element={<Confirmation/>}/>
                         <Route path="/about" element={<About/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>

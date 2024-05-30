@@ -5,21 +5,25 @@ import { useForm } from 'react-hook-form';
 import generateOrderNumber from '../../../helpers/orderNumber.js';
 
 const OrderPage = () => {
-    const { cart, placeOrder, clearCart } = useCart();
+    const { artworks, placeOrder, clearCart } = useCart();
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    console.log('cart:', cart);
-
     const onSubmit = async (data) => {
         const orderData = {
-            ...data,
             orderNumber: generateOrderNumber(),
             orderDate: new Date().toISOString().split('T')[0],
             orderStatus: 'Pending',
-            totalPrice: calculateTotalPrice(cart),
-            artworkIds: cart.map(item => item.id),
+            paymentMethod: data.paymentMethod,
+            totalPrice: calculateTotalPrice(artworks),
+            name: data.name,
+            address: data.address,
+            postalCode: data.postalCode,
+            city: data.city,
+            artworkIds: artworks.map(item => item.id),
         };
+
+        console.log('Order data:', orderData)
 
         try {
             await placeOrder(orderData);
@@ -30,9 +34,11 @@ const OrderPage = () => {
         }
     };
 
-    const calculateTotalPrice = (items) => {
-        return items.reduce((total, item) => total + item.price, 0);
-    };
+    const calculateTotalPrice = (artworks) => {
+        return artworks.reduce((total, item) => total + item.sellingPrice, 0);
+    }
+
+    const totalPrice = calculateTotalPrice(artworks);
 
     return (
         <div>
@@ -49,28 +55,34 @@ const OrderPage = () => {
                     {errors.address && <span>This field is required</span>}
                 </div>
                 <div>
+                    <label>Postal Code:</label>
+                    <input {...register('postalCode', { required: true })} />
+                    {errors.postalCode && <span>This field is required</span>}
+                </div>
+                <div>
+                    <label>City:</label>
+                    <input {...register('city', { required: true })} />
+                    {errors.city && <span>This field is required</span>}
+                </div>
+                <div>
                     <label>Payment Method:</label>
-                    <input {...register('paymentMethod', { required: true })} />
-                    {errors.paymentMethod && <span>This field is required</span>}
-                </div>
-                <div>
-                    <label>Shipping Address:</label>
-                    <input {...register('shippingAddress', { required: true })} />
-                    {errors.shippingAddress && <span>This field is required</span>}
-                </div>
-                <div>
-                    <label>Billing Address:</label>
-                    <input {...register('billingAddress', { required: true })} />
-                    {errors.billingAddress && <span>This field is required</span>}
+                    <select {...register('paymentMethod', { required: true })}>
+                        <option value="">Select payment method</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="PayPal">PayPal</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Cash">Cash</option>
+                    </select>
                 </div>
                 <h3>Items</h3>
                 <ul>
-                    {cart.map((item) => (
+                    {artworks.map((item) => (
                         <li key={item.id}>
-                            {item.title} - ${item.price}
+                            {item.title} - ${item.sellingPrice}
                         </li>
                     ))}
                 </ul>
+                <p>Total price: ${totalPrice.toFixed(2)}</p>
                 <button type="submit">Place Order</button>
             </form>
         </div>
