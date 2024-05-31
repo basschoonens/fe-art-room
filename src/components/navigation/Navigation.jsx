@@ -8,7 +8,7 @@ import {useContext} from "react";
 export default function Navigation() {
 
     const navigate = useNavigate();
-    const {isAuth} = useContext(AuthContext);
+    const {isAuth, user} = useContext(AuthContext);
 
     return (
         <nav>
@@ -23,8 +23,13 @@ export default function Navigation() {
                     {isAuth && (
                         <li>
                             <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
-                                     to="/artistgallery">For
-                                artists</NavLink>
+                                     to="/artistgallery">For artists</NavLink>
+                        </li>
+                    )}
+                    {isAuth && user.authority === "ROLE_ADMIN" && (
+                        <li>
+                            <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
+                                     to="/admin">For admin</NavLink>
                         </li>
                     )}
                     <li>
