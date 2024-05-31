@@ -1,8 +1,10 @@
+import styles from './Order.module.css';
 import React from 'react';
 import { useCart } from '../../../context/CartContext.jsx'; // Adjust the import path as needed
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import generateOrderNumber from '../../../helpers/orderNumber.js';
+import Button from "../../../components/button/Button.jsx";
 
 const OrderPage = () => {
     const { artworks, placeOrder, clearCart } = useCart();
@@ -41,30 +43,30 @@ const OrderPage = () => {
     const totalPrice = calculateTotalPrice(artworks);
 
     return (
-        <div>
+        <div className={styles.pageContainer}>
             <h2>Order Page</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
+            <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+                <div className={styles.formGroup}>
                     <label>Name:</label>
                     <input {...register('name', { required: true })} />
-                    {errors.name && <span>This field is required</span>}
+                    {errors.name && <span className={styles.error}>This field is required</span>}
                 </div>
-                <div>
+                <div className={styles.formGroup}>
                     <label>Address:</label>
                     <input {...register('address', { required: true })} />
-                    {errors.address && <span>This field is required</span>}
+                    {errors.address && <span className={styles.error}>This field is required</span>}
                 </div>
-                <div>
+                <div className={styles.formGroup}>
                     <label>Postal Code:</label>
                     <input {...register('postalCode', { required: true })} />
-                    {errors.postalCode && <span>This field is required</span>}
+                    {errors.postalCode && <span className={styles.error}>This field is required</span>}
                 </div>
-                <div>
+                <div className={styles.formGroup}>
                     <label>City:</label>
                     <input {...register('city', { required: true })} />
-                    {errors.city && <span>This field is required</span>}
+                    {errors.city && <span className={styles.error}>This field is required</span>}
                 </div>
-                <div>
+                <div className={styles.formGroup}>
                     <label>Payment Method:</label>
                     <select {...register('paymentMethod', { required: true })}>
                         <option value="">Select payment method</option>
@@ -75,15 +77,16 @@ const OrderPage = () => {
                     </select>
                 </div>
                 <h3>Items</h3>
-                <ul>
+                <ul className={styles.itemsList}>
                     {artworks.map((item) => (
                         <li key={item.id}>
-                            {item.title} - ${item.sellingPrice}
+                            <span>{item.title}</span>
+                            <span>${item.sellingPrice.toFixed(2)}</span>
                         </li>
                     ))}
                 </ul>
-                <p>Total price: ${totalPrice.toFixed(2)}</p>
-                <button type="submit">Place Order</button>
+                <p className={styles.totalPrice}>Total price: ${totalPrice.toFixed(2)}</p>
+                <Button type="submit" text="Confirm" />
             </form>
         </div>
     );

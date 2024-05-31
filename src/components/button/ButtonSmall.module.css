@@ -1,0 +1,13 @@
+.button {
+    background-color: var(--color-secondary);
+    border: var(--border-sm) var(--color-white);
+    color: var(--color-primary);
+    border-radius: 5px;
+    padding: 4px 12px;
+    font-family: var(--font-family-alt);
+    text-align: center;
+    display: inline-block;
+    font-size: var(--font-size-small);
+    margin: 2px 1px;
+    cursor: pointer;
+}

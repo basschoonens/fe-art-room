@@ -4,6 +4,7 @@ import axios from "axios";
 import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/userArtworkCard/UserArtworkCard.jsx";
 import shuffleArray from "../../helpers/shuffleArray.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import Button from "../../components/button/Button.jsx";
 
 export default function MainGallery() {
 
@@ -83,8 +84,8 @@ export default function MainGallery() {
                     </div>
                 </div>
                 <div className={styles.buttonsContainer}>
-                    <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
-                    <button onClick={nextPage}>Next</button>
+                    <Button onClick={prevPage} disabled={currentPage === 1} text="Previous"/>
+                    <Button onClick={nextPage} text="Next"/>
                 </div>
             </div>
         </>
