@@ -18,7 +18,7 @@ export default function ReviewModal({ isOpen, onRequestClose, onSubmitReview }) 
             setSuccessMessage(false);
             onRequestClose();
             // reset();
-        }, 2000); // Adjust the delay as needed
+        }, 2000);
     };
 
     if (!isOpen) return null;
