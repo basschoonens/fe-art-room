@@ -1,0 +1,27 @@
+.pageContainer {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    justify-content: space-between;
+}
+
+.artworkImage{
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.artworkDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border: var(--border-md) var(--color-light);
+    border-radius: var(--border-radius-lg);
+    margin-left: var(--spacing-md);
+}

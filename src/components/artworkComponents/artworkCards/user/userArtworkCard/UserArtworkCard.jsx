@@ -49,7 +49,6 @@ export default function UserArtworkCard({id, title, artist, imageUrl, rating}) {
             }
         }
         void sendRating();
-        setIsRatingModalOpen(false);
     }
 
     return (

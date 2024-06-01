@@ -10,4 +10,5 @@ button {
     font-size: var(--font-size-medium);
     margin: 4px 2px;
     cursor: pointer;
+    width: auto;
 }

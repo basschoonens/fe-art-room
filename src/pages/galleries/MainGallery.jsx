@@ -4,6 +4,7 @@ import axios from "axios";
 import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/userArtworkCard/UserArtworkCard.jsx";
 import shuffleArray from "../../helpers/shuffleArray.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import Button from "../../components/button/Button.jsx";
 
 export default function MainGallery() {
 
@@ -13,7 +14,6 @@ export default function MainGallery() {
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const artworksPerPage = 6;
-    const [updateArtwork, toggleUpdateArtwork] = useState(false);
 
     useEffect(() => {
 
@@ -71,22 +71,21 @@ export default function MainGallery() {
                 {!loading && !error && artworks.length === 0 && <p>No artworks found</p>}
                 <div>
                     <div className={styles.cardContainer}>
-                        {currentArtworks.map(art => (
+                        {currentArtworks.map(artwork => (
                             <UserArtworkCard
-                                key={art.id}
-                                id={art.id}
-                                title={art.title}
-                                artist={art.artist}
-                                rating={art.averageRating}
-                                toggleUpdateArtwork={toggleUpdateArtwork}
-                                imageUrl={`http://localhost:8080/artworks/${art.id}/image`}
+                                key={artwork.id}
+                                id={artwork.id}
+                                title={artwork.title}
+                                artist={artwork.artist}
+                                rating={artwork.averageRating}
+                                imageUrl={`http://localhost:8080/artworks/${artwork.id}/image`}
                             />
                         ))}
                     </div>
                 </div>
                 <div className={styles.buttonsContainer}>
-                    <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
-                    <button onClick={nextPage}>Next</button>
+                    <Button onClick={prevPage} disabled={currentPage === 1} text="Previous"/>
+                    <Button onClick={nextPage} text="Next"/>
                 </div>
             </div>
         </>

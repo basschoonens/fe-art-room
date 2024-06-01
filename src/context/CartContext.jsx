@@ -1,4 +1,5 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
+import axios from "axios";
 
 const CART_STORAGE_KEY = 'cart';
 
@@ -6,9 +7,13 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
+    const [artworks, setArtworks] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    // import the jwt token from local storage
+    const jwt = localStorage.getItem('jwt');
 
     useEffect(() => {
-        // Load cart items from local storage when component mounts
         const storedCart = localStorage.getItem(CART_STORAGE_KEY);
         if (storedCart) {
             setCart(JSON.parse(storedCart));
@@ -33,30 +38,68 @@ export const CartProvider = ({ children }) => {
         setCart([]);
     };
 
-    const placeOrder = async () => {
+    useEffect(() => {
+
+        const controller = new AbortController();
+        const fetchArtworkDetails = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const artworkDetails = await Promise.all(
+                    // TODO check if this is necessary
+                    cart.map(async (item) => {
+                        const response = await axios.get(`http://localhost:8080/artworks/${item.id}`, { signal: controller.signal });
+                        return response.data;
+                    })
+                );
+                setArtworks(artworkDetails);
+            } catch (error) {
+                setError(error);
+                console.error('Error fetching artwork details:', error);
+            } finally {
+                setLoading(false);
+            }
+            return () => {
+                controller.abort();
+            }
+        };
+
+        void fetchArtworkDetails();
+
+    }, [cart]);
+
+    const placeOrder = async (orderData) => {
+        setLoading(true);
+        setError(null);
+
+        const abortController = new AbortController();
+
         try {
-            const response = await fetch('http://your-backend-url/api/orders', {
-                method: 'POST',
+            const response = await axios.post('http://localhost:8080/orders', orderData, {
+                signal: abortController.signal,
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwt}`,
                 },
-                body: JSON.stringify(cart),
             });
-            if (!response.ok) throw new Error('Order placement failed');
-            clearCart(); // Clear the cart after successful order placement
+
+            if (response.status !== 200) throw new Error('Order placement failed');
+
+            console.log('Order placed:', response.data);
         } catch (error) {
             console.error('Error placing order:', error);
+            setError(error);
+        } finally {
+            setLoading(false);
         }
+
+        return () => {
+            abortController.abort();
+        };
     };
 
-    // const [cartUpdateCounter, setCartUpdateCounter] = useState(0);
-    //
-    // const updateCart = () => {
-    //     setCartUpdateCounter(prevCounter => prevCounter + 1);
-    // };
-
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, placeOrder}}>
+        <CartContext.Provider value={{ artworks, cart, addToCart, removeFromCart, clearCart, placeOrder}}>
             {children}
         </CartContext.Provider>
     );

@@ -7,7 +7,7 @@ import ArtistGallery from "./pages/galleries/ArtistGallery.jsx";
 import Login from "./pages/login/Login.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import Order from "./pages/orders/order/Order.jsx";
-import Purchased from "./pages/orders/purchased/Purchased.jsx";
+import Confirmation from "./pages/orders/confirmation/Confirmation.jsx";
 import About from "./pages/about/About.jsx";
 import NotFound from "./pages/notfound/NotFound.jsx";
 import Navigation from "./components/navigation/Navigation.jsx";
@@ -16,8 +16,7 @@ import AddNewArtwork from "./pages/artworks/AddNewArtwork.jsx";
 import {AuthContext} from "./context/AuthContext.jsx";
 import React, {useContext} from "react";
 import Register from "./pages/register/Register.jsx";
-import UserArtworkDetails from "../src/pages/galleries/artworkDetails/UserArtworkDetails.jsx";
-import {CartProvider} from "./context/CartContext.jsx";
+import UserArtworkDetails from "./pages/artworkDetails/UserArtworkDetails.jsx";
 
 
 function App() {
@@ -40,7 +39,7 @@ function App() {
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/shoppingcart" element={<ShoppingCart/>}/>
                         <Route path="/order" element={<Order/>}/>
-                        <Route path="/purchased" element={<Purchased/>}/>
+                        <Route path="/confirmation" element={<Confirmation/>}/>
                         <Route path="/about" element={<About/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>

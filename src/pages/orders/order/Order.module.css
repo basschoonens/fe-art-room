@@ -1,0 +1,89 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    background: var(--color-transparent);
+}
+
+.orderForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    background: var(--color-transparent);
+    margin: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    font-family: var(--font-family-alt);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-md) var(--color-light);
+    box-shadow: var(--shadow-md);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+}
+
+.formGroup label {
+    margin-bottom: var(--spacing-xs);
+    font-weight: bold;
+}
+
+.formGroup input,
+.formGroup select {
+    margin: var(--spacing-sm) 0;
+    padding: var(--spacing-sm);
+    width: 80%;
+    min-width: 150px;
+    font-family: var(--font-family-alt);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-md) var(--color-light);
+}
+
+.errorMessage {
+    padding: 4px;
+    border: var(--border-sm) var(--color-dark);
+    color: var(--color-dark);
+    font-size: var(--font-size-small);
+}
+
+.itemsList {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-md);
+}
+
+.itemsList li {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid var(--color-light);
+}
+
+.totalPrice {
+    font-weight: bold;
+    margin-top: var(--spacing-md);
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .orderForm {
+        width: 600px;
+    }
+}
