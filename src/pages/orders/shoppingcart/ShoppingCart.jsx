@@ -1,13 +1,15 @@
 import styles from './ShoppingCart.module.css';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useCart} from '../../../context/CartContext.jsx';
 import {Link} from "react-router-dom";
 import {currencyFormat} from "../../../helpers/currencyFormat.js";
 import Button from "../../../components/button/Button.jsx";
+import {calculateTotalPrice} from "../../../helpers/calculateTotalPrice.js";
 
 
 const ShoppingCart = () => {
     const {artworks,removeFromCart, loading, error} = useCart();
+    const totalPrice = calculateTotalPrice(artworks);
 
     console.log('artworks:', artworks);
 
@@ -41,7 +43,7 @@ const ShoppingCart = () => {
             ) : (
                 <p>Your cart is empty</p>
             )}
-            <p>Your total: {currencyFormat(artworks.reduce((acc, artwork) => acc + artwork.sellingPrice, 0))}</p>
+            <p>Your total: {currencyFormat(totalPrice)}</p>
             <div className={styles.buttonsContainer}>
             <Link to={'/maingallery'}><Button type="button" text="Cancel" /></Link>
             <Link to={'/order'}><Button type="submit" text="Place Order" /></Link>

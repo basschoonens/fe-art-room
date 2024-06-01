@@ -72,8 +72,11 @@ export const CartProvider = ({ children }) => {
         setLoading(true);
         setError(null);
 
+        const abortController = new AbortController();
+
         try {
             const response = await axios.post('http://localhost:8080/orders', orderData, {
+                signal: abortController.signal,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${jwt}`,
@@ -83,13 +86,16 @@ export const CartProvider = ({ children }) => {
             if (response.status !== 200) throw new Error('Order placement failed');
 
             console.log('Order placed:', response.data);
-            // clearCart(); // Uncomment if you want to clear the cart after successful order placement
         } catch (error) {
             console.error('Error placing order:', error);
             setError(error);
         } finally {
             setLoading(false);
         }
+
+        return () => {
+            abortController.abort();
+        };
     };
 
     return (

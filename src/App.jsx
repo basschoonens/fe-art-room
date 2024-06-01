@@ -16,8 +16,7 @@ import AddNewArtwork from "./pages/artworks/AddNewArtwork.jsx";
 import {AuthContext} from "./context/AuthContext.jsx";
 import React, {useContext} from "react";
 import Register from "./pages/register/Register.jsx";
-import UserArtworkDetails from "../src/pages/galleries/artworkDetails/UserArtworkDetails.jsx";
-import {CartProvider} from "./context/CartContext.jsx";
+import UserArtworkDetails from "./pages/artworkDetails/UserArtworkDetails.jsx";
 
 
 function App() {

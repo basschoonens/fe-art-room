@@ -71,14 +71,14 @@ export default function MainGallery() {
                 {!loading && !error && artworks.length === 0 && <p>No artworks found</p>}
                 <div>
                     <div className={styles.cardContainer}>
-                        {currentArtworks.map(art => (
+                        {currentArtworks.map(artwork => (
                             <UserArtworkCard
-                                key={art.id}
-                                id={art.id}
-                                title={art.title}
-                                artist={art.artist}
-                                rating={art.averageRating}
-                                imageUrl={`http://localhost:8080/artworks/${art.id}/image`}
+                                key={artwork.id}
+                                id={artwork.id}
+                                title={artwork.title}
+                                artist={artwork.artist}
+                                rating={artwork.averageRating}
+                                imageUrl={`http://localhost:8080/artworks/${artwork.id}/image`}
                             />
                         ))}
                     </div>

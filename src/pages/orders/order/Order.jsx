@@ -1,15 +1,18 @@
 import styles from './Order.module.css';
 import React from 'react';
-import { useCart } from '../../../context/CartContext.jsx'; // Adjust the import path as needed
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import {useCart} from '../../../context/CartContext.jsx';
+import {useNavigate} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 import generateOrderNumber from '../../../helpers/orderNumber.js';
 import Button from "../../../components/button/Button.jsx";
+import {currencyFormat} from "../../../helpers/currencyFormat.js";
+import {calculateTotalPrice} from "../../../helpers/calculateTotalPrice.js";
 
 const OrderPage = () => {
-    const { artworks, placeOrder, clearCart } = useCart();
+    const {artworks, placeOrder, clearCart} = useCart();
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {register, handleSubmit, formState: {errors}} = useForm();
+    const totalPrice = calculateTotalPrice(artworks);
 
     const onSubmit = async (data) => {
         const orderData = {
@@ -30,63 +33,68 @@ const OrderPage = () => {
         try {
             await placeOrder(orderData);
             clearCart();
-            navigate('/confirmation');
+            navigate('/confirmation', {state: {orderData}});
         } catch (error) {
             console.error('Error placing order:', error);
         }
     };
 
-    const calculateTotalPrice = (artworks) => {
-        return artworks.reduce((total, item) => total + item.sellingPrice, 0);
-    }
-
-    const totalPrice = calculateTotalPrice(artworks);
-
     return (
         <div className={styles.pageContainer}>
             <h2>Order Page</h2>
-            <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
+            <h3>Please fill out your details to confirm your order.</h3>
+            <form className={styles.orderForm} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.formGroup}>
-                    <label>Name:</label>
-                    <input {...register('name', { required: true })} />
-                    {errors.name && <span className={styles.error}>This field is required</span>}
+                    <input
+                        placeholder={'Enter your name...'}
+                        {...register('name', {required: true})} />
+                    {errors.name && <span className={styles.errorMessage}>This field is required</span>}
                 </div>
                 <div className={styles.formGroup}>
-                    <label>Address:</label>
-                    <input {...register('address', { required: true })} />
-                    {errors.address && <span className={styles.error}>This field is required</span>}
+                    <input
+                        placeholder={'Enter your address...'}
+                        {...register('address', {required: true})} />
+                    {errors.address && <span className={styles.errorMessage}>This field is required</span>}
                 </div>
                 <div className={styles.formGroup}>
-                    <label>Postal Code:</label>
-                    <input {...register('postalCode', { required: true })} />
-                    {errors.postalCode && <span className={styles.error}>This field is required</span>}
+                    <input
+                        placeholder={'Enter your postal code...'}
+                        {...register('postalCode', {required: true})} />
+                    {errors.postalCode && <span className={styles.errorMessage}>This field is required</span>}
                 </div>
                 <div className={styles.formGroup}>
-                    <label>City:</label>
-                    <input {...register('city', { required: true })} />
-                    {errors.city && <span className={styles.error}>This field is required</span>}
+                    <input
+                        placeholder={'Enter your city...'}
+                        {...register('city', {required: true})} />
+                    {errors.city && <span className={styles.errorMessage}>This field is required</span>}
                 </div>
                 <div className={styles.formGroup}>
-                    <label>Payment Method:</label>
-                    <select {...register('paymentMethod', { required: true })}>
-                        <option value="">Select payment method</option>
+                    {/*TODO make select payment method unselectable*/}
+                    <select
+                        defaultValue=""
+                        {...register('paymentMethod', {required: true})}>
+                        <option value="" disabled>Select payment method</option>
                         <option value="Credit Card">Credit Card</option>
-                        <option value="PayPal">PayPal</option>
+                        <option value="IDeal">IDeal</option>
                         <option value="Bank Transfer">Bank Transfer</option>
                         <option value="Cash">Cash</option>
                     </select>
                 </div>
-                <h3>Items</h3>
+                <h3>Artworks</h3>
+                {/*TODO add date and order number etc.*/}
                 <ul className={styles.itemsList}>
-                    {artworks.map((item) => (
-                        <li key={item.id}>
-                            <span>{item.title}</span>
-                            <span>${item.sellingPrice.toFixed(2)}</span>
+                    {artworks.map((artwork) => (
+                        <li key={artwork.id}>
+                            <span>{artwork.title}</span>
+                            <span>${currencyFormat(artwork.sellingPrice)}</span>
                         </li>
                     ))}
                 </ul>
-                <p className={styles.totalPrice}>Total price: ${totalPrice.toFixed(2)}</p>
-                <Button type="submit" text="Confirm" />
+                <p className={styles.totalPrice}>Total price: {currencyFormat(totalPrice)}</p>
+                <div className={styles.buttonsContainer}>
+                    <Button type="button" text="Cancel" onClick={() => navigate('/maingallery')}/>
+                    <Button type="submit" text="Place Order"/>
+                </div>
             </form>
         </div>
     );

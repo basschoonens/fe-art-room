@@ -36,16 +36,16 @@
 
 .cartTable th:nth-child(3),
 .cartTable td:nth-child(3) {
-    width: 100px; /* Adjust width as needed */
+    width: 100px;
     text-align: center;
 }
 
 .cartTable th:nth-child(2),
 .cartTable td:nth-child(2) {
-    text-align: center; /* Center the price column */
+    text-align: center;
 }
 
-p {
+.pageContainer p {
     align-self: center;
     font-family: var(--font-family-alt);
     font-size: var(--font-size-medium);

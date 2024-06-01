@@ -3,25 +3,31 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 1200px;
     width: 100%;
+    max-width: 1200px;
     background: var(--color-transparent);
-    margin: 20px;
-    padding: var(--spacing-md);
 }
 
-.formContainer {
+.orderForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 800px;
+    justify-content: center;
     width: 100%;
-    gap: var(--spacing-md);
+    max-width: 800px;
+    background: var(--color-transparent);
+    margin: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    font-family: var(--font-family-alt);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-md) var(--color-light);
+    box-shadow: var(--shadow-md);
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
     margin-bottom: var(--spacing-sm);
 }
@@ -33,23 +39,27 @@
 
 .formGroup input,
 .formGroup select {
-    padding: var(--spacing-xs);
-    border: 1px solid var(--color-light);
-    border-radius: 5px;
+    margin: var(--spacing-sm) 0;
+    padding: var(--spacing-sm);
+    width: 80%;
+    min-width: 150px;
+    font-family: var(--font-family-alt);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-md) var(--color-light);
 }
 
-.error {
-    color: var(--color-error);
+.errorMessage {
+    padding: 4px;
+    border: var(--border-sm) var(--color-dark);
+    color: var(--color-dark);
     font-size: var(--font-size-small);
-    margin-top: var(--spacing-xs);
 }
 
 .itemsList {
     width: 100%;
     list-style-type: none;
     padding: 0;
-    margin: 0;
-    margin-bottom: var(--spacing-md);
+    margin: 0 0 var(--spacing-md);
 }
 
 .itemsList li {
@@ -62,4 +72,18 @@
 .totalPrice {
     font-weight: bold;
     margin-top: var(--spacing-md);
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .orderForm {
+        width: 600px;
+    }
 }
