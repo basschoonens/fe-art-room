@@ -6,45 +6,160 @@
     width: 100%;
     max-width: 1200px;
     background: var(--color-transparent);
-    margin: 0 20px;
 }
 
-.addArtworkForm{
+.addArtworkForm {
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    background: var(--color-transparent);
+    margin: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    font-family: var(--font-family-alt);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-md) var(--color-light);
+    box-shadow: var(--shadow-md);
+}
+
+.radioContainer {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    justify-content: center;
-    margin-top: var(--spacing-md);
-    position: relative;
+    font-size: var(--font-size-medium);
 }
 
-.formContainer{
+.radioWrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 50%;
-    margin-top: var(--spacing-md);
-    position: relative;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.addImageContainer{
+.checkboxWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.radioInput {
+    display: none;
+}
+
+.customRadio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-dark);
+    position: relative;
+    cursor: pointer;
+    margin-left: var(--spacing-lg);
+}
+
+.customRadio::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--color-dark);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease;
+}
+
+.radioInput:checked + .customRadio::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.radioLabel {
+    font-family: var(--font-family-alt);
+    font-size: var(--font-size-medium);
+    margin-right: var(--spacing-lg); /* Increase margin between label and next element */
+    margin-left: var(--spacing-sm); /* Add margin to the left side of the label */
+    cursor: pointer;
+}
+
+.inputField {
+    margin: var(--spacing-sm) 0;
+    padding: var(--spacing-sm);
+    width: 80%;
+    min-width: 150px;
+    font-family: var(--font-family-alt);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-md) var(--color-light);
+}
+
+.errorMessage {
+    padding: 4px; /* Adjust the value as needed */
+    border: var(--border-sm) var(--color-dark);
+    color: var(--color-dark); /* Optional: Set the color for error messages */
+    font-size: var(--font-size-small); /* Optional: Set the font size for error messages */
+}
+
+.imageContainer {
+    position: relative; /* Add position relative */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: var(--spacing-md);
-    position: relative;
-
+    width: 80%; /* Adjust the width as needed */
+    max-width: 600px; /* Adjust the maximum width as needed */
+    padding: var(--spacing-md); /* Add padding to create space around the content */
+    border: var(--border-md) var(--color-light); /* Add border around the container */
+    border-radius: var(--border-radius-md); /* Add border radius for rounded corners */
 }
 
-.addFieldsContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    margin-top: var(--spacing-md);
-    position: relative;
+.imageContainer label {
+    margin-bottom: var(--spacing-md); /* Add margin below the label */
+}
+
+.customFileUpload {
+    display: inline-block;
+    position: absolute; /* Change position to absolute */
+    cursor: pointer;
+    top: 0; /* Position at the top of the container */
+    left: 0; /* Position at the left of the container */
+    width: 100%; /* Cover the entire container */
+    height: 100%; /* Cover the entire container */
+}
+
+.customFileUpload input[type="file"] {
+    opacity: 0; /* Make the file input invisible */
+    width: 100%; /* Cover the entire container */
+    height: 100%; /* Cover the entire container */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.fileName {
+    margin-top: var(--spacing-sm); /* Add margin above the file name */
+    font-size: var(--font-size-small); /* Adjust the font size as needed */
+}
+
+.fileInput {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2; /* Make sure the input is above the label */
+}
+
+.uploadIcon {
+    font-size: 48px;
+    color: var(--color-secondary);
+}
+
+@media (min-width: 768px) {
+    .addArtworkForm {
+        width: 600px;
+    }
 }

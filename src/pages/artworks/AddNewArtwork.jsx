@@ -1,13 +1,21 @@
+import styles from './AddNewArtwork.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
 const AddNewArtwork = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {register, handleSubmit, formState: {errors}} = useForm();
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
     const [artworkType, setArtworkType] = React.useState('');
+    const [selectedFile, setSelectedFile] = React.useState(null);
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedFile(file);
+    };
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -35,7 +43,8 @@ const AddNewArtwork = () => {
 
             const artworkResponse = await axios.post('http://localhost:8080/artworks/user', formData, {
                 signal: abortController.signal,
-                headers });
+                headers
+            });
 
             console.log('Artwork POST request complete.');
             console.log('Response:', artworkResponse);
@@ -50,101 +59,131 @@ const AddNewArtwork = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <label>Title</label>
-                <input type="text" {...register('title', { required: true })} />
-                {errors.title && <span>Title is required</span>}
-            </div>
-            <div>
-                <label>Artist</label>
-                <input type="text" {...register('artist')} />
-            </div>
-            <div>
-                <label>Description</label>
-                <textarea {...register('description', { required: true })}></textarea>
-                {errors.description && <span>Description is required</span>}
-            </div>
-            <div>
-                <label>Date Created</label>
-                <input type="date" {...register('dateCreated')} />
-            </div>
-            <div>
-                <label>Gallery Buying Price</label>
-                <input type="number" {...register('galleryBuyingPrice')} />
-            </div>
-            <div>
-                <label>Edition</label>
-                <input type="text" {...register('edition')} />
-            </div>
-            <div>
-                <label>Artwork Type</label>
-                <div>
-                    <label>
-                        <input type="radio" value="drawing" checked={artworkType === 'drawing'} onChange={() => setArtworkType('drawing')} />
-                        Drawing
-                    </label>
-                    <label>
-                        <input type="radio" value="painting" checked={artworkType === 'painting'} onChange={() => setArtworkType('painting')} />
-                        Painting
-                    </label>
+        <div className={styles.pageContainer}>
+            <h1>Create new artwork</h1>
+            <p>Fill in the form below to add your new artwork to the gallery</p>
+            <form className={styles.addArtworkForm} onSubmit={handleSubmit(onSubmit)}>
+                {/*TODO check if empty label is neccesary everywhere.*/}
+                <input type="text" className={styles.inputField}
+                       placeholder="Please enter the title of your artwork"
+                       {...register('title', {required: true})} />
+                {errors.title && <span className={styles.errorMessage}>Title is required</span>}
+                <input type="text" className={styles.inputField}
+                       placeholder="Please enter your artist name for this artwork"
+                       {...register('artist', {required: true})} />
+                {errors.artist && <span className={styles.errorMessage}>Description is required</span>}
+                <textarea className={styles.inputField}
+                          placeholder="Please enter a description of the artwork"
+                          {...register('description', {required: true})}></textarea>
+                {errors.description && <span className={styles.errorMessage}>Description is required</span>}
+                <input type="date" className={styles.inputField}
+                       placeholder="Please enter the date the artwork was created"
+                       {...register('dateCreated', {required: true})} />
+                {errors.dateCreated && <span className={styles.errorMessage}>Date created is required</span>}
+                <input
+                    className={styles.inputField}
+                    type="number"
+                    placeholder="Please enter the selling price of the artwork"
+                    {...register('galleryBuyingPrice', {required: true})} // Register the price field
+                />
+                {errors.galleryBuyingPrice && <span className={styles.errorMessage}>Selling price is required</span>}
+                <select className={styles.inputField} {...register('edition', {required: true})}>
+                    <option value="" disabled>Select edition type</option>
+                    <option value="Single / Unique edition">Single / Unique edition</option>
+                    <option value="Part of a series">Part of a series</option>
+                    <option value="Reproduction">Reproduction</option>
+                    <option value="To be decided">To be decided</option>
+                </select>
+                {errors.edition && <span className={styles.errorMessage}>Edition type is required</span>}
+                <div className={styles.radioContainer}>
+                    <div className={styles.radioWrapper}>
+                        <p>Please select your artwork type :</p>
+                        <div className={styles.checkboxWrapper}>
+                            <input
+                                type="radio"
+                                value="drawing"
+                                id="drawing"
+                                className={styles.radioInput}
+                                checked={artworkType === 'drawing'}
+                                onChange={() => setArtworkType('drawing')}
+                            />
+                            <label htmlFor="drawing" className={styles.customRadio}></label>
+                            <label htmlFor="drawing" className={styles.radioLabel}>Drawing</label>
+                            <input
+                                type="radio"
+                                value="painting"
+                                id="painting"
+                                className={styles.radioInput}
+                                checked={artworkType === 'painting'}
+                                onChange={() => setArtworkType('painting')}
+                            />
+                            <label htmlFor="painting" className={styles.customRadio}></label>
+                            <label htmlFor="painting" className={styles.radioLabel}>Painting</label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            {artworkType === 'drawing' && (
-                <>
-                    <div>
-                        <label>Drawing Draw Type</label>
-                        <input type="text" {...register('drawingDrawType')} />
-                    </div>
-                    <div>
-                        <label>Drawing Surface</label>
-                        <input type="text" {...register('drawingSurface')} />
-                    </div>
-                    <div>
-                        <label>Drawing Material</label>
-                        <input type="text" {...register('drawingMaterial')} />
-                    </div>
-                    <div>
-                        <label>Drawing Dimensions Width (cm)</label>
-                        <input type="number" {...register('drawingDimensionsWidthInCm')} />
-                    </div>
-                    <div>
-                        <label>Drawing Dimensions Height (cm)</label>
-                        <input type="number" {...register('drawingDimensionsHeightInCm')} />
-                    </div>
-                </>
-            )}
-            {artworkType === 'painting' && (
-                <>
-                    <div>
-                        <label>Painting Paint Type</label>
-                        <input type="text" {...register('paintingPaintType')} />
-                    </div>
-                    <div>
-                        <label>Painting Surface</label>
-                        <input type="text" {...register('paintingSurface')} />
-                    </div>
-                    <div>
-                        <label>Painting Material</label>
-                        <input type="text" {...register('paintingMaterial')} />
-                    </div>
-                    <div>
-                        <label>Painting Dimensions Width (cm)</label>
-                        <input type="number" {...register('paintingDimensionsWidthInCm')} />
-                    </div>
-                    <div>
-                        <label>Painting Dimensions Height (cm)</label>
-                        <input type="number" {...register('paintingDimensionsHeightInCm')} />
-                    </div>
-                </>
-            )}
-            <div>
-                <label>Image</label>
-                <input type="file" {...register('file', { required: true })} />
-                {errors.file && <span>Image is required</span>}
-            </div>
-            <button type="submit">Add Artwork</button>
-        </form>
+                {artworkType === 'drawing' && (
+                    <>
+                        <input type="text" className={styles.inputField}
+                               placeholder="Please enter the type of drawing"
+                               {...register('drawingDrawType')} />
+                        <input type="text" className={styles.inputField}
+                               placeholder="Please enter the surface used"
+                               {...register('drawingSurface')} />
+                        <input type="text" className={styles.inputField}
+                               placeholder="Please enter chosen material with which the drawing was made"
+                               {...register('drawingMaterial')} />
+                        <input type="number" className={styles.inputField}
+                               placeholder="Please enter the width size in cm"
+                               {...register('drawingDimensionsWidthInCm')} />
+                        <input type="number" className={styles.inputField}
+                               placeholder="Please enter the height size in cm"
+                               {...register('drawingDimensionsHeightInCm')} />
+                    </>
+                )}
+                {artworkType === 'painting' && (
+                    <>
+                        <>
+                            <input type="text" className={styles.inputField}
+                                   placeholder="Please enter the type of painting"
+                                   {...register('paintingPaintType')} />
+                            <input type="text" className={styles.inputField}
+                                   placeholder="Please enter the surface used"
+                                   {...register('paintingSurface')} />
+                            <input type="text" className={styles.inputField}
+                                   placeholder="Please enter chosen material with which the drawing was made"
+                                   {...register('paintingMaterial')} />
+                            <input type="number" className={styles.inputField}
+                                   placeholder="Please enter the width size in cm"
+                                   {...register('paintingDimensionsWidthInCm')} />
+                            <input type="number" className={styles.inputField}
+                                   placeholder="Please enter the height size in cm"
+                                   {...register('paintingDimensionsHeightInCm')} />
+                        </>
+                    </>
+                )}
+                <div className={styles.imageContainer}>
+                    <label htmlFor="fileInput" className={styles.uploadLabel}>
+                        <FontAwesomeIcon icon={faUpload}/>
+                        &nbsp;Upload Image
+                    </label>
+                    <input
+                        id="fileInput"
+                        className={styles.fileInput}
+                        type="file"
+                        {...register('file', {required: true})}
+                        onChange={(e) => {
+                            e.preventDefault(); // Prevent page scroll to top
+                            handleFileChange(e);
+                        }}
+                    />
+                    {selectedFile && <span className={styles.fileName}>{selectedFile.name}</span>}
+                </div>
+                <button className={styles.registerButton} type="submit">Add Artwork</button>
+            </form>
+            {loading && <p>Loading...</p>}
+            {error && <p>Something went wrong while adding the artwork. Please try again.</p>}
+        </div>
     );
 };
 
