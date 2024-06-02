@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './RatingModal.module.css';
+import StarRating from '../../../components/starRating/StarRating.jsx';
 
 export default function ReviewModal({ isOpen, onRequestClose, onSubmitReview }) {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const [rating, setRating] = useState(0);
     const [successMessage, setSuccessMessage] = useState(false);
 
@@ -17,7 +18,8 @@ export default function ReviewModal({ isOpen, onRequestClose, onSubmitReview }) 
         setTimeout(() => {
             setSuccessMessage(false);
             onRequestClose();
-            // reset();
+            reset();
+            setRating(0);
         }, 2000);
     };
 
@@ -34,18 +36,7 @@ export default function ReviewModal({ isOpen, onRequestClose, onSubmitReview }) 
                     <p className={styles.successMessage}>Review submitted successfully!</p>
                 ) : (
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className={styles.rating}>
-                            {[...Array(5)].map((_, i) => (
-                                <span
-                                    key={i}
-                                    className={i < rating ? styles.starFilled : styles.starEmpty}
-                                    onClick={() => handleRatingChange(i + 1)}
-                                >
-                                    ★
-                                </span>
-                            ))}
-                        </div>
-                        {/*TODO Textarea doesn't store anything after pressing Enter in the input field, error is Assertion failed: Input argument is not an HTMLInputElement, perhaps refactor to not use React Hook Form*/}
+                        <StarRating rating={rating} onRatingChange={handleRatingChange} isInteractive={true} customClassName={styles.largeStars} />
                         <textarea
                             {...register('comment')}
                             placeholder="Leave a comment..."
