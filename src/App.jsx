@@ -17,6 +17,8 @@ import {AuthContext} from "./context/AuthContext.jsx";
 import React, {useContext} from "react";
 import Register from "./pages/register/Register.jsx";
 import UserArtworkDetails from "./pages/artworkDetails/UserArtworkDetails.jsx";
+import MyOrders from "./pages/profile/myorders/MyOrders.jsx";
+import MyReviews from "./pages/profile/myReviews/MyReviews.jsx";
 
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/profile" element={<Profile/>}/>
+                        <Route path="/myorders" element={<MyOrders/>}/>
+                        <Route path="/myreviews" element={<MyReviews/>}/>
                         <Route path="/shoppingcart" element={<ShoppingCart/>}/>
                         <Route path="/order" element={<Order/>}/>
                         <Route path="/confirmation" element={<Confirmation/>}/>

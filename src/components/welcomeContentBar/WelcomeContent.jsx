@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './WelcomeContent.module.css';
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import {Link} from "react-router-dom";
 
 const WelcomeContent = () => {
     const {user, isAuth} = useContext(AuthContext);
@@ -15,9 +16,9 @@ const WelcomeContent = () => {
                     <h1 className={styles.welcomeMessage}>Welcome {user.username} !</h1>
                     <div className={styles.toolsContainer}>
                         <ul className={styles.appTools}>
-                            <li>manage my collection</li>
-                            <li>my orders</li>
-                            <li>my reviews</li>
+                            <Link to="/artistgallery"><li>manage my collection</li></Link>
+                            <Link to="/myorders"><li>my orders</li></Link>
+                            <Link to="/myreviews"><li>my reviews</li></Link>
                         </ul>
                         <ul className={styles.profileTools}>
                             <li>edit profile</li>
