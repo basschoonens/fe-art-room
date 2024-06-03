@@ -17,6 +17,45 @@ const AddNewArtwork = () => {
         setSelectedFile(file);
     };
 
+        // const onSubmit = async (data) => {
+        //
+        //     const jwt = localStorage.getItem('jwt');
+        //
+        //     try {
+        //         const artworkResponse = await axios.post('http://localhost:8080/artworks/user', {
+        //             title: data.title,
+        //             artist: data.artist,
+        //             description: data.description,
+        //             dateCreated: data.dateCreated,
+        //             galleryBuyingPrice: data.galleryBuyingPrice,
+        //             edition: data.edition,
+        //             artworkType: data.artworkType,
+        //             drawingDrawType: data.drawingDrawType,
+        //             drawingSurface: data.drawingSurface,
+        //             drawingMaterial: data.drawingMaterial,
+        //             drawingDimensionsWidthInCm: data.drawingDimensionsWidthInCm,
+        //             drawingDimensionsHeightInCm: data.drawingDimensionsHeightInCm
+        //         });
+        //         const artworkId = artworkResponse.data;
+        //
+        //         if (data.file[0]) {
+        //             const formData = new FormData();
+        //             formData.append('file', data.file[0]);
+        //
+        //             await axios.post(`/api/artworks/${artworkId}/image`, formData, {
+        //                 headers: {
+        //                     'Content-Type': 'multipart/form-data',
+        //                     'Authorization': `Bearer ${jwt}`
+        //                 }
+        //             });
+        //             alert('Artwork and image uploaded successfully.');
+        //         }
+        //     } catch (error) {
+        //         console.error('Error uploading artwork:', error);
+        //         alert('Failed to upload artwork.');
+        //     }
+        // };
+
     const onSubmit = async (data) => {
         setLoading(true);
         setError(null);
@@ -80,12 +119,15 @@ const AddNewArtwork = () => {
                        placeholder="Please enter the date the artwork was created"
                        {...register('dateCreated', {required: true})} />
                 {errors.dateCreated && <span className={styles.errorMessage}>Date created is required</span>}
+                <span className={styles.currencyWrapper}>
+                <p>€</p>
                 <input
                     className={styles.inputField}
                     type="number"
                     placeholder="Please enter the selling price of the artwork"
                     {...register('galleryBuyingPrice', {required: true})} // Register the price field
                 />
+                </span>
                 {errors.galleryBuyingPrice && <span className={styles.errorMessage}>Selling price is required</span>}
                 <select className={styles.inputField} {...register('edition', {required: true})}>
                     <option value="" disabled>Select edition type</option>

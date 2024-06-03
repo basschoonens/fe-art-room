@@ -11,8 +11,6 @@ const WelcomeContent = () => {
         <div className={styles.welcomeContainer}>
             {isAuth ?
                 <div className={styles.welcomeLoggedIn}>
-                    <span><img id={styles.profileImage} src="https://via.placeholder.com/100"
-                               alt="profile-image"/></span>
                     <h1 className={styles.welcomeMessage}>Welcome {user.username} !</h1>
                     <div className={styles.toolsContainer}>
                         <ul className={styles.appTools}>
