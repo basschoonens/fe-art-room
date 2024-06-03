@@ -35,6 +35,7 @@ function App() {
                         <Route path="/artistgallery"
                                element={isAuth && user.authority === "ROLE_ARTIST" ? <ArtistGallery/> :
                                    <Navigate to="/"/>}/>
+                        <Route path="/artistgallery/:id" element={<UserArtworkDetails/>}/>
                         <Route path="/artistgallery/addnewartwork" element={<AddNewArtwork/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>

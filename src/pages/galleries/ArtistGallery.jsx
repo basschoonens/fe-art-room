@@ -64,8 +64,9 @@ export default function ArtistGallery() {
                 {artworks.map((artwork) => (
                         <ArtistArtworkCard
                             key={artwork.id}
+                            id={artwork.id}
                             title={artwork.title}
-                            price={artwork.sellingPrice}
+                            salesPrice={artwork.sellingPrice}
                             imageUrl={`http://localhost:8080/artworks/${artwork.id}/image`}
                         />
                 ))}
