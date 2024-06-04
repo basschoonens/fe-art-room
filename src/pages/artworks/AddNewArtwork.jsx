@@ -1,6 +1,6 @@
 import styles from './AddNewArtwork.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUpload} from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
@@ -17,85 +17,113 @@ const AddNewArtwork = () => {
         setSelectedFile(file);
     };
 
-        // const onSubmit = async (data) => {
-        //
-        //     const jwt = localStorage.getItem('jwt');
-        //
-        //     try {
-        //         const artworkResponse = await axios.post('http://localhost:8080/artworks/user', {
-        //             title: data.title,
-        //             artist: data.artist,
-        //             description: data.description,
-        //             dateCreated: data.dateCreated,
-        //             galleryBuyingPrice: data.galleryBuyingPrice,
-        //             edition: data.edition,
-        //             artworkType: data.artworkType,
-        //             drawingDrawType: data.drawingDrawType,
-        //             drawingSurface: data.drawingSurface,
-        //             drawingMaterial: data.drawingMaterial,
-        //             drawingDimensionsWidthInCm: data.drawingDimensionsWidthInCm,
-        //             drawingDimensionsHeightInCm: data.drawingDimensionsHeightInCm
-        //         });
-        //         const artworkId = artworkResponse.data;
-        //
-        //         if (data.file[0]) {
-        //             const formData = new FormData();
-        //             formData.append('file', data.file[0]);
-        //
-        //             await axios.post(`/api/artworks/${artworkId}/image`, formData, {
-        //                 headers: {
-        //                     'Content-Type': 'multipart/form-data',
-        //                     'Authorization': `Bearer ${jwt}`
-        //                 }
-        //             });
-        //             alert('Artwork and image uploaded successfully.');
-        //         }
-        //     } catch (error) {
-        //         console.error('Error uploading artwork:', error);
-        //         alert('Failed to upload artwork.');
-        //     }
-        // };
-
     const onSubmit = async (data) => {
-        setLoading(true);
-        setError(null);
 
         const jwt = localStorage.getItem('jwt');
-        const abortController = new AbortController();
 
-        const headers = {
-            "Content-Type": 'multipart/form-data',
-            "Authorization": `Bearer ${jwt}`
-        };
+        console.log(data);
 
         try {
-            console.log('Making POST request to add artwork with image...');
-
-            const formData = new FormData();
-            formData.append('artworkType', artworkType);
-            Object.entries(data).forEach(([key, value]) => {
-                if (key !== 'file') {
-                    formData.append(key, value);
+            const artworkResponse = await axios.post('http://localhost:8080/artworks', {
+                title: data.title,
+                artist: data.artist,
+                description: data.description,
+                dateCreated: data.dateCreated,
+                galleryBuyingPrice: data.galleryBuyingPrice,
+                edition: data.edition,
+                artworkType: artworkType,
+                drawingDrawType: data.drawingDrawType,
+                drawingSurface: data.drawingSurface,
+                drawingMaterial: data.drawingMaterial,
+                drawingDimensionsWidthInCm: data.drawingDimensionsWidthInCm,
+                drawingDimensionsHeightInCm: data.drawingDimensionsHeightInCm
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwt}`
                 }
             });
-            formData.append('file', data.file[0]);
-
-            const artworkResponse = await axios.post('http://localhost:8080/artworks/user', formData, {
-                signal: abortController.signal,
-                headers
-            });
-
+            const artworkId = (artworkResponse.headers["location"].split('/').pop());
+            console.log(artworkId);
+            console.log(artworkResponse);
+            console.log(artworkResponse.headers["location"]);
             console.log('Artwork POST request complete.');
-            console.log('Response:', artworkResponse);
+            if (data.file[0]) {
+                const formData = new FormData();
+                formData.append('file', data.file[0]);
+
+                await axios.post(`http://localhost:8080/artworks/${artworkId}/image`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${jwt}`
+                    }
+                });
+                alert('Artwork and image uploaded successfully.');
+            }
         } catch (error) {
-            setError(error);
-            console.error('Error uploading artwork:', error.response ? error.response.data : error.message);
-        }
-        setLoading(false);
-        return () => {
-            abortController.abort();
+            console.error('Error uploading artwork:', error);
+            alert('Failed to upload artwork.');
         }
     };
+
+    //         if (data.file[0]) {
+    //             const formData = new FormData();
+    //             formData.append('file', data.file[0]);
+    //
+    //             await axios.post(`/api/artworks/${artworkId}/image`, formData, {
+    //                 headers: {
+    //                     'Content-Type': 'multipart/form-data',
+    //                     'Authorization': `Bearer ${jwt}`
+    //                 }
+    //             });
+    //             alert('Artwork and image uploaded successfully.');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error uploading artwork:', error);
+    //         alert('Failed to upload artwork.');
+    //     }
+    // };
+
+    // const onSubmit = async (data) => {
+    //     setLoading(true);
+    //     setError(null);
+    //
+    //     const jwt = localStorage.getItem('jwt');
+    //     const abortController = new AbortController();
+    //
+    //     const headers = {
+    //         "Content-Type": 'multipart/form-data',
+    //         "Authorization": `Bearer ${jwt}`
+    //     };
+    //
+    //     try {
+    //         console.log('Making POST request to add artwork with image...');
+    //
+    //         const formData = new FormData();
+    //         formData.append('artworkType', artworkType);
+    //         Object.entries(data).forEach(([key, value]) => {
+    //             if (key !== 'file') {
+    //                 formData.append(key, value);
+    //             }
+    //         });
+    //         formData.append('file', data.file[0]);
+    //
+    //         const artworkResponse = await axios.post('http://localhost:8080/artworks/user', formData, {
+    //             signal: abortController.signal,
+    //             headers
+    //         });
+    //
+    //         console.log('Artwork POST request complete.');
+    //         console.log('Response:', artworkResponse);
+    //     } catch (error) {
+    //         setError(error);
+    //         console.error('Error uploading artwork:', error.response ? error.response.data : error.message);
+    //     }
+    //     setLoading(false);
+    //     return () => {
+    //         abortController.abort();
+    //     }
+    // };
 
     return (
         <div className={styles.pageContainer}>
