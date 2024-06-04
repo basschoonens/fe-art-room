@@ -16,7 +16,7 @@ import AddNewArtwork from "./pages/artworks/AddNewArtwork.jsx";
 import {AuthContext} from "./context/AuthContext.jsx";
 import React, {useContext} from "react";
 import Register from "./pages/register/Register.jsx";
-import UserArtworkDetails from "./pages/artworkDetails/UserArtworkDetails.jsx";
+import UserArtworkDetails from "./pages/artworkDetails/userArtworkDetails/UserArtworkDetails.jsx";
 import MyOrders from "./pages/profile/myorders/MyOrders.jsx";
 import MyReviews from "./pages/profile/myReviews/MyReviews.jsx";
 

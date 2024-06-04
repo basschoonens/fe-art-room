@@ -2,12 +2,12 @@ import styles from './UserArtworkDetails.module.css';
 import {useContext, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import {currencyFormat} from "../../helpers/currencyFormat.js";
-import {dateFormat} from "../../helpers/dateFormat.js";
-import Button from "../../components/button/Button.jsx";
-import {useCart} from "../../context/CartContext.jsx";
-import {AuthContext} from "../../context/AuthContext.jsx";
-import StarRating from "../../components/starRating/StarRating.jsx";
+import {currencyFormat} from "../../../helpers/currencyFormat.js";
+import {dateFormat} from "../../../helpers/dateFormat.js";
+import Button from "../../../components/button/Button.jsx";
+import {useCart} from "../../../context/CartContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
+import StarRating from "../../../components/starRating/StarRating.jsx";
 
 export default function UserArtworkDetails() {
 

@@ -48,7 +48,7 @@ export default function ArtistGallery() {
             <h1>Artist Gallery</h1>
             <div className={styles.buttonsContainer}>
                 <Link to={'/artistgallery/addnewartwork'}><Button type="button" text="Add new artwork"/></Link>
-                <Button type="button" text="Find your reviews"/>
+                <Link to={'/myreviews'}><Button type="button" text="Find your reviews"/></Link>
             </div>
             <section className={styles.sortingBar}>
                 <ul className={styles.sortingLinks}>
