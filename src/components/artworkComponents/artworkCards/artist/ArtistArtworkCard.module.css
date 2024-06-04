@@ -12,12 +12,24 @@
     position: relative;
 }
 
+.artworkImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
 .artworkCard img {
     width: 100%;
+    height: 100%;
     padding: var(--spacing-sm);
-    height: auto;
     object-fit: contain;
-    margin: auto;
+}
+
+
+.artworkCard p {
+    margin: 0 auto;
+    padding: 10px;
 }
 
 .artworkImage:hover {

@@ -5,6 +5,7 @@ import UserArtworkCard from "../../components/artworkComponents/artworkCards/use
 import shuffleArray from "../../helpers/shuffleArray.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import Button from "../../components/button/Button.jsx";
+import formatRating from "../../helpers/formatRating.js";
 
 export default function MainGallery() {
 
@@ -77,7 +78,7 @@ export default function MainGallery() {
                                 id={artwork.id}
                                 title={artwork.title}
                                 artist={artwork.artist}
-                                rating={artwork.averageRating}
+                                rating={formatRating(artwork.averageRating)}
                                 imageUrl={`http://localhost:8080/artworks/${artwork.id}/image`}
                             />
                         ))}

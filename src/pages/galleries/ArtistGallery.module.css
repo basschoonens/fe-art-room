@@ -52,6 +52,14 @@
   list-style: none;
 }
 
+.sortingLinks li {
+  cursor: pointer;
+}
+
+.sortingLinks li:hover {
+  color: var(--color-dark);
+}
+
 .sortingLinks p{
   align-content: center;
   margin: auto;

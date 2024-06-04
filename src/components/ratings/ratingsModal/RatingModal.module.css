@@ -38,20 +38,6 @@
     margin-bottom: 15px;
 }
 
-.starFilled, .starEmpty{
-    font-size: var(--font-size-xlarge);
-}
-
-.starFilled {
-    color: gold;
-    cursor: pointer;
-}
-
-.starEmpty {
-    color: gray;
-    cursor: pointer;
-}
-
 .comment {
     width: 100%;
     height: 100px;
@@ -62,8 +48,14 @@
 }
 
 .successMessage {
-    color: green; /* Or any color you prefer */
+    color: green;
     font-size: 16px;
     text-align: center;
     margin-top: 10px;
+}
+
+.largeStars {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
 }
