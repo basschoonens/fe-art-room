@@ -15,13 +15,13 @@ const WelcomeContent = () => {
                     <div className={styles.toolsContainer}>
                         {user.authority === "ROLE_ARTIST" &&
                         <ul className={styles.appTools}>
-                            <Link to="/artistgallery"><li>manage my collection</li></Link>
-                            <Link to="/artistgallery/addnewartwork"><li>add new artwork</li></Link>
-                            <Link to={"/leftreviews"}><li>Reviews for your art</li></Link>
+                            <Link to="/artistgallery"><li>Manage my collection</li></Link>
+                            <Link to="/artistgallery/addnewartwork"><li>Add new artwork</li></Link>
+                            <Link to={"/artistgallery/leftreviews"}><li>Reviews for your art</li></Link>
                         </ul>}
                         <ul className={styles.profileTools}>
-                            <Link to="/myorders"><li>my orders</li></Link>
-                            <Link to="/myreviews"><li>my reviews</li></Link>
+                            <Link to="/myorders"><li>My orders</li></Link>
+                            <Link to="/myreviews"><li>My reviews</li></Link>
                             <li>edit profile</li>
                             <li>sign out</li>
                         </ul>

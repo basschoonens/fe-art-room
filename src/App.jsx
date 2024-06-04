@@ -16,9 +16,10 @@ import AddNewArtwork from "./pages/artworks/AddNewArtwork.jsx";
 import {AuthContext} from "./context/AuthContext.jsx";
 import React, {useContext} from "react";
 import Register from "./pages/register/Register.jsx";
-import UserArtworkDetails from "./pages/artworkDetails/userArtworkDetails/UserArtworkDetails.jsx";
+import ArtworkDetails from "./pages/artworkDetails/ArtworkDetails/ArtworkDetails.jsx";
 import MyOrders from "./pages/profile/myorders/MyOrders.jsx";
 import MyReviews from "./pages/profile/myReviews/MyReviews.jsx";
+import LeftReviewsForArtist from "./pages/artists/LeftReviewsForArtist.jsx";
 
 
 function App() {
@@ -31,12 +32,13 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/maingallery" element={<MainGallery/>}/>
-                        <Route path="/maingallery/:id" element={<UserArtworkDetails/>}/>
+                        <Route path="/maingallery/:id" element={<ArtworkDetails/>}/>
                         <Route path="/artistgallery"
                                element={isAuth && user.authority === "ROLE_ARTIST" ? <ArtistGallery/> :
                                    <Navigate to="/"/>}/>
-                        <Route path="/artistgallery/:id" element={<UserArtworkDetails/>}/>
+                        <Route path="/artistgallery/:id" element={<ArtworkDetails/>}/>
                         <Route path="/artistgallery/addnewartwork" element={<AddNewArtwork/>}/>
+                        <Route path="/artistgallery/leftreviews" element={<LeftReviewsForArtist/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/profile" element={<Profile/>}/>

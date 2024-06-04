@@ -3,7 +3,7 @@ import React from 'react';
 import {currencyFormat} from "../../../../helpers/currencyFormat.js";
 import {Link} from "react-router-dom";
 
-export default function ArtistArtworkCard({id, title, salesPrice, imageUrl}){
+export default function ArtistArtworkCard({id, title, salesPrice, rating, imageUrl}){
 
 
     return (
@@ -15,6 +15,7 @@ export default function ArtistArtworkCard({id, title, salesPrice, imageUrl}){
             </Link>
             <div className={styles.artworkDetails}>
                 <h3>{title}</h3>
+                <p>Rating : {rating}</p>
                 <p>Gallery selling price : {currencyFormat(salesPrice)}</p>
             </div>
         </div>
