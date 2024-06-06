@@ -1,10 +1,10 @@
 import styles from './LeftReviewsForArtist.module.css';
 import Button from "../../components/button/Button.jsx";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import formatRating from "../../helpers/formatRating.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Link, useNavigate} from "react-router-dom";
 
 export default function LeftReviewsForArtist() {
@@ -31,7 +31,7 @@ export default function LeftReviewsForArtist() {
             setLoading(true);
             setError(null);
             try {
-                const response = await axios.get(`http://localhost:8080/ratings/artist`, config, { signal: controller.signal });
+                const response = await axios.get(`http://localhost:8080/ratings/artist`, config, {signal: controller.signal});
                 const groupedReviews = groupByArtworkTitle(response.data);
                 setReviews(groupedReviews);
             } catch (error) {
@@ -70,7 +70,7 @@ export default function LeftReviewsForArtist() {
         try {
             await axios.delete(`http://localhost:8080/ratings/${artworkId}/ratings`, config);
             setReviews((prevReviews) => {
-                const updatedReviews = { ...prevReviews };
+                const updatedReviews = {...prevReviews};
                 for (const title in updatedReviews) {
                     updatedReviews[title] = updatedReviews[title].filter(review => review.artworkId !== artworkId);
                     if (updatedReviews[title].length === 0) {
@@ -86,15 +86,20 @@ export default function LeftReviewsForArtist() {
 
     return (
         <div className={styles.pageContainer}>
-                <h2>Reviews for your artworks</h2>
-                {loading && <p>Loading reviews...</p>}
-                {error && <p>Error loading reviews: {error.message}</p>}
-                <div className={styles.reviewsContainer}>
-                    {Object.keys(reviews).length === 0 && <p>No reviews found for you yet. Please leave one on an artwork you enjoy!</p>}
-                    {Object.keys(reviews).map((title) => (
-                        <div key={title} className={styles.reviewGroup}>
-                            <h3 className={styles.artworkTitle}>{title}</h3>
-                            <div className={styles.reviewWrapper}>
+            <h2>Reviews for your artworks</h2>
+            {loading && <p>Loading reviews...</p>}
+            {error && <p>Error loading reviews: {error.message}</p>}
+            <div className={styles.reviewsContainer}>
+                {Object.keys(reviews).length === 0 &&
+                    <div>
+                        <p>No reviews found for you yet.</p>
+                        <p>Ask your customers to leave a review on your artworks!</p>
+                    </div>
+                }
+                {Object.keys(reviews).map((title) => (
+                    <div key={title} className={styles.reviewGroup}>
+                        <h3 className={styles.artworkTitle}>{title}</h3>
+                        <div className={styles.reviewWrapper}>
                             {Array.isArray(reviews[title]) && reviews[title].map((review) => (
                                 <div key={review.ratingId} className={styles.review}>
                                     <p className={styles.reviewTitle}>Artwork: {review.artworkTitle}</p>
@@ -103,15 +108,15 @@ export default function LeftReviewsForArtist() {
                                     <button
                                         className={styles.deleteButton}
                                         onClick={() => handleDelete(review.artworkId)}>
-                                        <FontAwesomeIcon icon={faTrashAlt} />
+                                        <FontAwesomeIcon icon={faTrashAlt}/>
                                     </button>
                                 </div>
                             ))}
-                            </div>
                         </div>
-                    ))}
-                </div>
-            <Button type="button" text="Back to profile" onClick={() => navigate("/profile")} />
+                    </div>
+                ))}
+            </div>
+            <Button type="button" text="Back to profile" onClick={() => navigate("/profile")}/>
         </div>
     );
 }

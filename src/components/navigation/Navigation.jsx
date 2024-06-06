@@ -19,7 +19,7 @@ export default function Navigation() {
                         <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
                                  to="/maingallery">For artlovers</NavLink>
                     </li>
-                    {isAuth && (
+                    {isAuth && user.authority === "ROLE_ARTIST" || isAuth && user.authority === "ROLE_ADMIN" && (
                         <li>
                             <NavLink className={({isActive}) => isActive ? styles.activeLink : styles.defaultLink}
                                      to="/artistgallery">For artists</NavLink>

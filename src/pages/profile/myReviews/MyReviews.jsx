@@ -90,7 +90,6 @@ export default function MyReviews() {
                     ))}
                 </div>
             </div>
-            <Button className={styles.logOutButton} type="button" text="Logout"/>
         </div>
     );
 }
