@@ -30,7 +30,7 @@ export default function MyReviews() {
             setLoading(true);
             setError(null);
             try {
-                const response = await axios.get(`http://localhost:8080/ratings/user/artwork`, config, { signal: controller.signal });
+                const response = await axios.get(`http://localhost:8080/ratings/user`, config, { signal: controller.signal });
                 console.log(response.data);
                 setReviews(response.data);
             } catch (error) {
