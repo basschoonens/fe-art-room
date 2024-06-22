@@ -82,20 +82,20 @@
 }
 
 :root h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family);
+  font-family: var(--font-family), sans-serif;
   font-weight: 700;
   color: var(--color-dark);
   padding: 20px;
 }
 
 :root p {
-  font-family: var(--font-family-alt);
+  font-family: var(--font-family-alt), sans-serif;
   font-weight: 400;
   color: var(--color-black);
 }
 
 :root ul li {
-  font-family: var(--font-family-alt);
+  font-family: var(--font-family-alt), sans-serif;
   font-weight: 400;
   color: var(--color-black);
 }
