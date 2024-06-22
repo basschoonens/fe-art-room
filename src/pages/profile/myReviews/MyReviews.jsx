@@ -59,7 +59,7 @@ export default function MyReviews() {
         };
 
         try {
-            await axios.delete(`http://localhost:8080/ratings/${artworkId}/ratings`, config);
+            await axios.delete(`http://localhost:8080/ratings/user/${artworkId}`, config);
             setReviews(reviews.filter(review => review.artworkId !== artworkId));
         } catch (error) {
             console.error('Error deleting review:', error);

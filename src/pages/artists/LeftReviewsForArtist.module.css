@@ -63,11 +63,6 @@
     margin: var(--spacing-md);
 }
 
-.reviewTitle {
-    font-weight: bold;
-    margin-bottom: var(--spacing-sm);
-}
-
 .deleteButton {
     background-color: var(--color-transparent);
     color: var(--color-dark);

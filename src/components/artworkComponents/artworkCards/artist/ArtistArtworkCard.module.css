@@ -37,12 +37,13 @@
 }
 
 .artworkDetails {
-    padding: 10px;
+    padding: var(--spacing-md);
+    padding-bottom: var(--spacing-xxl);
 }
 
 .artworkDetails h3 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: var(--font-size-large);
 }
 
 .artworkDetails p {
@@ -59,8 +60,31 @@
 }
 
 .icon {
-    font-size: 20px;
-    margin-right: 5px;
+    font-size: var(--font-size-large);
+    margin: 0 var(--spacing-xs);
     border: var(--border-md) var(--color-light);
-    padding: 5px;
+    padding: var(--spacing-xs);
+    cursor: pointer;
+}
+
+.iconEdit {
+    color: var(--color-secondary);
+    border: var(--border-md) var(--color-light)/* Gele kleur */
+}
+
+.iconDelete {
+    color: var(--color-secondary);
+    border: var(--border-md) var(--color-light)/* Gele kleur */
+}
+
+.iconEdit:hover {
+    color: var(--color-secondary);
+    background-color: var(--color-light); /* Kleur van de winkelwagen bij hover */
+    border-color: var(--color-primary); /* Omlijning kleur bij hover */
+}
+
+.iconDelete:hover {
+    color: var(--color-secondary);
+    background-color: var(--color-light); /* Kleur van de winkelwagen bij hover */
+    border-color: var(--color-primary); /* Omlijning kleur bij hover */
 }

@@ -25,7 +25,7 @@ const OrderPage = () => {
             address: data.address,
             postalCode: data.postalCode,
             city: data.city,
-            artworkIds: artworks.map(item => item.id),
+            artworkId: artworks.map(item => item.artworkId),
         };
 
         console.log('Order data:', orderData)
@@ -84,7 +84,7 @@ const OrderPage = () => {
                 {/*TODO add date and order number etc.*/}
                 <ul className={styles.itemsList}>
                     {artworks.map((artwork) => (
-                        <li key={artwork.id}>
+                        <li key={artwork.artworkId}>
                             <span>{artwork.title}</span>
                             <span>${currencyFormat(artwork.sellingPrice)}</span>
                         </li>

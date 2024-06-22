@@ -52,8 +52,24 @@
   list-style: none;
 }
 
+.sortingLinks li::after {
+  content: "";
+  margin-left: 0.5em;
+  font-size: 0.8em;
+}
+
 .sortingLinks li {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.sortingLinks li[data-order="asc"]::after {
+  content: "▲"; /* Up arrow */
+}
+
+.sortingLinks li[data-order="desc"]::after {
+  content: "▼"; /* Down arrow */
 }
 
 .sortingLinks li:hover {

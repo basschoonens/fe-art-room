@@ -1,22 +1,66 @@
 import styles from './ArtistArtworkCard.module.css';
-import React from 'react';
-import {currencyFormat} from "../../../../helpers/currencyFormat.js";
-import {Link} from "react-router-dom";
+import React, {useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { currencyFormat } from "../../../../helpers/currencyFormat.js";
 
-export default function ArtistArtworkCard({id, title, salesPrice, rating, imageUrl}){
+export default function ArtistArtworkCard({ artworkId, title, salesPrice, averageRating, imageUrl }) {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
+    const controller = new AbortController();
+
+
+    const handleDelete = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+
+            const jwt = localStorage.getItem('jwt');
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/json'
+                }
+            };
+            await axios.delete(`http://localhost:8080/artworks/artist/${artworkId}`, config, { signal: controller.signal });
+            console.log(`Artwork ${artworkId} deleted`);
+            window.location.reload();
+        } catch (error) {
+            setError(error);
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+        return () => {
+            controller.abort();
+        }
+    };
 
     return (
         <div className={styles.artworkCard}>
-            <Link to={`${id}`}>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error.message}</p>}
+            <Link to={`${artworkId}`}>
                 <span className={styles.artworkImage}>
-                <img src={imageUrl} alt={title}/>
+                    <img src={imageUrl} alt={title} />
                 </span>
             </Link>
             <div className={styles.artworkDetails}>
                 <h3>{title}</h3>
-                <p>Rating : {rating}</p>
-                <p>Gallery selling price : {currencyFormat(salesPrice)}</p>
+                <p>Gallery selling price: {currencyFormat(salesPrice)}</p>
+                <p>Average review rating: {averageRating}</p>
+            </div>
+            <div className={styles.iconsContainer}>
+                <span className={`${styles.icon} ${styles.iconEdit}`} onClick={() => navigate(`/editartwork/${artworkId}`)}>
+                    <FaEdit />
+                </span>
+                <span className={`${styles.icon} ${styles.iconDelete}`} onClick={handleDelete}>
+                    <FaTrashAlt />
+                </span>
             </div>
         </div>
     );

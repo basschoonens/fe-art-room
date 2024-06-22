@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Didone&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
 
-/*TODO Checken of ik hier ook een modules css van moet maken ?*/
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,6 +26,7 @@
   --spacing-md: 20px;
   --spacing-lg: 32px;
   --spacing-xl: 40px;
+  --spacing-xxl: 70px;
 }
 
 /* Colors */

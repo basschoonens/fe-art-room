@@ -2,12 +2,12 @@ import styles from './ArtworkDetails.module.css';
 import {useContext, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import {currencyFormat} from "../../../helpers/currencyFormat.js";
-import {dateFormat} from "../../../helpers/dateFormat.js";
-import Button from "../../../components/button/Button.jsx";
-import {useCart} from "../../../context/CartContext.jsx";
-import {AuthContext} from "../../../context/AuthContext.jsx";
-import StarRating from "../../../components/starRating/StarRating.jsx";
+import {currencyFormat} from "../../helpers/currencyFormat.js";
+import {dateFormat} from "../../helpers/dateFormat.js";
+import Button from "../../components/button/Button.jsx";
+import {useCart} from "../../context/CartContext.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import StarRating from "../../components/starRating/StarRating.jsx";
 
 export default function ArtworkDetails() {
 
@@ -18,6 +18,7 @@ export default function ArtworkDetails() {
     const [error, setError] = useState(null);
     const [ratings, setRatings] = useState([]);
     const {isAuth} = useContext(AuthContext);
+    const [previousGalleryPage, setPreviousGalleryPage] = useState('/maingallery');
     const {id} = useParams();
 
     useEffect(() => {
@@ -45,13 +46,29 @@ export default function ArtworkDetails() {
         };
     }, [id]);
 
+    const handleBackToGallery = () => {
+        navigate(previousGalleryPage);
+    };
+
+    useEffect(() => {
+        // Update the previous gallery page state whenever the location changes
+        if (window.location.pathname.includes('/maingallery')) {
+            setPreviousGalleryPage('/maingallery');
+        } else if (window.location.pathname.includes('/artistgallery')) {
+            setPreviousGalleryPage('/artistgallery');
+        } else {
+            setPreviousGalleryPage('/maingallery');
+        }
+    }, []);
+
     const fetchRatingsForArtwork = async () => {
+
         const abortController = new AbortController();
 
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get(`http://localhost:8080/ratings/${id}/ratings`, {signal: abortController.signal});
+            const response = await axios.get(`http://localhost:8080/ratings/artwork/${id}`, {signal: abortController.signal});
             setRatings(response.data);
         } catch (error) {
             setError(error);
@@ -67,12 +84,13 @@ export default function ArtworkDetails() {
             {artwork && (
                 <div className={styles.artworkDetailsContainer}>
                     <div className={styles.artworkImageContainer}>
-                        <img className={styles.artworkImage} src={`http://localhost:8080/artworks/${artwork.id}/image`}
+                        <img className={styles.artworkImage} src={`http://localhost:8080/artworks/${artwork.artworkId}/image`}
                              alt={artwork.title}/>
                     </div>
                     <div className={styles.artworkDetails}>
                         <h1>{artwork.title}</h1>
                         <p>{artwork.description}</p>
+                        <p>Artwork type: {artwork.artworkType}</p>
                         <p>Artist name: {artwork.artist}</p>
                         <p>Date created: {dateFormat(artwork.dateCreated)}</p>
                         {isAuth && <p>Selling price: {currencyFormat(artwork.sellingPrice)}</p>}
@@ -94,7 +112,7 @@ export default function ArtworkDetails() {
                         <p>Total amount of ratings for this artwork: {artwork.totalAmountOfRatings}</p>
                         <p>{artwork.comments}</p>
                         <div className={styles.buttonsContainer}>
-                            <Button type="button" text="Back to Gallery" onClick={() => navigate('/maingallery')}
+                            <Button type="button" text="Back to Gallery" onClick={handleBackToGallery}
                                     variant="small"/>
                             <Button type="button" text="Add to Cart" onClick={() => addToCart(artwork)}
                                     variant="small"/>

@@ -1,6 +1,7 @@
 import styles from './Home.module.css';
 import artist from '../../assets/artist.jpg';
 import curator from '../../assets/curator.jpg'
+import user from '../../assets/user.jpg';
 import Button from "../../components/button/Button.jsx";
 import {useNavigate} from "react-router-dom";
 
@@ -11,11 +12,15 @@ export default function Home() {
     return (
         <div className={styles.pageContainer}>
             <section>
-                HERO SECTION
+                 <span className={styles.toGalleryImage}>
+                    <img id="gallery-image" src={user} alt="gallery image"/>
+                    <Button id={styles.galleryButton} text="For artlovers" type="button"
+                            onClick={() => navigate("/maingallery")}/>
+                </span>
             </section>
             <section className={styles.artistContainer}>
                 <span className={styles.toArtistImage}>
-                    <img id="artist-image" src={artist} alt="gallery image"/>
+                    <img id="artist-image" src={artist} alt="artist image"/>
                     <Button id={styles.artistButton} text="For artists" type="button"
                             onClick={() => navigate("/artistgallery")}/>
                 </span>
