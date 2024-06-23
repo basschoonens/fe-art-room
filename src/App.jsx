@@ -6,7 +6,7 @@ import MainGallery from "./pages/galleries/MainGallery.jsx";
 import ArtistGallery from "./pages/galleries/ArtistGallery.jsx";
 import Login from "./pages/login/Login.jsx";
 import MyProfile from "./pages/profile/myProfile/MyProfile.jsx";
-import Order from "./pages/orders/order/Order.jsx";
+import Order from "./pages/orders/order/PlaceOrder.jsx";
 import Confirmation from "./pages/orders/confirmation/Confirmation.jsx";
 import About from "./pages/about/About.jsx";
 import NotFound from "./pages/notFound/NotFound.jsx";

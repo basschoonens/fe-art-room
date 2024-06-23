@@ -5,7 +5,8 @@ import axios from 'axios';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUpload} from '@fortawesome/free-solid-svg-icons';
 import Button from '../../../components/button/Button.jsx';
-import styles from './EditArtwork.module.css'; // Adjust path to your CSS module
+import styles from './EditArtwork.module.css';
+import {validateFile} from "../../../helpers/fileValidation.js"; // Adjust path to your CSS module
 
 const EditArtwork = () => {
     const {id} = useParams(); // Get artworkId from URL params
@@ -16,6 +17,8 @@ const EditArtwork = () => {
     const [artworkData, setArtworkData] = useState(null);
     const [artworkType, setArtworkType] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
+    const [currentImageUrl, setCurrentImageUrl] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
 
     useEffect(() => {
         // Fetch artwork data by artworkId
@@ -49,6 +52,7 @@ const EditArtwork = () => {
                     setValue('paintingDimensionsWidthInCm', response.data.paintingData.paintingDimensionsWidthInCm);
                     setValue('paintingDimensionsHeightInCm', response.data.paintingData.paintingDimensionsHeightInCm);
                 }
+                setCurrentImageUrl(`http://localhost:8080/artworks/${id}/image`);
             } catch (error) {
                 console.error('Error fetching artwork:', error);
                 setError('Failed to fetch artwork data. Please try again.');
@@ -60,9 +64,26 @@ const EditArtwork = () => {
         fetchArtwork();
     }, [id, setValue]);
 
+    useEffect(() => {
+        return () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+        };
+    }, [previewUrl]);
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        setSelectedFile(file);
+        if (file && validateFile(file)) {
+            setSelectedFile(file);
+            // Generate preview URL
+            const url = URL.createObjectURL(file);
+            setPreviewUrl(url);
+        } else {
+            setSelectedFile(null);
+            setPreviewUrl(null);
+            e.target.value = '';
+        }
     };
 
     const submitEditedArtwork = async (data) => {
@@ -99,8 +120,7 @@ const EditArtwork = () => {
                 }
             });
 
-            // If a new file is selected, upload the image
-            if (selectedFile) {
+            if (selectedFile instanceof File) {
                 const formData = new FormData();
                 formData.append('file', selectedFile);
 
@@ -113,7 +133,7 @@ const EditArtwork = () => {
             }
 
             alert('Artwork updated successfully!');
-            navigate('/artistgallery'); // Redirect to gallery or artwork list page after update
+            navigate('/artistgallery');
         } catch (error) {
             console.error('Error updating artwork:', error);
             alert('Failed to update artwork. Please check your data and try again.');
@@ -126,137 +146,149 @@ const EditArtwork = () => {
     return (
         <div className={styles.pageContainer}>
             <h1>Edit Artwork</h1>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error}</p>}
             <form className={styles.editArtworkForm} onSubmit={handleSubmit(submitEditedArtwork)}>
-                <div className={styles.imageContainer}>
-                    <label htmlFor="fileInput" className={styles.uploadLabel}>
-                        <FontAwesomeIcon icon={faUpload}/>
-                        &nbsp;Upload Image
-                    </label>
-                    <input
-                        id="fileInput"
-                        className={styles.fileInput}
-                        type="file"
-                        onChange={handleFileChange}
-                    />
-                    {selectedFile && <span className={styles.fileName}>{selectedFile.name}</span>}
+                <div className={styles.allInputWrapper}>
+                    <div className={styles.imageContainer}>
+                        {previewUrl ? (
+                            <img src={previewUrl} alt="New Preview" className={styles.imagePreview} />
+                        ) : (
+                            currentImageUrl && (
+                                <img src={currentImageUrl} alt="Current Artwork" className={styles.imagePreview} />
+                            )
+                        )}
+                        <label htmlFor="fileInput" className={styles.uploadLabel}>
+                            <FontAwesomeIcon icon={faUpload} className={styles.uploadIcon} />
+                            Upload new Image
+                        </label>
+                        <input
+                            id="fileInput"
+                            type="file"
+                            accept=".jpeg,.jpg,.png"
+                            onChange={handleFileChange}
+                            className={styles.fileInput}
+                        />
+                        {selectedFile && <span className={styles.fileName}>{selectedFile.name}</span>}
+                    </div>
+                    <div className={styles.inputFieldWrapper}>
+                        <input
+                            type="text"
+                            className={styles.inputField}
+                            placeholder="Artwork Title"
+                            {...register('title', {required: true})}
+                        />
+                        {errors.title && <span className={styles.errorMessage}>Title is required</span>}
+
+                        <input
+                            type="text"
+                            className={styles.inputField}
+                            placeholder="Artist Name"
+                            disabled={true}
+                            {...register('artist', {required: true})}
+                        />
+                        {errors.artist && <span className={styles.errorMessage}>Artist name is required</span>}
+
+                        <textarea
+                            className={styles.inputField}
+                            placeholder="Artwork Description"
+                            {...register('description', {required: true})}
+                        />
+                        {errors.description && <span className={styles.errorMessage}>Description is required</span>}
+
+                        <input
+                            type="date"
+                            className={styles.inputField}
+                            placeholder="Date Created"
+                            {...register('dateCreated', {required: true})}
+                        />
+                        {errors.dateCreated && <span className={styles.errorMessage}>Date created is required</span>}
+
+                        <input
+                            type="number"
+                            className={styles.inputField}
+                            placeholder="Gallery Buying Price"
+                            {...register('galleryBuyingPrice', {required: true})}
+                        />
+                        {errors.galleryBuyingPrice && <span className={styles.errorMessage}>Price is required</span>}
+
+                        <select className={styles.inputField} {...register('edition', {required: true})}>
+                            <option value="">Select Edition</option>
+                            <option value="Single / Unique edition">Single / Unique edition</option>
+                            <option value="Part of a series">Part of a series</option>
+                            <option value="Reproduction">Reproduction</option>
+                            <option value="To be decided">To be decided</option>
+                        </select>
+                        {errors.edition && <span className={styles.errorMessage}>Edition type is required</span>}
+                        <input
+                            type="text"
+                            className={styles.inputField}
+                            placeholder="Artwork Type"
+                            value={artworkType}
+                            disabled
+                        />
+                        {artworkType === 'drawing' && (
+                            <>
+                                <input
+                                    type="text"
+                                    className={styles.inputField}
+                                    placeholder="Drawing Surface"
+                                    {...register('drawingSurface')}
+                                />
+                                <input
+                                    type="text"
+                                    className={styles.inputField}
+                                    placeholder="Drawing Material"
+                                    {...register('drawingMaterial')}
+                                />
+                                <input
+                                    type="number"
+                                    className={styles.inputField}
+                                    placeholder="Width in cm"
+                                    {...register('drawingDimensionsWidthInCm')}
+                                />
+                                <input
+                                    type="number"
+                                    className={styles.inputField}
+                                    placeholder="Height in cm"
+                                    {...register('drawingDimensionsHeightInCm')}
+                                />
+                            </>
+                        )}
+                        {artworkType === 'painting' && (
+                            <>
+                                <input
+                                    type="text"
+                                    className={styles.inputField}
+                                    placeholder="Painting Surface"
+                                    {...register('paintingSurface')}
+                                />
+                                <input
+                                    type="text"
+                                    className={styles.inputField}
+                                    placeholder="Painting Material"
+                                    {...register('paintingMaterial')}
+                                />
+                                <input
+                                    type="number"
+                                    className={styles.inputField}
+                                    placeholder="Width in cm"
+                                    {...register('paintingDimensionsWidthInCm')}
+                                />
+                                <input
+                                    type="number"
+                                    className={styles.inputField}
+                                    placeholder="Height in cm"
+                                    {...register('paintingDimensionsHeightInCm')}
+                                />
+                            </>
+                        )}
+                    </div>
                 </div>
-
-                <div className={styles.inputFieldWrapper}>
-                    <input
-                        type="text"
-                        className={styles.inputField}
-                        placeholder="Artwork Title"
-                        {...register('title', {required: true})}
-                    />
-                    {errors.title && <span className={styles.errorMessage}>Title is required</span>}
-
-                    <input
-                        type="text"
-                        className={styles.inputField}
-                        placeholder="Artist Name"
-                        disabled={true}
-                        {...register('artist', {required: true})}
-                    />
-                    {errors.artist && <span className={styles.errorMessage}>Artist name is required</span>}
-
-                    <textarea
-                        className={styles.inputField}
-                        placeholder="Artwork Description"
-                        {...register('description', {required: true})}
-                    />
-                    {errors.description && <span className={styles.errorMessage}>Description is required</span>}
-
-                    <input
-                        type="date"
-                        className={styles.inputField}
-                        placeholder="Date Created"
-                        {...register('dateCreated', {required: true})}
-                    />
-                    {errors.dateCreated && <span className={styles.errorMessage}>Date created is required</span>}
-
-                    <input
-                        type="number"
-                        className={styles.inputField}
-                        placeholder="Gallery Buying Price"
-                        {...register('galleryBuyingPrice', {required: true})}
-                    />
-                    {errors.galleryBuyingPrice && <span className={styles.errorMessage}>Price is required</span>}
-
-                    <select className={styles.inputField} {...register('edition', {required: true})}>
-                        <option value="">Select Edition</option>
-                        <option value="Single / Unique edition">Single / Unique edition</option>
-                        <option value="Part of a series">Part of a series</option>
-                        <option value="Reproduction">Reproduction</option>
-                        <option value="To be decided">To be decided</option>
-                    </select>
-                    {errors.edition && <span className={styles.errorMessage}>Edition type is required</span>}
-                    <input
-                        type="text"
-                        className={styles.inputField}
-                        placeholder="Artwork Type"
-                        value={artworkType}
-                        disabled
-                    />
-                    {artworkType === 'drawing' && (
-                        <>
-                            <input
-                                type="text"
-                                className={styles.inputField}
-                                placeholder="Drawing Surface"
-                                {...register('drawingSurface')}
-                            />
-                            <input
-                                type="text"
-                                className={styles.inputField}
-                                placeholder="Drawing Material"
-                                {...register('drawingMaterial')}
-                            />
-                            <input
-                                type="number"
-                                className={styles.inputField}
-                                placeholder="Width in cm"
-                                {...register('drawingDimensionsWidthInCm')}
-                            />
-                            <input
-                                type="number"
-                                className={styles.inputField}
-                                placeholder="Height in cm"
-                                {...register('drawingDimensionsHeightInCm')}
-                            />
-                        </>
-                    )}
-                    {artworkType === 'painting' && (
-                        <>
-                            <input
-                                type="text"
-                                className={styles.inputField}
-                                placeholder="Painting Surface"
-                                {...register('paintingSurface')}
-                            />
-                            <input
-                                type="text"
-                                className={styles.inputField}
-                                placeholder="Painting Material"
-                                {...register('paintingMaterial')}
-                            />
-                            <input
-                                type="number"
-                                className={styles.inputField}
-                                placeholder="Width in cm"
-                                {...register('paintingDimensionsWidthInCm')}
-                            />
-                            <input
-                                type="number"
-                                className={styles.inputField}
-                                placeholder="Height in cm"
-                                {...register('paintingDimensionsHeightInCm')}
-                            />
-                        </>
-                    )}
-
+                <div className={styles.buttonWrapper}>
+                    <Button text="Cancel" onClick={() => navigate('/artistgallery')}/>
+                    <Button type="submit" text="Update Artwork"/>
                 </div>
-
-                <Button className={styles.submitButton} type="submit" text="Update Artwork"/>
             </form>
         </div>
     );

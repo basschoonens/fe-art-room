@@ -18,7 +18,7 @@
     width: 100%;
     padding-bottom: 20px;
     background: var(--color-transparent);
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
 }
 
 .inputFieldWrapper {
@@ -29,7 +29,7 @@
     width: 100%;
     max-width: 600px;
     background: var(--color-transparent);
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
 }
 
 .addArtworkForm{
@@ -43,7 +43,7 @@
     background: var(--color-transparent);
     margin: var(--spacing-sm);
     padding: var(--spacing-md);
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
     border-radius: var(--border-radius-lg);
     border: var(--border-md) var(--color-light);
     box-shadow: var(--shadow-md);
@@ -135,8 +135,6 @@
     width: 80%;
     max-width: 600px;
     padding: var(--spacing-xxl) 0;
-    border: var(--border-md) var(--color-light);
-    border-radius: var(--border-radius-md);
 }
 
 .imageContainer label {
@@ -162,21 +160,36 @@
 
 .fileName {
     margin-top: var(--spacing-sm); /* Add margin above the file name */
-    font-size: var(--font-size-small); /* Adjust the font size as needed */
 }
 
 .fileInput {
-    opacity: 0;
+    display: none;
+}
+
+.uploadLabel {
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
+    color: var(--color-secondary);
+    font-size: var(--font-size-large);
+    border: var(--border-md) var(--color-secondary);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    transition: background-color 0.3s ease;
+}
+
+.uploadLabel:hover {
+    text-decoration: none;
+    color: var(--color-dark);
+}
+
+.uploadIcon {
+    margin-right: 8px;
 }
 
 .uploadIcon {
     font-size: var(--font-size-xlarge);
-    color: var(--color-secondary);
+    margin-right: var(--spacing-xs);
 }
 
 .currencyWrapper{
@@ -186,4 +199,13 @@
     align-items: center;
     width: 90%;
     font-size: var(--font-size-large);
+}
+
+.previewImage {
+    margin-top: var(--spacing-md);
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
 }

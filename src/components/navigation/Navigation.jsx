@@ -4,7 +4,7 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import Logo from '../logo/Logo.jsx';
 import styles from './Navigation.module.css';
-import hamburgerStyles from "../hamburgerMenu/HamburgerMenu.module.css";
+import hamburgerStyles from "./HamburgerMenu.module.css";
 
 const Navigation = () => {
     const navigate = useNavigate();

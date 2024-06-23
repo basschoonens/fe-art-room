@@ -87,7 +87,7 @@ export default function MainGallery() {
                 </div>
                 <div className={styles.buttonsContainer}>
                     <Button onClick={prevPage} disabled={currentPage === 1} text="Previous"/>
-                    <Button onClick={nextPage} text="Next"/>
+                    <Button onClick={nextPage} disabled={endIndex === artworks.length} text="Next" />
                 </div>
             </div>
         </>

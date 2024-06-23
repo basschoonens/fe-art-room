@@ -1,7 +1,7 @@
 import styles from './AddNewArtwork.module.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUpload} from '@fortawesome/free-solid-svg-icons';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 import Button from "../../../components/button/Button.jsx";
@@ -14,6 +14,7 @@ const AddNewArtwork = () => {
     const [error, setError] = React.useState(null);
     const [artworkType, setArtworkType] = React.useState('');
     const [selectedFile, setSelectedFile] = React.useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
     const navigate = useNavigate();
 
     const submitNewArtwork = async (data) => {
@@ -74,29 +75,44 @@ const AddNewArtwork = () => {
         setLoading(false);
     };
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file && validateFile(file)) {
+            setSelectedFile(file);
+            setPreviewUrl(URL.createObjectURL(file)); // Create object URL for preview
+        } else {
+            setSelectedFile(null);
+            setPreviewUrl(null);
+            e.target.value = '';
+        }
+    };
+
+    // Cleanup object URL when component unmounts or file changes
+    useEffect(() => {
+        return () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+        };
+    }, [previewUrl]);
+
     return (
         <div className={styles.pageContainer}>
             <h1>Create new artwork</h1>
             <form className={styles.addArtworkForm} onSubmit={handleSubmit(submitNewArtwork)}>
                 <div className={styles.addArtworkFormContainer}>
                     <div className={styles.imageContainer}>
+                        {previewUrl && <img src={previewUrl} alt="Preview" className={styles.previewImage}/>}
                         <label htmlFor="fileInput" className={styles.uploadLabel}>
-                            <FontAwesomeIcon icon={faUpload}/>
-                            &nbsp;Upload Image
+                            <FontAwesomeIcon icon={faUpload} className={styles.uploadIcon}/>
+                            Upload Image
                         </label>
                         <input
-                            id="fileinput"
+                            id="fileInput"
                             type="file"
+                            className={styles.fileInput}
                             accept=".jpeg,.jpg,.png"
-                            onChange={(e) => {
-                                const file = e.target.files[0];
-                                if (file && validateFile(file)) {
-                                    setSelectedFile(file);
-                                } else {
-                                    setSelectedFile(null);
-                                    e.target.value = '';
-                                }
-                            }}
+                            onChange={handleFileChange}
                         />
                         {errors.file && <span className={styles.error}>{errors.file.message}</span>}
                         {selectedFile && <span className={styles.fileName}>{selectedFile.name}</span>}

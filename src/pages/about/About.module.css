@@ -4,46 +4,31 @@
 .artistContainer,
 .galleryInfoContainer,
 .galleryContactContainer,
-.contactContainerContents,
-.contactForm {
+.contactContents{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: var(--spacing-md);
 }
+
 .pageContainer,
 .welcomeContainer,
 .userContainer,
 .artistContainer,
 .galleryInfoContainer,
-.contactContainerContents {
+.contactContents {
     max-width: 1200px;
     background: var(--color-transparent);
 }
 
-/* Border styles */
 .welcomeContainer,
 .userContainer,
 .artistContainer,
-.galleryContactContainer {
+.contactContents {
     border: var(--border-lg) var(--color-light);
     border-radius: var(--border-radius-lg);
-}
-
-.contactForm,
-.inputField,
-.textAreaField {
-    max-width: 600px;
-}
-
-/* Margin and padding */
-.galleryContactContainer,
-.welcomeContainer,
-.userContainer,
-.artistContainer,
-.contactForm {
-    margin: 20px;
-    padding: 20px;
+    margin: var(--spacing-md);
 }
 
 .welcomeContainerContents,
@@ -60,9 +45,9 @@
 .artistContainerContents p,
 .contactContainerContents p{
     font: var(--font-family-alt);
-    font-weight: 400;
+    font-size: var(--font-size-medium);
     color: var(--color-black);
-    padding: 20px;
+    padding: var(--spacing-md);
     width: 100%;
 }
 
@@ -72,24 +57,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 30vw;
+    min-width: 40%;
     max-height: 300px;
 }
 
 .welcomeContainerContents img,
 .userContainerContents img,
 .artistContainerContents img {
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
 }
 
-.inputField,
-.textAreaField {
-    margin: var(--spacing-md) 0;
-    padding: var(--spacing-md);
-    width: 100%;
-    min-width: 150px;
-    font: var(--font-family-alt);
-    border-radius: var(--border-radius-lg);
-    border: var(--border-md) var(--color-light);
+.contactContents a {
+    color: var(--color-secondary);
+    font-family: var(--font-family-alt), sans-serif;
+    padding: var(--spacing-sm);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .userContainerContents,
+    .contactContents {
+        flex-direction: column;
+    }
+
+    .welcomeContainerContents,
+    .artistContainerContents{
+        flex-direction: column-reverse;
+    }
+
+
+
 }

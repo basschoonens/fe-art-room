@@ -1,4 +1,4 @@
-import styles from './Order.module.css';
+import styles from './PlaceOrder.module.css';
 import React from 'react';
 import {useCart} from '../../../context/CartContext.jsx';
 import {useNavigate} from 'react-router-dom';

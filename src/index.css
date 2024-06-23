@@ -61,21 +61,13 @@
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Breakpoints */
-:root {
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-  --breakpoint-xxl: 1440px;
-}
-
+/* Layout */
 :root {
   --navbar-height: 80px;
   --footer-height: auto;
 }
 
+/* Global styles */
 :root img {
   max-width: 100%;
   max-height: inherit;
@@ -99,5 +91,3 @@
   font-weight: 400;
   color: var(--color-black);
 }
-
-/*TODO Inputfields styling global instellen*/

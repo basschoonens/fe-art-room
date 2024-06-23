@@ -1,5 +1,4 @@
 import styles from './About.module.css';
-import Button from "../../components/button/Button.jsx";
 import welcome from '../../assets/about-page/welcome-image.jpg';
 import user from '../../assets/about-page/user-image.jpg';
 import artist from '../../assets/about-page/artist-image.jpg';
@@ -7,27 +6,30 @@ import artist from '../../assets/about-page/artist-image.jpg';
 export default function About() {
     return (
         <div className={styles.pageContainer}>
-            <section className={styles.galleryInfoContainer}>
+            <h1>About Us</h1>
+            <section className={styles.galleryInfoSection}>
                 {/*TODO add notations like STRONG etc in this and/or other pages*/}
-                <h1>About Us</h1>
                 <div className={styles.welcomeContainer}>
                     <h2>Welcome to The Art Room</h2>
                     <div className={styles.welcomeContainerContents}>
                         <p>
-                            Step into The Art Room, a haven for art enthusiasts nestled in the cultural heart of
-                            Hilversum,
-                            The Netherlands. Our online platform serves as a gateway to the rich tapestry of artistic
+                            Step into <strong>The Art Room</strong>, a haven for art enthusiasts nestled in the cultural
+                            heart of
+                            Hilversum, The Netherlands. Our online platform serves as a gateway to the rich tapestry of
+                            artistic
                             expression found within our physical gallery walls. Whether you are a seasoned collector or
                             a budding aficionado, prepare to embark on a journey of discovery and inspiration.
                         </p>
-                        <span><img src={welcome} alt="welcome-image"/></span>
+                        <span><img src={welcome} alt="Welcome to the Art Room"/></span>
                     </div>
                 </div>
+            </section>
+            <section className={styles.userSection}>
                 <div className={styles.userContainer}>
                     <h2>Discover and Engage</h2>
                     <div className={styles.userContainerContents}>
                         <span>
-                            <img src={user} alt="user-image"/>
+                            <img src={user} alt="Engage with Art"/>
                         </span>
                         <p>
                             Embark on a visual odyssey through our carefully curated collection of artworks, each one
@@ -40,6 +42,8 @@ export default function About() {
                         </p>
                     </div>
                 </div>
+            </section>
+            <section className={styles.artistSection}>
                 <div className={styles.artistContainer}>
                     <h2>Showcase Your Talent</h2>
                     <div className={styles.artistContainerContents}>
@@ -57,13 +61,13 @@ export default function About() {
                             gallery's website.
                         </p>
                         <span>
-                            <img src={artist} alt="artist-image"/>
+                            <img src={artist} alt="Showcase Your Talent"/>
                         </span>
                     </div>
                 </div>
             </section>
-            <section className={styles.galleryContactContainer}>
-                <div className={styles.contactContainerContents}>
+            <section className={styles.contactSection}>
+                <div className={styles.contactContents}>
                     <h2>Get in Touch</h2>
                     <p>
                         Have a question about our gallery or looking for assistance with your artistic endeavors?
@@ -75,7 +79,7 @@ export default function About() {
                         and message. He'll get back to you as soon as possible to provide the assistance you need.
                         Thank you for your interest in The Art Room!
                     </p>
-                    <a href="mailto:">Contact the gallery</a>
+                    <a href="mailto:">Click here to contact the gallery</a>
                 </div>
             </section>
         </div>
