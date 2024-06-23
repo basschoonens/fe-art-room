@@ -1,7 +1,7 @@
 import styles from './MainGallery.module.css';
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/userArtworkCard/UserArtworkCard.jsx";
+import UserArtworkCard from "../../components/artworkComponents/artworkCards/user/UserArtworkCard.jsx";
 import shuffleArray from "../../helpers/shuffleArray.js";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import Button from "../../components/button/Button.jsx";
@@ -25,6 +25,7 @@ export default function MainGallery() {
             setError(null);
             try {
                 const response = await axios.get(`http://localhost:8080/artworks`, { signal: controller.signal });
+                console.log(response.data)
                 const shuffledArtworks = shuffleArray(response.data);
                 setArtworks(shuffledArtworks);
                 console.log(shuffledArtworks)
@@ -74,12 +75,12 @@ export default function MainGallery() {
                     <div className={styles.cardContainer}>
                         {currentArtworks.map(artwork => (
                             <UserArtworkCard
-                                key={artwork.id}
-                                id={artwork.id}
+                                key={artwork.artworkId}
+                                artworkId={artwork.artworkId}
                                 title={artwork.title}
                                 artist={artwork.artist}
                                 rating={formatRating(artwork.averageRating)}
-                                imageUrl={`http://localhost:8080/artworks/${artwork.id}/image`}
+                                imageUrl={`http://localhost:8080/artworks/${artwork.artworkId}/image`}
                             />
                         ))}
                     </div>

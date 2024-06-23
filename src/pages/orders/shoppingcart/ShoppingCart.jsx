@@ -6,7 +6,6 @@ import {currencyFormat} from "../../../helpers/currencyFormat.js";
 import Button from "../../../components/button/Button.jsx";
 import {calculateTotalPrice} from "../../../helpers/calculateTotalPrice.js";
 
-
 const ShoppingCart = () => {
     const {artworks,removeFromCart, loading, error} = useCart();
     const totalPrice = calculateTotalPrice(artworks);
@@ -29,12 +28,12 @@ const ShoppingCart = () => {
                     </thead>
                     <tbody>
                     {artworks.map(artwork => (
-                        <tr key={artwork.id}>
+                        <tr key={artwork.artworkId}>
                             <td>{artwork.title}</td>
                             <td>{currencyFormat(artwork.sellingPrice)}</td>
                             <td>
                                 <Button type="button" variant="small" text="Remove"
-                                        onClick={() => removeFromCart(artwork.id)} />
+                                        onClick={() => removeFromCart(artwork.artworkId)} />
                             </td>
                         </tr>
                     ))}
@@ -45,6 +44,7 @@ const ShoppingCart = () => {
             )}
             <p>Your total: {currencyFormat(totalPrice)}</p>
             <div className={styles.buttonsContainer}>
+            {/*    remove Link from buttons and use onClick   */}
             <Link to={'/maingallery'}><Button type="button" text="Cancel" /></Link>
             <Link to={'/order'}><Button type="submit" text="Place Order" /></Link>
             </div>

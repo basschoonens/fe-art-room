@@ -1,8 +1,10 @@
 .navbar {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     width: 100vw;
+    box-sizing: border-box;
     max-height: var(--navbar-height);
     background: var(--color-secondary);
 }
@@ -40,14 +42,14 @@
 
 .defaultLink {
     color: var(--color-primary);
-    font-family: var(--font-family);
+    font: var(--font-family);
     text-decoration: none;
     font-size: var(--font-size-large);
 }
 
 .activeLink {
     color: var(--color-primary);
-    font-family: var(--font-family);
+    font: var(--font-family);
     font-size: var(--font-size-large);
     text-decoration: none;
     border-bottom: 2px solid var(--color-dark);
@@ -57,6 +59,31 @@
     .navbar {
         justify-content: center;
         width: 1440px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Increase shadow intensity for wider screens */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navLinks {
+        display: none; /* Hide nav links on small screens */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        background-color: #fff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 20px 0;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .navOpen {
+        display: flex; /* Show nav links when the menu is open */
+    }
+
+    /* Hide normal nav links and show the hamburger menu icon */
+    .menuIcon {
+        display: flex;
     }
 }

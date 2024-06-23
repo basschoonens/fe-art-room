@@ -10,7 +10,7 @@ export const CartProvider = ({ children }) => {
     const [artworks, setArtworks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    // import the jwt token from local storage
+
     const jwt = localStorage.getItem('jwt');
 
     useEffect(() => {
@@ -27,11 +27,15 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = (item) => {
         console.log('Adding item to cart:', item)
+        if (item && item.artworkId) {
         setCart([...cart, item]);
+        } else {
+            console.error('Invalid item:', item);
+        }
     };
 
     const removeFromCart = (itemId) => {
-        setCart(cart.filter(item => item.id !== itemId));
+        setCart(cart.filter(item => item.artworkId !== itemId));
     };
 
     const clearCart = () => {
@@ -46,9 +50,8 @@ export const CartProvider = ({ children }) => {
             setError(null);
             try {
                 const artworkDetails = await Promise.all(
-                    // TODO check if this is necessary
                     cart.map(async (item) => {
-                        const response = await axios.get(`http://localhost:8080/artworks/${item.id}`, { signal: controller.signal });
+                        const response = await axios.get(`http://localhost:8080/artworks/${item.artworkId}`, { signal: controller.signal });
                         return response.data;
                     })
                 );
@@ -75,7 +78,7 @@ export const CartProvider = ({ children }) => {
         const abortController = new AbortController();
 
         try {
-            const response = await axios.post('http://localhost:8080/orders', orderData, {
+            const response = await axios.post('http://localhost:8080/orders/user', orderData, {
                 signal: abortController.signal,
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,8 +86,7 @@ export const CartProvider = ({ children }) => {
                 },
             });
 
-            if (response.status !== 200) throw new Error('Order placement failed');
-
+            if (response.status !== 201) throw new Error('Order placement failed');
             console.log('Order placed:', response.data);
         } catch (error) {
             console.error('Error placing order:', error);

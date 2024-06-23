@@ -19,7 +19,7 @@ export default function ArtistGallery() {
             setError(null);
             try {
                 const token = localStorage.getItem('jwt');
-                const response = await axios.get(`http://localhost:8080/artworks/user/artworks`, {
+                const response = await axios.get(`http://localhost:8080/artworks/artist`, {
                     signal: abortController.signal,
                     headers: {
                         "Content-Type": `application/json`,
@@ -71,9 +71,18 @@ export default function ArtistGallery() {
             <section className={styles.sortingBar}>
                 <ul className={styles.sortingLinks}>
                     <li>Sort by:</li>
-                    <li onClick={() => handleSort('type')}>Type</li>
-                    <li onClick={() => handleSort('rating')}>Rating</li>
-                    <li onClick={() => handleSort('sellingPrice')}>Price</li>
+                    <li onClick={() => handleSort('type')}
+                        data-order={sortCriteria.field === 'type' ? sortCriteria.order : null}>
+                        Type
+                    </li>
+                    <li onClick={() => handleSort('averageRating')}
+                        data-order={sortCriteria.field === 'averageRating' ? sortCriteria.order : null}>
+                        Rating
+                    </li>
+                    <li onClick={() => handleSort('sellingPrice')}
+                        data-order={sortCriteria.field === 'sellingPrice' ? sortCriteria.order : null}>
+                        Price
+                    </li>
                 </ul>
             </section>
             {loading && <p>Loading...</p>}
@@ -81,12 +90,12 @@ export default function ArtistGallery() {
             <div className={styles.cardContainer}>
                 {sortedArtworks.map((artwork) => (
                     <ArtistArtworkCard
-                        key={artwork.id}
-                        id={artwork.id}
+                        key={artwork.artworkId}
+                        artworkId={artwork.artworkId}
                         title={artwork.title}
-                        rating={artwork.averageRating}
+                        averageRating={artwork.averageRating}
                         salesPrice={artwork.sellingPrice}
-                        imageUrl={`http://localhost:8080/artworks/${artwork.id}/image`}
+                        imageUrl={`http://localhost:8080/artworks/${artwork.artworkId}/image`}
                     />
                 ))}
             </div>

@@ -75,16 +75,7 @@ export default function About() {
                         and message. He'll get back to you as soon as possible to provide the assistance you need.
                         Thank you for your interest in The Art Room!
                     </p>
-                    <form className={styles.contactForm}>
-                        <input className={styles.inputField} type="text" id="name" placeholder="Voer uw naam in:" name="name" required/>
-                        <input className={styles.inputField} type="email" id="email" placeholder="Voer uw emailadres in:" name="email" required/>
-                        <textarea className={styles.textAreaField} id="message" placeholder="Voer hier uw opmerking en/of vraag in: " name="message" rows="10" cols="60" required/>
-                        <Button
-                            className={styles.contactFormButton}
-                            type="submit"
-                            text="Submit"
-                        />
-                    </form>
+                    <a href="mailto:">Contact the gallery</a>
                 </div>
             </section>
         </div>

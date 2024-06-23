@@ -5,7 +5,7 @@ import axios from "axios";
 import formatRating from "../../helpers/formatRating.js";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function LeftReviewsForArtist() {
 
@@ -58,7 +58,7 @@ export default function LeftReviewsForArtist() {
         }, {});
     };
 
-    const handleDelete = async (artworkId) => {
+    const handleDelete = async (artworkId, ratingId) => {
         const jwt = localStorage.getItem('jwt');
         const config = {
             headers: {
@@ -68,15 +68,18 @@ export default function LeftReviewsForArtist() {
         };
 
         try {
-            await axios.delete(`http://localhost:8080/ratings/${artworkId}/ratings`, config);
+            await axios.delete(`http://localhost:8080/ratings/artist/${artworkId}/${ratingId}`, config);
             setReviews((prevReviews) => {
                 const updatedReviews = {...prevReviews};
                 for (const title in updatedReviews) {
-                    updatedReviews[title] = updatedReviews[title].filter(review => review.artworkId !== artworkId);
+                    // Filter out only the review with the specific ratingId
+                    updatedReviews[title] = updatedReviews[title].filter(review => review.ratingId !== ratingId);
+                    // Remove the title if there are no more reviews for that artwork
                     if (updatedReviews[title].length === 0) {
                         delete updatedReviews[title];
                     }
                 }
+                console.log('Review deleted successfully');
                 return updatedReviews;
             });
         } catch (error) {
@@ -96,18 +99,17 @@ export default function LeftReviewsForArtist() {
                         <p>Ask your customers to leave a review on your artworks!</p>
                     </div>
                 }
-                {Object.keys(reviews).map((title) => (
-                    <div key={title} className={styles.reviewGroup}>
-                        <h3 className={styles.artworkTitle}>{title}</h3>
+                {Object.keys(reviews).map((artworkTitle) => (
+                    <div key={artworkTitle} className={styles.reviewGroup}>
+                        <h3 className={styles.artworkTitle}>Reviews found for: {artworkTitle}</h3>
                         <div className={styles.reviewWrapper}>
-                            {Array.isArray(reviews[title]) && reviews[title].map((review) => (
+                            {Array.isArray(reviews[artworkTitle]) && reviews[artworkTitle].map((review) => (
                                 <div key={review.ratingId} className={styles.review}>
-                                    <p className={styles.reviewTitle}>Artwork: {review.artworkTitle}</p>
-                                    <p>Rating: {formatRating(review.rating)}</p>
+                                    <p>Review: {formatRating(review.rating)}</p>
                                     <p>Comment: {review.comment}</p>
                                     <button
                                         className={styles.deleteButton}
-                                        onClick={() => handleDelete(review.artworkId)}>
+                                        onClick={() => handleDelete(review.artworkId, review.ratingId)}>
                                         <FontAwesomeIcon icon={faTrashAlt}/>
                                     </button>
                                 </div>

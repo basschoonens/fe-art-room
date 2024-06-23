@@ -1,8 +1,9 @@
 import styles from './MyOrders.module.css';
 import WelcomeContent from "../../../components/welcomeContentBar/WelcomeContent.jsx";
 import Button from "../../../components/button/Button.jsx";
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 export default function MyOrders() {
 
@@ -46,22 +47,22 @@ export default function MyOrders() {
 
     }, []);
 
-    const handleDelete = async (orderId) => {
-        const jwt = localStorage.getItem('jwt');
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${jwt}`,
-                'Content-Type': 'application/json'
-            }
-        };
-
-        try {
-            await axios.delete(`http://localhost:8080/orders/${orderId}`, config);
-            setOrders(orders.filter(order => order.orderId !== orderId));
-        } catch (error) {
-            console.error('Error deleting review:', error);
-        }
-    };
+    // const handleDelete = async (orderId) => {
+    //     const jwt = localStorage.getItem('jwt');
+    //     const config = {
+    //         headers: {
+    //             'Authorization': `Bearer ${jwt}`,
+    //             'Content-Type': 'application/json'
+    //         }
+    //     };
+    //
+    //     try {
+    //         await axios.delete(`http://localhost:8080/orders/${orderId}`, config);
+    //         setOrders(orders.filter(order => order.orderId !== orderId));
+    //     } catch (error) {
+    //         console.error('Error deleting order:', error);
+    //     }
+    // };
 
     return (
         <div className={styles.pageContainer}>
@@ -88,12 +89,12 @@ export default function MyOrders() {
                                 <p>Order Status: {order.orderStatus}</p>
                                 <p>Order Total: {order.totalPrice}</p>
                             </div>
-                            <Button
-                                className={styles.deleteButton}
-                                type="button"
-                                text="Cancel Order"
-                                onClick={() => handleDelete(order.orderId)}
-                            />
+                            {/*<Button*/}
+                            {/*    className={styles.deleteButton}*/}
+                            {/*    type="button"*/}
+                            {/*    text="Cancel Order"*/}
+                            {/*    onClick={() => handleDelete(order.orderId)}*/}
+                            {/*/>*/}
                         </div>
                     ))}
                 </div>
