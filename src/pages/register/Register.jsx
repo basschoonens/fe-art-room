@@ -24,6 +24,7 @@ export default function Register(){
             if (response.status === 201) {
                 console.log(`${selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)} created successfully`);
             }
+            alert('Your registration is successful, please login to continue');
         } catch (error) {
             console.error(error);
         }
