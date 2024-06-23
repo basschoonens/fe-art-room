@@ -6,6 +6,7 @@ import {useForm} from 'react-hook-form';
 import axios from 'axios';
 import Button from "../../../components/button/Button.jsx";
 import {useNavigate} from "react-router-dom";
+import {validateFile} from "../../../helpers/fileValidation.js";
 
 const AddNewArtwork = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -15,18 +16,11 @@ const AddNewArtwork = () => {
     const [selectedFile, setSelectedFile] = React.useState(null);
     const navigate = useNavigate();
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setSelectedFile(file);
-    };
-
     const submitNewArtwork = async (data) => {
         setLoading(true);
         setError(null);
         const jwt = localStorage.getItem('jwt');
-
         console.log(data);
-
         try {
             const artworkResponse = await axios.post('http://localhost:8080/artworks/artist', {
                 title: data.title,
@@ -44,20 +38,22 @@ const AddNewArtwork = () => {
                 paintingMaterial: artworkType === 'painting' ? data.paintingMaterial : undefined,
                 paintingDimensionsWidthInCm: artworkType === 'painting' ? data.paintingDimensionsWidthInCm : undefined,
                 paintingDimensionsHeightInCm: artworkType === 'painting' ? data.paintingDimensionsHeightInCm : undefined
-                }, {
+            }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${jwt}`
                 }
             });
+
             const artworkId = (artworkResponse.headers["location"].split('/').pop());
             console.log(artworkId);
             console.log(artworkResponse);
             console.log(artworkResponse.headers["location"]);
             console.log('Artwork POST request complete.');
-            if (data.file[0]) {
+
+            if (selectedFile instanceof File) {
                 const formData = new FormData();
-                formData.append('file', data.file[0]);
+                formData.append('file', selectedFile);
 
                 await axios.post(`http://localhost:8080/artworks/artist/${artworkId}/image`, formData, {
                     headers: {
@@ -66,12 +62,15 @@ const AddNewArtwork = () => {
                     }
                 });
             }
-            alert('Artwork added successfully!');
-            navigate('/artistgallery')
+            if (artworkResponse.status === 201) {
+                alert('Artwork added successfully!');
+            }
+            navigate('/artistgallery');
         } catch (error) {
             console.error('Error uploading artwork:', error);
             alert('Failed to upload artwork, please check if the data you provided is correct.');
         }
+
         setLoading(false);
     };
 
@@ -86,13 +85,17 @@ const AddNewArtwork = () => {
                             &nbsp;Upload Image
                         </label>
                         <input
-                            id="fileInput"
-                            className={styles.fileInput}
+                            id="fileinput"
                             type="file"
-                            {...register('file', {required: 'File upload is required'})}
+                            accept=".jpeg,.jpg,.png"
                             onChange={(e) => {
-                                e.preventDefault();
-                                handleFileChange(e);
+                                const file = e.target.files[0];
+                                if (file && validateFile(file)) {
+                                    setSelectedFile(file);
+                                } else {
+                                    setSelectedFile(null);
+                                    e.target.value = '';
+                                }
                             }}
                         />
                         {errors.file && <span className={styles.error}>{errors.file.message}</span>}
@@ -107,7 +110,7 @@ const AddNewArtwork = () => {
                         <input type="text" className={styles.inputField}
                                placeholder="Please enter your artist name for this artwork"
                                {...register('artist', {required: true})} />
-                        {errors.artist && <span className={styles.errorMessage}>Description is required</span>}
+                        {errors.artist && <span className={styles.errorMessage}>Artist name is required</span>}
                         <textarea className={styles.inputField}
                                   placeholder="Please enter a description of the artwork"
                                   {...register('description', {required: true})}></textarea>

@@ -18,7 +18,7 @@
     background: var(--color-transparent);
     margin: var(--spacing-sm);
     padding: var(--spacing-sm);
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
     border-radius: var(--border-radius-lg);
     border: var(--border-md) var(--color-light);
     box-shadow: var(--shadow-md);
@@ -32,18 +32,13 @@
     margin-bottom: var(--spacing-sm);
 }
 
-.formGroup label {
-    margin-bottom: var(--spacing-xs);
-    font-weight: bold;
-}
-
 .formGroup input,
 .formGroup select {
     margin: var(--spacing-sm) 0;
     padding: var(--spacing-sm);
     width: 80%;
     min-width: 150px;
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
     border-radius: var(--border-radius-lg);
     border: var(--border-md) var(--color-light);
 }

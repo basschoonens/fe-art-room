@@ -1,5 +1,5 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
-import axios from "axios";
+import axios, {all} from "axios";
 
 const CART_STORAGE_KEY = 'cart';
 
@@ -71,37 +71,8 @@ export const CartProvider = ({ children }) => {
 
     }, [cart]);
 
-    const placeOrder = async (orderData) => {
-        setLoading(true);
-        setError(null);
-
-        const abortController = new AbortController();
-
-        try {
-            const response = await axios.post('http://localhost:8080/orders/user', orderData, {
-                signal: abortController.signal,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${jwt}`,
-                },
-            });
-
-            if (response.status !== 201) throw new Error('Order placement failed');
-            console.log('Order placed:', response.data);
-        } catch (error) {
-            console.error('Error placing order:', error);
-            setError(error);
-        } finally {
-            setLoading(false);
-        }
-
-        return () => {
-            abortController.abort();
-        };
-    };
-
     return (
-        <CartContext.Provider value={{ artworks, cart, addToCart, removeFromCart, clearCart, placeOrder}}>
+        <CartContext.Provider value={{ artworks, cart, addToCart, removeFromCart, clearCart}}>
             {children}
         </CartContext.Provider>
     );

@@ -2,7 +2,7 @@
 // import React, {useContext, useState} from 'react';
 // import {AuthContext} from "../../../../../context/AuthContext.jsx";
 // import {Link} from "react-router-dom";
-// import RatingModal from "../../../../ratings/ratingsModal/RatingModal.jsx";
+// import RatingModal from "../../../../ratingModal/ratingsModal/RatingModal.jsx";
 // import axios from "axios";
 // import {useCart} from "../../../../../context/CartContext.jsx";
 // import { FaStar, FaShoppingCart } from 'react-icons/fa'
@@ -93,7 +93,7 @@ import styles from './UserArtworkCard.module.css';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from "../../../../context/AuthContext.jsx";
 import { Link } from "react-router-dom";
-import RatingModal from "../../../ratings/ratingsModal/RatingModal.jsx";
+import RatingModal from "../../../ratingModal/RatingModal.jsx";
 import axios from "axios";
 import { useCart } from "../../../../context/CartContext.jsx";
 import { FaStar, FaShoppingCart } from 'react-icons/fa';
@@ -132,15 +132,13 @@ export default function UserArtworkCard({ artworkId, title, artist, imageUrl, ra
                     'Content-Type': 'application/json'
                 }
             };
-
             const data = {
                 rating,
                 comment
             };
-
             await axios.post(`http://localhost:8080/ratings/user/${artworkId}`, data, config);
         } catch (error) {
-            console.log(error);
+            alert('An error occurred while submitting your rating. Please try again.')
         }
     };
 

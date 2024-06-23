@@ -154,6 +154,7 @@ const EditArtwork = () => {
                         type="text"
                         className={styles.inputField}
                         placeholder="Artist Name"
+                        disabled={true}
                         {...register('artist', {required: true})}
                     />
                     {errors.artist && <span className={styles.errorMessage}>Artist name is required</span>}

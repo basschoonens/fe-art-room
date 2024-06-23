@@ -24,9 +24,15 @@ export default function Register(){
             if (response.status === 201) {
                 console.log(`${selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)} created successfully`);
             }
+
             alert('Your registration is successful, please login to continue');
         } catch (error) {
-            console.error(error);
+            if (error.response && error.response.status === 409) {
+                alert('Username already exists, please try again with a different username');
+            } else {
+                console.error(error);
+                alert('We\'re sorry, something went wrong. Please try again or contact our gallery for assistance.');
+            }
         }
         console.log(data);
     };
