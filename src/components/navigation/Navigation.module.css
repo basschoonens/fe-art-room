@@ -30,6 +30,7 @@
     fill: var(--color-light);
     stroke: var(--color-light);
     stroke-width: var(--border-lg);
+    margin-right: var(--spacing-sm);
     width: 24px;
     height: 24px;
 }

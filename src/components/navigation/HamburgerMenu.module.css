@@ -28,6 +28,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        margin-right: var(--spacing-sm);
         width: 30px;
         height: 30px;
         cursor: pointer;

@@ -11,10 +11,6 @@ export default function MyProfile() {
     return (
         <div className={styles.pageContainer}>
             <WelcomeContent />
-                <div className={styles.profileData}>
-                </div>
-            <Button onClick={logout} text="Logout"/>
         </div>
-
     )
 }

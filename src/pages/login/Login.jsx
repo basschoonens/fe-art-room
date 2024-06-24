@@ -1,5 +1,5 @@
 import styles from './Login.module.css';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -10,6 +10,7 @@ export default function Login(){
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [error, setError] = useState('');
 
     const handleLogin = async (data) => {
         try {
@@ -17,25 +18,27 @@ export default function Login(){
                 username: data.username,
                 password: data.password
             });
-            console.log(response)
             if (response.status === 200) {
                 login(response.data.jwt);
                 navigate('/profile');
             }
-            console.log("User logged in successfully");
         } catch (error) {
+            if (error.response && error.response.status === 401) {
+                setError('Incorrect password');
+            } else {
+                setError('Login failed. Please check your username, or try again later.');
+            }
             console.error(error);
         }
-        console.log(data);
-        // Here you would usually send a request to your server to log the user in\
-
     };
+
 
     return (
         <div className={styles.pageContainer}>
             <WelcomeContent/>
             <form className={styles.loginForm} onSubmit={handleSubmit(handleLogin)}>
                 <h2 className={styles.loginHeading}>Please login</h2>
+                    {error && <p className={styles.error}>{error}</p>}
                     <input
                         id="username"
                         type="text"

@@ -73,6 +73,14 @@
     padding: 20px 0;
 }
 
+.radioInputWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 .radioInput {
     display: none;
 }
@@ -105,8 +113,8 @@
 .radioLabel {
     font: var(--font-family-alt);
     font-size: var(--font-size-medium);
-    margin-right: var(--spacing-lg); /* Increase margin between label and next element */
-    margin-left: var(--spacing-sm); /* Add margin to the left side of the label */
+    margin-right: var(--spacing-lg);
+    margin-left: var(--spacing-sm);
     cursor: pointer;
 }
 
@@ -208,4 +216,31 @@
     height: auto;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-sm);
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+@media screen and (max-width: 768px) {
+    .addArtworkFormContainer {
+        flex-direction: column;
+        padding: var(--spacing-sm);
+    }
+
+    .checkbox {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    .radioInputWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
 }

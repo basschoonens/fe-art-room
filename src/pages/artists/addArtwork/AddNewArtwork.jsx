@@ -118,21 +118,20 @@ const AddNewArtwork = () => {
                         {selectedFile && <span className={styles.fileName}>{selectedFile.name}</span>}
                     </div>
                     <div className={styles.inputFieldWrapper}>
-                        {/*TODO check if empty label is neccesary everywhere.*/}
                         <input type="text" className={styles.inputField}
-                               placeholder="Please enter the title of your artwork"
+                               placeholder="Enter the title of your artwork"
                                {...register('title', {required: true})} />
                         {errors.title && <span className={styles.errorMessage}>Title is required</span>}
                         <input type="text" className={styles.inputField}
-                               placeholder="Please enter your artist name for this artwork"
+                               placeholder="Enter your artist name for this artwork"
                                {...register('artist', {required: true})} />
                         {errors.artist && <span className={styles.errorMessage}>Artist name is required</span>}
                         <textarea className={styles.inputField}
-                                  placeholder="Please enter a description of the artwork"
+                                  placeholder="Enter a description of the artwork"
                                   {...register('description', {required: true})}></textarea>
                         {errors.description && <span className={styles.errorMessage}>Description is required</span>}
                         <input type="date" className={styles.inputField}
-                               placeholder="Please enter the date the artwork was created"
+                               placeholder="Enter the date the artwork was created"
                                {...register('dateCreated', {required: true})} />
                         {errors.dateCreated && <span className={styles.errorMessage}>Date created is required</span>}
                         <span className={styles.currencyWrapper}>
@@ -140,7 +139,7 @@ const AddNewArtwork = () => {
                 <input
                     className={styles.inputField}
                     type="number"
-                    placeholder="Please enter the selling price of the artwork"
+                    placeholder="Enter the selling price of the artwork"
                     {...register('galleryBuyingPrice', {required: true})} // Register the price field
                 />
                 </span>
@@ -158,6 +157,7 @@ const AddNewArtwork = () => {
                             <div className={styles.radioWrapper}>
                                 <p>Please select your artwork type :</p>
                                 <div className={styles.checkboxWrapper}>
+                                    <div className={styles.radioInputWrapper}>
                                     <input
                                         type="radio"
                                         value="drawing"
@@ -168,6 +168,8 @@ const AddNewArtwork = () => {
                                     />
                                     <label htmlFor="drawing" className={styles.customRadio}></label>
                                     <label htmlFor="drawing" className={styles.radioLabel}>Drawing</label>
+                                    </div>
+                                    <div className={styles.radioInputWrapper}>
                                     <input
                                         type="radio"
                                         value="painting"
@@ -178,22 +180,23 @@ const AddNewArtwork = () => {
                                     />
                                     <label htmlFor="painting" className={styles.customRadio}></label>
                                     <label htmlFor="painting" className={styles.radioLabel}>Painting</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         {artworkType === 'drawing' && (
                             <>
                                 <input type="text" className={styles.inputField}
-                                       placeholder="Please enter the surface used"
+                                       placeholder="Enter the surface used"
                                        {...register('drawingSurface')} />
                                 <input type="text" className={styles.inputField}
-                                       placeholder="Please enter chosen material with which the drawing was made"
+                                       placeholder="Enter chosen material with which the drawing was made"
                                        {...register('drawingMaterial')} />
                                 <input type="number" className={styles.inputField}
-                                       placeholder="Please enter the width size in cm"
+                                       placeholder="Enter the width size in cm"
                                        {...register('drawingDimensionsWidthInCm')} />
                                 <input type="number" className={styles.inputField}
-                                       placeholder="Please enter the height size in cm"
+                                       placeholder="Enter the height size in cm"
                                        {...register('drawingDimensionsHeightInCm')} />
                             </>
                         )}
@@ -201,23 +204,26 @@ const AddNewArtwork = () => {
                             <>
                                 <>
                                     <input type="text" className={styles.inputField}
-                                           placeholder="Please enter the surface used"
+                                           placeholder="Enter the surface used"
                                            {...register('paintingSurface')} />
                                     <input type="text" className={styles.inputField}
-                                           placeholder="Please enter chosen material with which the drawing was made"
+                                           placeholder="Enter chosen material with which the drawing was made"
                                            {...register('paintingMaterial')} />
                                     <input type="number" className={styles.inputField}
-                                           placeholder="Please enter the width size in cm"
+                                           placeholder="Enter the width size in cm"
                                            {...register('paintingDimensionsWidthInCm')} />
                                     <input type="number" className={styles.inputField}
-                                           placeholder="Please enter the height size in cm"
+                                           placeholder="Enter the height size in cm"
                                            {...register('paintingDimensionsHeightInCm')} />
                                 </>
                             </>
                         )}
                     </div>
                 </div>
-                <Button className={styles.registerButton} type="submit" text="Add new Artwork"/>
+                <div className={styles.buttonWrapper}>
+                    <Button className={styles.cancelButton} type="button" text="Cancel" onClick={() => navigate('/artistgallery')}/>
+                    <Button className={styles.registerButton} type="submit" text="Add new Artwork"/>
+                </div>
             </form>
             {loading && <p>Loading...</p>}
             {error && <p>Something went wrong while adding the artwork. Please try again.</p>}

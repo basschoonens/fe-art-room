@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100vw;
     background: var(--color-gradient);
     margin: 0 auto;
 }

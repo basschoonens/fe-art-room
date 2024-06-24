@@ -152,14 +152,14 @@ const EditArtwork = () => {
                 <div className={styles.allInputWrapper}>
                     <div className={styles.imageContainer}>
                         {previewUrl ? (
-                            <img src={previewUrl} alt="New Preview" className={styles.imagePreview} />
+                            <img src={previewUrl} alt="New Preview" className={styles.imagePreview}/>
                         ) : (
                             currentImageUrl && (
-                                <img src={currentImageUrl} alt="Current Artwork" className={styles.imagePreview} />
+                                <img src={currentImageUrl} alt="Current Artwork" className={styles.imagePreview}/>
                             )
                         )}
                         <label htmlFor="fileInput" className={styles.uploadLabel}>
-                            <FontAwesomeIcon icon={faUpload} className={styles.uploadIcon} />
+                            <FontAwesomeIcon icon={faUpload} className={styles.uploadIcon}/>
                             Upload new Image
                         </label>
                         <input
@@ -172,113 +172,123 @@ const EditArtwork = () => {
                         {selectedFile && <span className={styles.fileName}>{selectedFile.name}</span>}
                     </div>
                     <div className={styles.inputFieldWrapper}>
+                        <label htmlFor="title" className={styles.label}>Artwork Title</label>
                         <input
+                            id="title"
                             type="text"
                             className={styles.inputField}
-                            placeholder="Artwork Title"
                             {...register('title', {required: true})}
                         />
-                        {errors.title && <span className={styles.errorMessage}>Title is required</span>}
-
+                        <label htmlFor="artist" className={styles.label}>Artist Name</label>
                         <input
+                            id="artist"
                             type="text"
                             className={styles.inputField}
-                            placeholder="Artist Name"
                             disabled={true}
                             {...register('artist', {required: true})}
                         />
-                        {errors.artist && <span className={styles.errorMessage}>Artist name is required</span>}
-
+                        <label htmlFor="description" className={styles.label}>Artwork Description</label>
                         <textarea
+                            id="description"
                             className={styles.inputField}
-                            placeholder="Artwork Description"
                             {...register('description', {required: true})}
                         />
-                        {errors.description && <span className={styles.errorMessage}>Description is required</span>}
-
+                        <label htmlFor="dateCreated" className={styles.label}>Date Created</label>
                         <input
+                            id="dateCreated"
                             type="date"
                             className={styles.inputField}
-                            placeholder="Date Created"
                             {...register('dateCreated', {required: true})}
                         />
-                        {errors.dateCreated && <span className={styles.errorMessage}>Date created is required</span>}
 
+                        <label htmlFor="galleryBuyingPrice" className={styles.label}>Gallery Buying Price in Euro €</label>
                         <input
+                            id="galleryBuyingPrice"
                             type="number"
                             className={styles.inputField}
-                            placeholder="Gallery Buying Price"
                             {...register('galleryBuyingPrice', {required: true})}
                         />
-                        {errors.galleryBuyingPrice && <span className={styles.errorMessage}>Price is required</span>}
-
-                        <select className={styles.inputField} {...register('edition', {required: true})}>
+                        <label htmlFor="edition" className={styles.label}>Edition</label>
+                        <select id="edition" className={styles.inputField} {...register('edition', {required: true})}>
                             <option value="">Select Edition</option>
                             <option value="Single / Unique edition">Single / Unique edition</option>
                             <option value="Part of a series">Part of a series</option>
                             <option value="Reproduction">Reproduction</option>
                             <option value="To be decided">To be decided</option>
                         </select>
-                        {errors.edition && <span className={styles.errorMessage}>Edition type is required</span>}
+                        <label htmlFor="artworkType" className={styles.label}>Artwork Type</label>
                         <input
+                            id="artworkType"
                             type="text"
                             className={styles.inputField}
-                            placeholder="Artwork Type"
                             value={artworkType}
                             disabled
                         />
                         {artworkType === 'drawing' && (
                             <>
+                                <label htmlFor="drawingSurface" className={styles.label}>Drawing Surface</label>
                                 <input
+                                    id="drawingSurface"
                                     type="text"
                                     className={styles.inputField}
-                                    placeholder="Drawing Surface"
                                     {...register('drawingSurface')}
                                 />
+                                <label htmlFor="drawingMaterial" className={styles.label}>Drawing Material</label>
                                 <input
+                                    id="drawingMaterial"
                                     type="text"
                                     className={styles.inputField}
-                                    placeholder="Drawing Material"
                                     {...register('drawingMaterial')}
                                 />
+                                <label htmlFor="drawingDimensionsWidthInCm" className={styles.label}>Width in cm</label>
                                 <input
+                                    id="drawingDimensionsWidthInCm"
                                     type="number"
                                     className={styles.inputField}
-                                    placeholder="Width in cm"
                                     {...register('drawingDimensionsWidthInCm')}
                                 />
+                                <label htmlFor="drawingDimensionsHeightInCm" className={styles.label}>Height in
+                                    cm</label>
                                 <input
+                                    id="drawingDimensionsHeightInCm"
                                     type="number"
                                     className={styles.inputField}
-                                    placeholder="Height in cm"
                                     {...register('drawingDimensionsHeightInCm')}
                                 />
                             </>
                         )}
                         {artworkType === 'painting' && (
                             <>
+                                <label htmlFor="paintingSurface" className={styles.label}>Painting Surface</label>
                                 <input
+                                    id="paintingSurface"
                                     type="text"
                                     className={styles.inputField}
-                                    placeholder="Painting Surface"
                                     {...register('paintingSurface')}
                                 />
+
+                                <label htmlFor="paintingMaterial" className={styles.label}>Painting Material</label>
                                 <input
+                                    id="paintingMaterial"
                                     type="text"
                                     className={styles.inputField}
-                                    placeholder="Painting Material"
                                     {...register('paintingMaterial')}
                                 />
+
+                                <label htmlFor="paintingDimensionsWidthInCm" className={styles.label}>Width in
+                                    cm</label>
                                 <input
+                                    id="paintingDimensionsWidthInCm"
                                     type="number"
                                     className={styles.inputField}
-                                    placeholder="Width in cm"
                                     {...register('paintingDimensionsWidthInCm')}
                                 />
+                                <label htmlFor="paintingDimensionsHeightInCm" className={styles.label}>Height in
+                                    cm</label>
                                 <input
+                                    id="paintingDimensionsHeightInCm"
                                     type="number"
                                     className={styles.inputField}
-                                    placeholder="Height in cm"
                                     {...register('paintingDimensionsHeightInCm')}
                                 />
                             </>

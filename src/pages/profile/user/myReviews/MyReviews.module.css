@@ -45,19 +45,19 @@
 
 .reviewTitle {
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: var(--font-size-large);
     margin-bottom: var(--spacing-xs);
 }
 
 .deleteButton {
     position: absolute;
-    bottom: var(--spacing-md);
-    right: var(--spacing-md);
+    bottom: var(--spacing-sm);
+    right: var(--spacing-sm);
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--color-danger);
-    font-size: 1.2em;
+    color: var(--color-dark);
+    font-size: var(--font-size-medium);
 }
 
 .logOutButton {
