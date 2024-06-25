@@ -17,6 +17,9 @@ const OrderPage = () => {
     const totalPrice = calculateTotalPrice(artworks);
 
     const onSubmit = async (data) => {
+
+        data.postalCode = data.postalCode.toUpperCase();
+
         const orderData = {
             orderNumber: generateOrderNumber(),
             orderDate: new Date().toISOString().split('T')[0],
@@ -43,7 +46,6 @@ const OrderPage = () => {
             if (response.status !== 201) {
                 alert('Order placement failed, please contact the gallery.')
             }
-            console.log('Order placed:', response.data);
             clearCart();
             if (response.status === 201){
             navigate('/confirmation', { state: { orderData } });

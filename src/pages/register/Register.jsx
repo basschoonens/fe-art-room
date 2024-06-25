@@ -3,11 +3,13 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import axios from "axios";
 import WelcomeContent from "../../components/welcomeContentBar/WelcomeContent.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Register(){
     const {register, handleSubmit, watch, formState: {errors}, setValue} = useForm();
     const password = watch('password');
     const [selectedRole, setSelectedRole] = React.useState('');
+    const navigate = useNavigate();
 
     const handleRegister = async (data) => {
         const userData = {
@@ -22,19 +24,16 @@ export default function Register(){
         try {
             const response = await axios.post(url, userData);
             if (response.status === 201) {
-                console.log(`${selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)} created successfully`);
+                alert('Your registration is successful, please login to continue');
             }
-
-            alert('Your registration is successful, please login to continue');
+            navigate('/login')
         } catch (error) {
             if (error.response && error.response.status === 409) {
                 alert('Username already exists, please try again with a different username');
             } else {
-                console.error(error);
                 alert('We\'re sorry, something went wrong. Please try again or contact our gallery for assistance.');
             }
         }
-        console.log(data);
     };
 
     const handleRoleChange = (event) => {

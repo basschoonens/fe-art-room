@@ -31,10 +31,8 @@ export default function AllReviews() {
             setError(null);
             try {
                 const response = await axios.get(`http://localhost:8080/ratings/admin`, config, {signal: controller.signal});
-                console.log(response.data);
                 setReviews(response.data);
             } catch (error) {
-                console.error('Error fetching reviews:', error); // Log the error
                 setError(error);
             } finally {
                 setLoading(false);
@@ -62,7 +60,7 @@ export default function AllReviews() {
             await axios.delete(`http://localhost:8080/ratings/admin/${ratingId}`, config);
             setReviews(reviews.filter(rating => rating.ratingId !== ratingId));
         } catch (error) {
-            console.error('Error deleting review:', error);
+            setError(error)
         }
     };
     const groupedReviews = reviews.reduce((acc, review) => {
@@ -79,7 +77,7 @@ export default function AllReviews() {
             <div className={styles.reviewData}>
                 <h2>All Reviews</h2>
                 {loading && <p>Loading reviews...</p>}
-                {error && <p>Error loading reviews: {error.message}</p>}
+                {error && <p>Error: {error.message}</p>}
                 {Object.keys(groupedReviews).length === 0 && <p>No reviews found for you yet. Please leave one on an artwork you enjoy!</p>}
                 {Object.keys(groupedReviews).map(artworkTitle => (
                     <div key={artworkTitle} className={styles.reviewsTitle}>

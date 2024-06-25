@@ -5,8 +5,6 @@ import WelcomeContent from "../../../components/welcomeContentBar/WelcomeContent
 
 export default function MyProfile() {
 
-    const {logout} = useContext(AuthContext);
-
     return (
         <div className={styles.pageContainer}>
             <WelcomeContent />

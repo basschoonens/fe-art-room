@@ -31,7 +31,6 @@ const WelcomeContent = () => {
                             <ul className={styles.profileTools}>
                                 <li><Link to="/myorders">My orders</Link></li>
                                 <li><Link to="/myreviews">My reviews</Link></li>
-                                <li><Link to="/editprofile">Edit profile</Link></li>
                                 <li>
                                     <a href="#" onClick={(e) => {
                                         e.preventDefault();

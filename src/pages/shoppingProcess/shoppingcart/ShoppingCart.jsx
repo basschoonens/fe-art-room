@@ -11,8 +11,6 @@ const ShoppingCart = () => {
     const totalPrice = calculateTotalPrice(artworks);
     const navigate = useNavigate();
 
-    console.log('artworks:', artworks);
-
     return (
         <div className={styles.pageContainer}>
             <h2>Shopping Cart</h2>

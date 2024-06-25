@@ -5,12 +5,14 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import WelcomeContent from "../../components/welcomeContentBar/WelcomeContent.jsx";
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importing eye icons from FontAwesome
 
-export default function Login(){
+export default function Login() {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);  // State for password visibility
 
     const handleLogin = async (data) => {
         try {
@@ -28,42 +30,56 @@ export default function Login(){
             } else {
                 setError('Login failed. Please check your username, or try again later.');
             }
-            console.error(error);
         }
     };
 
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(prevVisible => !prevVisible);  // Toggle password visibility
+    };
 
     return (
         <div className={styles.pageContainer}>
-            <WelcomeContent/>
+            <WelcomeContent />
             <form className={styles.loginForm} onSubmit={handleSubmit(handleLogin)}>
                 <h2 className={styles.loginHeading}>Please login</h2>
-                    {error && <p className={styles.error}>{error}</p>}
-                    <input
-                        id="username"
-                        type="text"
-                        autoComplete="username"
-                        placeholder="Username"
-                        className={styles.inputField}
-                        {...register("username", {
-                            required: "Username is required",
-                            minLength: {
-                                value: 3,
-                                message: "Username must be at least 3 characters long"
-                            }
-                        })} />
-                    {errors.email && <p>{errors.email.message}</p>}
+                {error && <p className={styles.error}>{error}</p>}
+                <div className={styles.usernameContainer}>
+                <input
+                    id="username"
+                    type="text"
+                    autoComplete="username"
+                    placeholder="Username"
+                    className={styles.inputField}
+                    {...register("username", {
+                        required: "Username is required",
+                        minLength: {
+                            value: 3,
+                            message: "Username must be at least 3 characters long"
+                        }
+                    })} />
+                </div>
+                {errors.username && <p className={styles.error}>{errors.username.message}</p>}
+                <div className={styles.passwordContainer}>
                     <input
                         id="password"
-                        type="password"
+                        type={passwordVisible ? "text" : "password"}  // Conditional type
                         autoComplete="current-password"
                         placeholder="Password"
                         className={styles.inputField}
                         {...register("password", {required: "Password is required"})} />
-                    {errors.password && <p>{errors.password.message}</p>}
-                <button type="submit">Login</button>
+                    <button
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                        className={styles.visibilityToggle}
+                        aria-label="Toggle password visibility"
+                    >
+                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}  {/* Toggle icon */}
+                    </button>
+                </div>
+                {errors.password && <p className={styles.error}>{errors.password.message}</p>}
+                <button type="submit" className={styles.submitButton}>Login</button>
             </form>
             <p>Please register <Link to="/register">here</Link> if you don't have an account yet.</p>
         </div>
     );
-};
+}

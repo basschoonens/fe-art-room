@@ -28,10 +28,8 @@ export default function MyOrders() {
             setError(null);
             try {
                 const response = await axios.get(`http://localhost:8080/orders/user`, config, { signal: controller.signal });
-                console.log(response.data);
                 setOrders(response.data);
             } catch (error) {
-                console.error('Error fetching reviews:', error); // Log the error
                 setError(error);
             } finally {
                 setLoading(false);

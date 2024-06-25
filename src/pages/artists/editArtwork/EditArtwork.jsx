@@ -32,7 +32,6 @@ const EditArtwork = () => {
                         "Content-Type": "application/json"
                     }
                 });
-                console.log('Artwork data:', response.data)
                 setArtworkData(response.data);
                 setArtworkType(response.data.artworkType);
                 setValue('title', response.data.title);
@@ -54,7 +53,6 @@ const EditArtwork = () => {
                 }
                 setCurrentImageUrl(`http://localhost:8080/artworks/${id}/image`);
             } catch (error) {
-                console.error('Error fetching artwork:', error);
                 setError('Failed to fetch artwork data. Please try again.');
             } finally {
                 setLoading(false);
@@ -111,8 +109,6 @@ const EditArtwork = () => {
                 paintingDimensionsHeightInCm: data.paintingDimensionsHeightInCm || undefined
             };
 
-            console.log('Updated Data:', updatedData);
-
             await axios.put(`http://localhost:8080/artworks/artist/${id}`, updatedData, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -135,8 +131,6 @@ const EditArtwork = () => {
             alert('Artwork updated successfully!');
             navigate('/artistgallery');
         } catch (error) {
-            console.error('Error updating artwork:', error);
-            alert('Failed to update artwork. Please check your data and try again.');
             setError('Failed to update artwork. Please check your data and try again.');
         } finally {
             setLoading(false);

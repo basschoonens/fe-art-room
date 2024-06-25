@@ -25,11 +25,10 @@ export const CartProvider = ({ children }) => {
     }, [cart]);
 
     const addToCart = (item) => {
-        console.log('Adding item to cart:', item)
         if (item && item.artworkId) {
         setCart([...cart, item]);
         } else {
-            console.error('Invalid item:', item);
+            alert(`Invalid item: ${item}`);
         }
     };
 
@@ -57,7 +56,6 @@ export const CartProvider = ({ children }) => {
                 setArtworks(artworkDetails);
             } catch (error) {
                 setError(error);
-                console.error('Error fetching artwork details:', error);
             } finally {
                 setLoading(false);
             }

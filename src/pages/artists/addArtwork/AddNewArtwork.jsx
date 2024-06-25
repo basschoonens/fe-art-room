@@ -7,10 +7,12 @@ import axios from 'axios';
 import Button from "../../../components/button/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import {validateFile} from "../../../helpers/fileValidation.js";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 const AddNewArtwork = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const {register, handleSubmit, setValue, formState: {errors}} = useForm();
     const [loading, setLoading] = React.useState(false);
+    const {user} = React.useContext(AuthContext);
     const [error, setError] = React.useState(null);
     const [artworkType, setArtworkType] = React.useState('');
     const [selectedFile, setSelectedFile] = React.useState(null);
@@ -21,7 +23,6 @@ const AddNewArtwork = () => {
         setLoading(true);
         setError(null);
         const jwt = localStorage.getItem('jwt');
-        console.log(data);
         try {
             const artworkResponse = await axios.post('http://localhost:8080/artworks/artist', {
                 title: data.title,
@@ -47,10 +48,6 @@ const AddNewArtwork = () => {
             });
 
             const artworkId = (artworkResponse.headers["location"].split('/').pop());
-            console.log(artworkId);
-            console.log(artworkResponse);
-            console.log(artworkResponse.headers["location"]);
-            console.log('Artwork POST request complete.');
 
             if (selectedFile instanceof File) {
                 const formData = new FormData();
@@ -68,7 +65,6 @@ const AddNewArtwork = () => {
             }
             navigate('/artistgallery');
         } catch (error) {
-            console.error('Error uploading artwork:', error);
             alert('Failed to upload artwork, please check if the data you provided is correct.');
         }
 
@@ -94,6 +90,13 @@ const AddNewArtwork = () => {
             }
         };
     }, [previewUrl]);
+
+    useEffect(() => {
+        if (user && user.username) {
+            // Set the default value for the artist name to the logged-in user's username
+            setValue('artist', user.username);
+        }
+    }, [user, setValue]);
 
     return (
         <div className={styles.pageContainer}>
@@ -134,16 +137,23 @@ const AddNewArtwork = () => {
                                {...register('dateCreated', {required: true})} />
                         {errors.dateCreated && <span className={styles.errorMessage}>Date created is required</span>}
                         <span className={styles.currencyWrapper}>
-                <label htmlFor={'galleryBuyingPrice'}>€</label>
-                <input
-                    className={styles.inputField}
-                    type="number"
-                    placeholder="Enter the selling price of the artwork"
-                    {...register('galleryBuyingPrice', {required: true})}
-                />
-                </span>
+                            <label htmlFor="galleryBuyingPrice">€</label>
+                            <input
+                                className={styles.inputField}
+                                type="number"
+                                placeholder="Enter the buying price for the gallery"
+                                min="0"  // Prevents entering negative numbers
+                                {...register('galleryBuyingPrice', {
+                                    required: "Buying price is required",
+                                    min: {
+                                        value: 0,
+                                        message: "Buying price cannot be negative"
+                                    }
+                                })}
+                            />
+                        </span>
                         {errors.galleryBuyingPrice &&
-                            <span className={styles.errorMessage}>Selling price is required</span>}
+                            <span className={styles.errorMessage}>{errors.galleryBuyingPrice.message}</span>}
                         <select className={styles.inputField} {...register('edition', {required: true})}>
                             <option value="" disabled>Select edition type</option>
                             <option value="Single / Unique edition">Single / Unique edition</option>
@@ -157,28 +167,28 @@ const AddNewArtwork = () => {
                                 <p>Please select your artwork type :</p>
                                 <div className={styles.checkboxWrapper}>
                                     <div className={styles.radioInputWrapper}>
-                                    <input
-                                        type="radio"
-                                        value="drawing"
-                                        id="drawing"
-                                        className={styles.radioInput}
-                                        checked={artworkType === 'drawing'}
-                                        onChange={() => setArtworkType('drawing')}
-                                    />
-                                    <label htmlFor="drawing" className={styles.customRadio}></label>
-                                    <label htmlFor="drawing" className={styles.radioLabel}>Drawing</label>
+                                        <input
+                                            type="radio"
+                                            value="drawing"
+                                            id="drawing"
+                                            className={styles.radioInput}
+                                            checked={artworkType === 'drawing'}
+                                            onChange={() => setArtworkType('drawing')}
+                                        />
+                                        <label htmlFor="drawing" className={styles.customRadio}></label>
+                                        <label htmlFor="drawing" className={styles.radioLabel}>Drawing</label>
                                     </div>
                                     <div className={styles.radioInputWrapper}>
-                                    <input
-                                        type="radio"
-                                        value="painting"
-                                        id="painting"
-                                        className={styles.radioInput}
-                                        checked={artworkType === 'painting'}
-                                        onChange={() => setArtworkType('painting')}
-                                    />
-                                    <label htmlFor="painting" className={styles.customRadio}></label>
-                                    <label htmlFor="painting" className={styles.radioLabel}>Painting</label>
+                                        <input
+                                            type="radio"
+                                            value="painting"
+                                            id="painting"
+                                            className={styles.radioInput}
+                                            checked={artworkType === 'painting'}
+                                            onChange={() => setArtworkType('painting')}
+                                        />
+                                        <label htmlFor="painting" className={styles.customRadio}></label>
+                                        <label htmlFor="painting" className={styles.radioLabel}>Painting</label>
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +230,8 @@ const AddNewArtwork = () => {
                     </div>
                 </div>
                 <div className={styles.buttonWrapper}>
-                    <Button className={styles.cancelButton} type="button" text="Cancel" onClick={() => navigate('/artistgallery')}/>
+                    <Button className={styles.cancelButton} type="button" text="Cancel"
+                            onClick={() => navigate('/artistgallery')}/>
                     <Button className={styles.registerButton} type="submit" text="Add new Artwork"/>
                 </div>
             </form>

@@ -30,7 +30,6 @@ export default function ArtworkDetails() {
             setError(null);
             try {
                 const response = await axios.get(`http://localhost:8080/artworks/${id}`, {signal: controller.signal});
-                console.log(response.data)
                 setArtwork(response.data);
             } catch (error) {
                 setError(error);

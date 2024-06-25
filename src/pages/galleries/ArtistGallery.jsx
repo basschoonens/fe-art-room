@@ -27,11 +27,9 @@ export default function ArtistGallery() {
                     }
                 });
                 const data = response.data;
-                console.log(data);
                 setArtworks(data)
             } catch (error) {
                 setError(error);
-                console.error(error);
             } finally {
                 setLoading(false);
             }
@@ -94,6 +92,7 @@ export default function ArtistGallery() {
                         artworkId={artwork.artworkId}
                         title={artwork.title}
                         averageRating={artwork.averageRating}
+                        galleryBuyingPrice={artwork.galleryBuyingPrice}
                         salesPrice={artwork.sellingPrice}
                         imageUrl={`http://localhost:8080/artworks/${artwork.artworkId}/image`}
                     />

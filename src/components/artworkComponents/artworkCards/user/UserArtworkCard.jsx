@@ -9,8 +9,6 @@ import { FaStar, FaShoppingCart } from 'react-icons/fa';
 
 export default function UserArtworkCard({ artworkId, title, artist, imageUrl, rating }) {
 
-    console.log('UserArtworkCard', artworkId, title, artist, imageUrl, rating);
-
     const { isAuth } = useContext(AuthContext);
     const { addToCart } = useCart();
     const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
@@ -27,11 +25,9 @@ export default function UserArtworkCard({ artworkId, title, artist, imageUrl, ra
     const handleAddToCart = () => {
         addToCart({ artworkId });
         toggleIconClicked(true);
-        console.log("Item added to cart:", { artworkId, title, artist, imageUrl, rating });
     };
 
     const handleRatingSubmit = async (rating, comment) => {
-        console.log(rating, comment);
         try {
             const jwt = localStorage.getItem('jwt');
 

@@ -30,10 +30,8 @@ export default function AllOrders() {
                     config,
                     { signal: controller.signal }
                 );
-                console.log(response.data);
                 setOrders(response.data);
             } catch (error) {
-                console.error("Error fetching orders:", error);
                 setError(error);
             } finally {
                 setLoading(false);
@@ -63,7 +61,7 @@ export default function AllOrders() {
             );
             setOrders(orders.filter((order) => order.orderId !== orderId));
         } catch (error) {
-            console.error("Error deleting order:", error);
+            setError(error)
         }
     };
 
@@ -89,7 +87,7 @@ export default function AllOrders() {
             );
             setOrders(updatedOrders);
         } catch (error) {
-            console.error("Error approving order:", error);
+            setError(error)
         }
     };
 
@@ -107,7 +105,7 @@ export default function AllOrders() {
             <div className={styles.reviewData}>
                 <h2>My Orders</h2>
                 {loading && <p>Loading orders...</p>}
-                {error && <p>Error loading orders: {error.message}</p>}
+                {error && <p>Error: {error.message}</p>}
                 <div className={styles.ordersContainer}>
                     {pendingOrders.length === 0 && approvedOrders.length === 0 && (
                         <p>No orders found.</p>

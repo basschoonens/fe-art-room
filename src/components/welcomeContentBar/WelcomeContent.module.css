@@ -52,6 +52,7 @@
     background: var(--color-transparent);
     list-style: none;
 }
+
 .appTools li a, .profileTools li a {
     text-decoration: none;
     color: var(--color-secondary);

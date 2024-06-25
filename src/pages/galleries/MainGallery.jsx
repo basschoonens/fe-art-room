@@ -25,13 +25,10 @@ export default function MainGallery() {
             setError(null);
             try {
                 const response = await axios.get(`http://localhost:8080/artworks`, { signal: controller.signal });
-                console.log(response.data)
                 const shuffledArtworks = shuffleArray(response.data);
                 setArtworks(shuffledArtworks);
-                console.log(shuffledArtworks)
             } catch (error) {
                 setError(error);
-                console.log(error);
             } finally {
                 setLoading(false);
             }
@@ -42,13 +39,14 @@ export default function MainGallery() {
         };
     }, []);
 
-
     const nextPage = () => {
-        setCurrentPage(currentPage + 1);
+        setCurrentPage(prevPage => prevPage + 1);
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const prevPage = () => {
-        setCurrentPage(currentPage - 1);
+        setCurrentPage(prevPage => prevPage - 1);
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const startIndex = (currentPage - 1) * artworksPerPage;
