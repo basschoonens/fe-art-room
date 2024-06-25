@@ -15,7 +15,7 @@
     max-width: 800px;
     border-collapse: collapse;
     margin: 20px 0;
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
 }
 
 .cartTable th,
@@ -47,7 +47,7 @@
 
 .pageContainer p {
     align-self: center;
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
     font-size: var(--font-size-medium);
     padding: var(--spacing-sm);
     margin: 0;

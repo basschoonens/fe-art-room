@@ -72,9 +72,7 @@ export default function LeftReviewsForArtist() {
             setReviews((prevReviews) => {
                 const updatedReviews = {...prevReviews};
                 for (const title in updatedReviews) {
-                    // Filter out only the review with the specific ratingId
                     updatedReviews[title] = updatedReviews[title].filter(review => review.ratingId !== ratingId);
-                    // Remove the title if there are no more reviews for that artwork
                     if (updatedReviews[title].length === 0) {
                         delete updatedReviews[title];
                     }

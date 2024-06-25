@@ -1,5 +1,3 @@
-// Description: This file contains the function that generates the order number consisting of the current date and a random number.
-
 const orderNumber = () => {
     const date = new Date();
     const year = date.getFullYear();

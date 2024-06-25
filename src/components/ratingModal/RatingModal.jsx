@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './RatingModal.module.css';
 import StarRating from '../starRating/StarRating.jsx';
-import error from "eslint-plugin-react/lib/util/error.js";
 
 export default function ReviewModal({ isOpen, onRequestClose, onSubmitReview }) {
     const { register, handleSubmit, reset } = useForm();

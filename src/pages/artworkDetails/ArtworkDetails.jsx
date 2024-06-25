@@ -51,7 +51,6 @@ export default function ArtworkDetails() {
     };
 
     useEffect(() => {
-        // Update the previous gallery page state whenever the location changes
         if (window.location.pathname.includes('/maingallery')) {
             setPreviousGalleryPage('/maingallery');
         } else if (window.location.pathname.includes('/artistgallery')) {

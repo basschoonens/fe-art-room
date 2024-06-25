@@ -10,7 +10,7 @@ const WelcomeContent = () => {
 
     const handleLogout = () => {
         logout();
-        navigate('/'); // Redirect to home or another page after logout
+        navigate('/');
     };
 
     return (

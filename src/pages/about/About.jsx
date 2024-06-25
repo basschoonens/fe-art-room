@@ -8,7 +8,6 @@ export default function About() {
         <div className={styles.pageContainer}>
             <h1>About Us</h1>
             <section className={styles.galleryInfoSection}>
-                {/*TODO add notations like STRONG etc in this and/or other pages*/}
                 <div className={styles.welcomeContainer}>
                     <h2>Welcome to The Art Room</h2>
                     <div className={styles.welcomeContainerContents}>

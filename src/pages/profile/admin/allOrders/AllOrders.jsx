@@ -82,7 +82,6 @@ export default function AllOrders() {
                 null,
                 config
             );
-            // Update the order status locally
             const updatedOrders = orders.map((order) =>
                 order.orderId === orderId
                     ? { ...order, orderStatus: "APPROVED" }
@@ -94,7 +93,7 @@ export default function AllOrders() {
         }
     };
 
-    // Separate orders into PENDING and APPROVED lists
+
     const pendingOrders = orders.filter(
         (order) => order.orderStatus !== "APPROVED"
     );

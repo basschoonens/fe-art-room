@@ -5,13 +5,13 @@
 
 .starFilled {
     color: gold;
-    font-size: var(--font-size-large); /* Default size */
+    font-size: var(--font-size-large);
     margin-right: 2px;
 }
 
 .starEmpty {
     color: grey;
-    font-size: var(--font-size-large); /* Default size */
+    font-size: var(--font-size-large);
     margin-right: 2px;
 }
 

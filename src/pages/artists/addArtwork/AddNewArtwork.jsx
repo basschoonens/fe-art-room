@@ -79,7 +79,7 @@ const AddNewArtwork = () => {
         const file = e.target.files[0];
         if (file && validateFile(file)) {
             setSelectedFile(file);
-            setPreviewUrl(URL.createObjectURL(file)); // Create object URL for preview
+            setPreviewUrl(URL.createObjectURL(file));
         } else {
             setSelectedFile(null);
             setPreviewUrl(null);
@@ -87,7 +87,6 @@ const AddNewArtwork = () => {
         }
     };
 
-    // Cleanup object URL when component unmounts or file changes
     useEffect(() => {
         return () => {
             if (previewUrl) {
@@ -140,7 +139,7 @@ const AddNewArtwork = () => {
                     className={styles.inputField}
                     type="number"
                     placeholder="Enter the selling price of the artwork"
-                    {...register('galleryBuyingPrice', {required: true})} // Register the price field
+                    {...register('galleryBuyingPrice', {required: true})}
                 />
                 </span>
                         {errors.galleryBuyingPrice &&

@@ -75,10 +75,9 @@
     }
 
     .navOpen {
-        display: flex; /* Show nav links when the menu is open */
+        display: flex;
     }
 
-    /* Hide normal nav links and show the hamburger menu icon */
     .menuIcon {
         display: flex;
     }

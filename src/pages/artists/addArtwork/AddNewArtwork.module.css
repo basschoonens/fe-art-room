@@ -129,10 +129,10 @@
 }
 
 .errorMessage {
-    padding: 4px; /* Adjust the value as needed */
+    padding: 4px;
     border: var(--border-sm) var(--color-dark);
-    color: var(--color-dark); /* Optional: Set the color for error messages */
-    font-size: var(--font-size-small); /* Optional: Set the font size for error messages */
+    color: var(--color-dark);
+    font-size: var(--font-size-small);
 }
 
 .imageContainer {
@@ -146,28 +146,28 @@
 }
 
 .imageContainer label {
-    margin-bottom: var(--spacing-md); /* Add margin below the label */
+    margin-bottom: var(--spacing-md);
 }
 
 .customFileUpload {
     display: inline-block;
-    position: absolute; /* Change position to absolute */
+    position: absolute;
     cursor: pointer;
-    top: 0; /* Position at the top of the container */
-    left: 0; /* Position at the left of the container */
-    width: 100%; /* Cover the entire container */
-    height: 100%; /* Cover the entire container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .customFileUpload input[type="file"] {
-    opacity: 0; /* Make the file input invisible */
-    width: 100%; /* Cover the entire container */
-    height: 100%; /* Cover the entire container */
-    cursor: pointer; /* Change cursor to pointer */
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }
 
 .fileName {
-    margin-top: var(--spacing-sm); /* Add margin above the file name */
+    margin-top: var(--spacing-sm);
 }
 
 .fileInput {

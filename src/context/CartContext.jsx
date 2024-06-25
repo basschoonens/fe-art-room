@@ -1,5 +1,5 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
-import axios, {all} from "axios";
+import axios from "axios";
 
 const CART_STORAGE_KEY = 'cart';
 
@@ -21,7 +21,6 @@ export const CartProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        // Save cart items to local storage whenever cart changes
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     }, [cart]);
 
