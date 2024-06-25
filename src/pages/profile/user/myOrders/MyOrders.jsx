@@ -1,9 +1,8 @@
 import styles from './MyOrders.module.css';
-import WelcomeContent from "../../../components/welcomeContentBar/WelcomeContent.jsx";
-import Button from "../../../components/button/Button.jsx";
-import React, {useContext, useEffect, useState} from "react";
+import WelcomeContent from "../../../../components/welcomeContentBar/WelcomeContent.jsx";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {AuthContext} from "../../../context/AuthContext.jsx";
+import { currencyFormat } from "../../../../helpers/currencyFormat.js";
 
 export default function MyOrders() {
 
@@ -29,10 +28,8 @@ export default function MyOrders() {
             setError(null);
             try {
                 const response = await axios.get(`http://localhost:8080/orders/user`, config, { signal: controller.signal });
-                console.log(response.data);
                 setOrders(response.data);
             } catch (error) {
-                console.error('Error fetching reviews:', error); // Log the error
                 setError(error);
             } finally {
                 setLoading(false);
@@ -47,23 +44,6 @@ export default function MyOrders() {
 
     }, []);
 
-    // const handleDelete = async (orderId) => {
-    //     const jwt = localStorage.getItem('jwt');
-    //     const config = {
-    //         headers: {
-    //             'Authorization': `Bearer ${jwt}`,
-    //             'Content-Type': 'application/json'
-    //         }
-    //     };
-    //
-    //     try {
-    //         await axios.delete(`http://localhost:8080/orders/${orderId}`, config);
-    //         setOrders(orders.filter(order => order.orderId !== orderId));
-    //     } catch (error) {
-    //         console.error('Error deleting order:', error);
-    //     }
-    // };
-
     return (
         <div className={styles.pageContainer}>
             <WelcomeContent />
@@ -76,25 +56,19 @@ export default function MyOrders() {
                         <p>No order found for you yet.</p>
                     )}
                     {orders && orders.map(order => (
-                        <div key={order.orderId} className={styles.order}>
+                        <div key={order.orderId} className={styles.myOrder}>
                             <div className={styles.customerDetails}>
-                                <p>Name: {order.name}</p>
+                                <p><strong>Name: {order.name}</strong></p>
                                 <p>Address: {order.address}</p>
                                 <p>Postal Code: {order.postalCode}</p>
                                 <p>City: {order.city}</p>
                             </div>
                             <div className={styles.orderDetails}>
-                                <p>Order Number: {order.orderNumber}</p>
+                                <p><strong>Order Number: {order.orderNumber}</strong></p>
                                 <p>Order Date: {order.orderDate}</p>
                                 <p>Order Status: {order.orderStatus}</p>
-                                <p>Order Total: {order.totalPrice}</p>
+                                <p>Order Total: {currencyFormat(order.totalPrice)}</p>
                             </div>
-                            {/*<Button*/}
-                            {/*    className={styles.deleteButton}*/}
-                            {/*    type="button"*/}
-                            {/*    text="Cancel Order"*/}
-                            {/*    onClick={() => handleDelete(order.orderId)}*/}
-                            {/*/>*/}
                         </div>
                     ))}
                 </div>

@@ -1,7 +1,7 @@
 import styles from './ShoppingCart.module.css';
 import React from 'react';
 import {useCart} from '../../../context/CartContext.jsx';
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {currencyFormat} from "../../../helpers/currencyFormat.js";
 import Button from "../../../components/button/Button.jsx";
 import {calculateTotalPrice} from "../../../helpers/calculateTotalPrice.js";
@@ -9,8 +9,7 @@ import {calculateTotalPrice} from "../../../helpers/calculateTotalPrice.js";
 const ShoppingCart = () => {
     const {artworks,removeFromCart, loading, error} = useCart();
     const totalPrice = calculateTotalPrice(artworks);
-
-    console.log('artworks:', artworks);
+    const navigate = useNavigate();
 
     return (
         <div className={styles.pageContainer}>
@@ -44,9 +43,8 @@ const ShoppingCart = () => {
             )}
             <p>Your total: {currencyFormat(totalPrice)}</p>
             <div className={styles.buttonsContainer}>
-            {/*    remove Link from buttons and use onClick   */}
-            <Link to={'/maingallery'}><Button type="button" text="Cancel" /></Link>
-            <Link to={'/order'}><Button type="submit" text="Place Order" /></Link>
+            <Button type="button" text="Cancel" onClick={() => navigate('/maingallery')} />
+            <Button type="submit" text="Place Order" onClick={() => navigate('/order')} disabled={artworks.length === 0} />
             </div>
         </div>
     );

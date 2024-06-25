@@ -38,7 +38,7 @@ function AuthContextProvider({ children }) {
                     Authorization: `Bearer ${jwt}`,
                 },
             });
-            console.log(response.data);
+
             setAuth({
                 ...auth,
                 isAuth: true,
@@ -50,9 +50,8 @@ function AuthContextProvider({ children }) {
                 status: 'done',
             });
         } catch (error) {
-                console.error(error);
+                alert(error);
         }
-        console.log('Gebruiker is ingelogd!');
     }
 
     function logout() {
@@ -63,8 +62,8 @@ function AuthContextProvider({ children }) {
             status: 'done',
         });
         localStorage.removeItem('jwt');
+        localStorage.removeItem('cart');
         navigate('/login')
-        console.log('Gebruiker is uitgelogd!');
     }
 
     const contextData = {

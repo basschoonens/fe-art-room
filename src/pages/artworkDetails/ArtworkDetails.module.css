@@ -16,8 +16,8 @@
 
 .artworkImageContainer {
     display: flex;
-    justify-content: center; /* horizontally center */
-    align-items: center; /* vertically center */
+    justify-content: center;
+    align-items: center;
 }
 
 .artworkImage{

@@ -11,8 +11,6 @@ export const CartProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const jwt = localStorage.getItem('jwt');
-
     useEffect(() => {
         const storedCart = localStorage.getItem(CART_STORAGE_KEY);
         if (storedCart) {
@@ -21,16 +19,14 @@ export const CartProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        // Save cart items to local storage whenever cart changes
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     }, [cart]);
 
     const addToCart = (item) => {
-        console.log('Adding item to cart:', item)
         if (item && item.artworkId) {
         setCart([...cart, item]);
         } else {
-            console.error('Invalid item:', item);
+            alert(`Invalid item: ${item}`);
         }
     };
 
@@ -58,7 +54,6 @@ export const CartProvider = ({ children }) => {
                 setArtworks(artworkDetails);
             } catch (error) {
                 setError(error);
-                console.error('Error fetching artwork details:', error);
             } finally {
                 setLoading(false);
             }
@@ -71,37 +66,8 @@ export const CartProvider = ({ children }) => {
 
     }, [cart]);
 
-    const placeOrder = async (orderData) => {
-        setLoading(true);
-        setError(null);
-
-        const abortController = new AbortController();
-
-        try {
-            const response = await axios.post('http://localhost:8080/orders/user', orderData, {
-                signal: abortController.signal,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${jwt}`,
-                },
-            });
-
-            if (response.status !== 201) throw new Error('Order placement failed');
-            console.log('Order placed:', response.data);
-        } catch (error) {
-            console.error('Error placing order:', error);
-            setError(error);
-        } finally {
-            setLoading(false);
-        }
-
-        return () => {
-            abortController.abort();
-        };
-    };
-
     return (
-        <CartContext.Provider value={{ artworks, cart, addToCart, removeFromCart, clearCart, placeOrder}}>
+        <CartContext.Provider value={{ artworks, cart, addToCart, removeFromCart, clearCart}}>
             {children}
         </CartContext.Provider>
     );

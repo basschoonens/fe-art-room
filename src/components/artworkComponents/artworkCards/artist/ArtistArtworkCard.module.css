@@ -69,22 +69,22 @@
 
 .iconEdit {
     color: var(--color-secondary);
-    border: var(--border-md) var(--color-light)/* Gele kleur */
+    border: var(--border-md) var(--color-light)
 }
 
 .iconDelete {
     color: var(--color-secondary);
-    border: var(--border-md) var(--color-light)/* Gele kleur */
+    border: var(--border-md) var(--color-light)
 }
 
 .iconEdit:hover {
     color: var(--color-secondary);
-    background-color: var(--color-light); /* Kleur van de winkelwagen bij hover */
-    border-color: var(--color-primary); /* Omlijning kleur bij hover */
+    background-color: var(--color-light);
+    border-color: var(--color-primary);
 }
 
 .iconDelete:hover {
     color: var(--color-secondary);
-    background-color: var(--color-light); /* Kleur van de winkelwagen bij hover */
-    border-color: var(--color-primary); /* Omlijning kleur bij hover */
+    background-color: var(--color-light);
+    border-color: var(--color-primary);
 }

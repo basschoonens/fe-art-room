@@ -1,0 +1,80 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reviewData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.reviewsTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: var(--spacing-md);
+    border: var(--border-lg) var(--color-light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    margin: var(--spacing-md);
+}
+
+.reviewsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 1200px;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-md);
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 250px;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--spacing-md);
+    margin-right: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.reviewTitle {
+    font-weight: bold;
+    font-size: var(--font-size-large);
+    margin-bottom: var(--spacing-xs);
+}
+
+.deleteButton {
+    position: absolute;
+    bottom: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-dark);
+    font-size: var(--font-size-medium);
+}
+
+.logOutButton {
+    width: 100px
+}

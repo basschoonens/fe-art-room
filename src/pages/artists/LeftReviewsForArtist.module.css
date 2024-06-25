@@ -77,7 +77,3 @@
     align-self: flex-end;
     margin-top: var(--spacing-lg);
 }
-
-@media screen and (min-width: var(--breakpoint-lg)){
-    width: 1200px;
-}

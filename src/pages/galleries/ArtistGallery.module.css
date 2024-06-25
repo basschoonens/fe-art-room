@@ -65,11 +65,11 @@
 }
 
 .sortingLinks li[data-order="asc"]::after {
-  content: "▲"; /* Up arrow */
+  content: "▲";
 }
 
 .sortingLinks li[data-order="desc"]::after {
-  content: "▼"; /* Down arrow */
+  content: "▼";
 }
 
 .sortingLinks li:hover {
