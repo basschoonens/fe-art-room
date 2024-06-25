@@ -1,7 +1,7 @@
 import styles from './ShoppingCart.module.css';
 import React from 'react';
 import {useCart} from '../../../context/CartContext.jsx';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {currencyFormat} from "../../../helpers/currencyFormat.js";
 import Button from "../../../components/button/Button.jsx";
 import {calculateTotalPrice} from "../../../helpers/calculateTotalPrice.js";

@@ -11,8 +11,6 @@ export const CartProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const jwt = localStorage.getItem('jwt');
-
     useEffect(() => {
         const storedCart = localStorage.getItem(CART_STORAGE_KEY);
         if (storedCart) {

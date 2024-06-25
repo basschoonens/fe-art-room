@@ -5,14 +5,14 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import WelcomeContent from "../../components/welcomeContentBar/WelcomeContent.jsx";
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importing eye icons from FontAwesome
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function Login() {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState('');
-    const [passwordVisible, setPasswordVisible] = useState(false);  // State for password visibility
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     const handleLogin = async (data) => {
         try {
@@ -34,7 +34,7 @@ export default function Login() {
     };
 
     const togglePasswordVisibility = () => {
-        setPasswordVisible(prevVisible => !prevVisible);  // Toggle password visibility
+        setPasswordVisible(prevVisible => !prevVisible);
     };
 
     return (
@@ -62,7 +62,7 @@ export default function Login() {
                 <div className={styles.passwordContainer}>
                     <input
                         id="password"
-                        type={passwordVisible ? "text" : "password"}  // Conditional type
+                        type={passwordVisible ? "text" : "password"}
                         autoComplete="current-password"
                         placeholder="Password"
                         className={styles.inputField}
@@ -73,7 +73,7 @@ export default function Login() {
                         className={styles.visibilityToggle}
                         aria-label="Toggle password visibility"
                     >
-                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}  {/* Toggle icon */}
+                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>
                 {errors.password && <p className={styles.error}>{errors.password.message}</p>}

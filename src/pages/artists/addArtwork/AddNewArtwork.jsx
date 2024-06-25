@@ -93,7 +93,6 @@ const AddNewArtwork = () => {
 
     useEffect(() => {
         if (user && user.username) {
-            // Set the default value for the artist name to the logged-in user's username
             setValue('artist', user.username);
         }
     }, [user, setValue]);

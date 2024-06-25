@@ -80,7 +80,6 @@ export default function LeftReviewsForArtist() {
                         delete updatedReviews[title];
                     }
                 }
-                // If no reviews left, set to empty object
                 if (Object.keys(updatedReviews).length === 0) {
                 return updatedReviews;
                 }
