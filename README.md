@@ -1,4 +1,6 @@
 About this Project
+
+The ArtRoom
 Welcome to the GitHub repository for The ArtRoom, this project was developed during the NOVI Hogeschool education course for Full-Stack Developer.
 This application is made for the as a final project. The project is a web application for a (non-existent) art-gallery, its artists and its customers.
 It contains functionalities specifically designed for each type of user.
@@ -19,14 +21,15 @@ Download and install the latest version of npm.
 npm install -g npm@latest
 
 Download the The ArtRoom repository via github:
-https://github.com/basschoonens/frontend-the-art-room-eindopdracht
+[https://github.com/basschoonens/frontend-the-art-room-eindopdracht](https://github.com/basschoonens/frontend-the-art-room-eindopdracht])
 
 or clone the repository via git:
 HTTPS:
-https://github.com/basschoonens/frontend-the-art-room-eindopdracht.git
+[https://github.com/basschoonens/frontend-the-art-room-eindopdracht.git](https://github.com/basschoonens/frontend-the-art-room-eindopdracht.git])
 
 SSH:
-git@github.com:basschoonens/frontend-the-art-room-eindopdracht.git
+[git@github.com:basschoonens/frontend-the-art-room-eindopdracht.git](git@github.com:basschoonens/frontend-the-art-room-eindopdracht.git)
+
 
 Navigate to the root of the project in your terminal and run:
 npm install
