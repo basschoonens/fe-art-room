@@ -4,10 +4,15 @@
     color: var(--color-primary);
     border-radius: 5px;
     padding: 4px 12px;
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
     text-align: center;
     display: inline-block;
     font-size: var(--font-size-small);
     margin: 2px 1px;
     cursor: pointer;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

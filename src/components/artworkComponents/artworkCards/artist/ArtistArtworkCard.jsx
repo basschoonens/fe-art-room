@@ -5,7 +5,7 @@ import axios from 'axios';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { currencyFormat } from "../../../../helpers/currencyFormat.js";
 
-export default function ArtistArtworkCard({ artworkId, title, salesPrice, averageRating, imageUrl }) {
+export default function ArtistArtworkCard({ artworkId, title, galleryBuyingPrice, salesPrice, averageRating, imageUrl }) {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -17,7 +17,6 @@ export default function ArtistArtworkCard({ artworkId, title, salesPrice, averag
         setLoading(true);
         setError(null);
         try {
-
             const jwt = localStorage.getItem('jwt');
 
             const config = {
@@ -27,11 +26,9 @@ export default function ArtistArtworkCard({ artworkId, title, salesPrice, averag
                 }
             };
             await axios.delete(`http://localhost:8080/artworks/artist/${artworkId}`, config, { signal: controller.signal });
-            console.log(`Artwork ${artworkId} deleted`);
             window.location.reload();
         } catch (error) {
-            setError(error);
-            console.log(error);
+            alert(error);
         } finally {
             setLoading(false);
         }
@@ -51,6 +48,7 @@ export default function ArtistArtworkCard({ artworkId, title, salesPrice, averag
             </Link>
             <div className={styles.artworkDetails}>
                 <h3>{title}</h3>
+                <p>Gallery buying price: {currencyFormat(galleryBuyingPrice)}</p>
                 <p>Gallery selling price: {currencyFormat(salesPrice)}</p>
                 <p>Average review rating: {averageRating}</p>
             </div>

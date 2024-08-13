@@ -5,6 +5,7 @@
     justify-content: center;
     width: 100%;
     max-width: 1200px;
+    padding: 0 var(--spacing-sm);
     background: var(--color-transparent);
 }
 
@@ -19,10 +20,19 @@
     background: var(--color-transparent);
     margin: var(--spacing-sm);
     padding: var(--spacing-sm);
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
     border-radius: var(--border-radius-lg);
     border: var(--border-md) var(--color-light);
     box-shadow: var(--shadow-md);
+}
+
+.usernameContainer{
+    width: 80%;
+}
+
+.passwordContainer {
+    position: relative;
+    width: 80%;
 }
 
 .loginHeading{
@@ -33,18 +43,37 @@
 .inputField {
     margin: var(--spacing-sm) 0;
     padding: var(--spacing-sm);
-    width: 80%;
+    width: 100%;
     min-width: 150px;
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
     border-radius: var(--border-radius-lg);
     border: var(--border-md) var(--color-light);
+    padding-right: 40px;
+    margin-bottom: 10px;
+}
+
+.visibilityToggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-large);
+    color: var(--color-dark);
+    padding: 0;
+}
+
+.visibilityToggle:hover {
+    color: var(--color-primary);
 }
 
 .errorMessage {
-    padding: 4px; /* Adjust the value as needed */
+    padding: 4px;
     border: var(--border-sm) var(--color-dark);
-    color: var(--color-dark); /* Optional: Set the color for error messages */
-    font-size: var(--font-size-small); /* Optional: Set the font size for error messages */
+    color: var(--color-dark);
+    font-size: var(--font-size-small);
 }
 
 @media (min-width: 768px) {

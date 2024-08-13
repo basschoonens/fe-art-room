@@ -1,0 +1,70 @@
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+    background: var(--color-transparent);
+    margin: 0 20px;
+    padding: var(--spacing-md);
+}
+
+.ordersContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.reviewData{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: var(--color-transparent);
+    margin: 0 20px;
+    padding: var(--spacing-md);
+}
+
+.order{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 250px;
+    border: var(--border-lg) var(--color-light);
+    padding: var(--spacing-md) 0;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--spacing-md);
+    margin-right: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.pendingOrders{
+    display: flex;
+    flex-direction: row;
+}
+
+.approvedOrders{
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonWrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.approveButton{
+    margin: var(--spacing-sm) 0;
+}
+
+.deleteButton{
+    margin: var(--spacing-sm) 0;
+}

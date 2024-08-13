@@ -4,11 +4,16 @@ button {
     color: var(--color-primary);
     border-radius: 10px;
     padding: 12px 24px;
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
     text-align: center;
     display: inline-block;
     font-size: var(--font-size-medium);
     margin: 4px 2px;
     cursor: pointer;
     width: auto;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

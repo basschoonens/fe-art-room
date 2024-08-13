@@ -4,10 +4,17 @@ import curator from '../../assets/curator.jpg'
 import user from '../../assets/user.jpg';
 import Button from "../../components/button/Button.jsx";
 import {useNavigate} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import {useContext} from "react";
 
 export default function Home() {
 
+    const {isAuth} = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const handleArtistClick = () => {
+        {isAuth ? navigate("/artistgallery") : navigate("/login")}
+    }
 
     return (
         <div className={styles.pageContainer}>
@@ -22,7 +29,7 @@ export default function Home() {
                 <span className={styles.toArtistImage}>
                     <img id="artist-image" src={artist} alt="artist image"/>
                     <Button id={styles.artistButton} text="For artists" type="button"
-                            onClick={() => navigate("/artistgallery")}/>
+                            onClick={handleArtistClick}/>
                 </span>
             </section>
             <section className={styles.curatorContainer}>

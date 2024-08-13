@@ -3,11 +3,13 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import axios from "axios";
 import WelcomeContent from "../../components/welcomeContentBar/WelcomeContent.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Register(){
     const {register, handleSubmit, watch, formState: {errors}, setValue} = useForm();
     const password = watch('password');
     const [selectedRole, setSelectedRole] = React.useState('');
+    const navigate = useNavigate();
 
     const handleRegister = async (data) => {
         const userData = {
@@ -22,12 +24,16 @@ export default function Register(){
         try {
             const response = await axios.post(url, userData);
             if (response.status === 201) {
-                console.log(`${selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)} created successfully`);
+                alert('Your registration is successful, please login to continue');
             }
+            navigate('/login')
         } catch (error) {
-            console.error(error);
+            if (error.response && error.response.status === 409) {
+                alert('Username already exists, please try again with a different username');
+            } else {
+                alert('We\'re sorry, something went wrong. Please try again or contact our gallery for assistance.');
+            }
         }
-        console.log(data);
     };
 
     const handleRoleChange = (event) => {
@@ -93,14 +99,14 @@ export default function Register(){
                 type="password"
                 {...register("password", {
                     required: "Password is required",
-                    // minLength: {
-                    //     value: 8,
-                    //     message: "Password must be at least 8 characters long"
-                    // },
-                    // pattern: {
-                    //     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                    //     message: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
-                    // }
+                    minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters long"
+                    },
+                    pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                        message: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+                    }
                 })}
             />
             {errors.password && <p className={styles.errorMessage}>{errors.password.message}</p>}

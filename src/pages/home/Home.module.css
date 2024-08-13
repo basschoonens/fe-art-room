@@ -38,23 +38,3 @@
   transform: translateX(-50%);
   z-index: 1;
 }
-
-@media screen and (min-width: var(--breakpoint-xs)) {
-
-}
-
-@media screen and (min-width: var(--breakpoint-sm)) {
-
-}
-
-@media screen and (min-width: var(--breakpoint-md)) {
-
-}
-
-@media screen and (min-width: var(--breakpoint-lg)) {
-
-}
-
-@media screen and (min-width: var(--breakpoint-xl)) {
-
-}

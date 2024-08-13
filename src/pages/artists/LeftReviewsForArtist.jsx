@@ -35,8 +35,11 @@ export default function LeftReviewsForArtist() {
                 const groupedReviews = groupByArtworkTitle(response.data);
                 setReviews(groupedReviews);
             } catch (error) {
-                console.error('Error fetching reviews:', error);
-                setError(error);
+                if (error.response && error.response.status === 404) {
+                    setReviews({});
+                } else {
+                    setError(error);
+                }
             } finally {
                 setLoading(false);
             }
@@ -72,18 +75,17 @@ export default function LeftReviewsForArtist() {
             setReviews((prevReviews) => {
                 const updatedReviews = {...prevReviews};
                 for (const title in updatedReviews) {
-                    // Filter out only the review with the specific ratingId
                     updatedReviews[title] = updatedReviews[title].filter(review => review.ratingId !== ratingId);
-                    // Remove the title if there are no more reviews for that artwork
                     if (updatedReviews[title].length === 0) {
                         delete updatedReviews[title];
                     }
                 }
-                console.log('Review deleted successfully');
+                if (Object.keys(updatedReviews).length === 0) {
                 return updatedReviews;
+                }
             });
         } catch (error) {
-            console.error('Error deleting review:', error);
+            setError(error)
         }
     };
 
@@ -91,7 +93,7 @@ export default function LeftReviewsForArtist() {
         <div className={styles.pageContainer}>
             <h2>Reviews for your artworks</h2>
             {loading && <p>Loading reviews...</p>}
-            {error && <p>Error loading reviews: {error.message}</p>}
+            {error && <p>Error: {error.message}</p>}
             <div className={styles.reviewsContainer}>
                 {Object.keys(reviews).length === 0 &&
                     <div>

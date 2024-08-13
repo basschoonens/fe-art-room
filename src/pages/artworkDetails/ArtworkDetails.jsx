@@ -30,7 +30,6 @@ export default function ArtworkDetails() {
             setError(null);
             try {
                 const response = await axios.get(`http://localhost:8080/artworks/${id}`, {signal: controller.signal});
-                console.log(response.data)
                 setArtwork(response.data);
             } catch (error) {
                 setError(error);
@@ -51,7 +50,6 @@ export default function ArtworkDetails() {
     };
 
     useEffect(() => {
-        // Update the previous gallery page state whenever the location changes
         if (window.location.pathname.includes('/maingallery')) {
             setPreviousGalleryPage('/maingallery');
         } else if (window.location.pathname.includes('/artistgallery')) {

@@ -6,7 +6,7 @@
     max-width: 1200px;
     width: 100%;
     background: var(--color-transparent);
-    border: var(--border-md) var(--color-light);
+    border: var(--border-lg) var(--color-light);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
     padding: var(--spacing-sm);
@@ -21,7 +21,7 @@
 }
 
 #welcomeContainer li {
-    font-family: var(--font-family-alt);
+    font-family: var(--font-family-alt), sans-serif;
 }
 
 .welcomeMessage{
@@ -53,9 +53,26 @@
     list-style: none;
 }
 
-@media screen and (min-width: var(--breakpoint-xl)) {
+.appTools li a, .profileTools li a {
+    text-decoration: none;
+    color: var(--color-secondary);
+    display: block;
+    transition: background-color 0.2s ease;
+}
+
+.appTools li a:hover, .profileTools li a:hover {
+    background-color: var(--color-light);
+}
+
+
+@media screen and (max-width: 768px) {
     .welcomeContainer{
-        max-width: 1200px;
-        margin: var(--spacing-md) auto;
+        flex-direction: column;
+    }
+    .welcomeLoggedIn{
+        flex-direction: column;
+    }
+    .toolsContainer{
+        flex-direction: column;
     }
 }
