@@ -24,7 +24,7 @@ export default function MainGallery() {
             setLoading(true);
             setError(null);
             try {
-                const response = await axios.get(`be-art-room:8080/artworks`, { signal: controller.signal });
+                const response = await axios.get('http://be-art-room.railway.internal:8080/artworks', { signal: controller.signal });
                 const shuffledArtworks = shuffleArray(response.data);
                 setArtworks(shuffledArtworks);
             } catch (error) {
