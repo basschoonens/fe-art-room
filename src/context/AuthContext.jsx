@@ -54,7 +54,7 @@ function AuthContextProvider({ children }) {
         }
     }
 
-    function logout() {
+    function logout(redirect = true) {
         setAuth({
             ...auth,
             isAuth: false,
@@ -63,7 +63,9 @@ function AuthContextProvider({ children }) {
         });
         localStorage.removeItem('jwt');
         localStorage.removeItem('cart');
-        navigate('/login')
+        if (redirect) {
+            navigate('/');
+        }
     }
 
     const contextData = {

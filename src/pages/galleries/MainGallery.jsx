@@ -24,7 +24,7 @@ export default function MainGallery() {
             setLoading(true);
             setError(null);
             try {
-                const response = await axios.get('https://be-art-room-production.up.railway.app/artworks', { signal: controller.signal });
+                const response = await axios.get(`http://localhost:8080/artworks`, { signal: controller.signal });
                 const shuffledArtworks = shuffleArray(response.data);
                 setArtworks(shuffledArtworks);
             } catch (error) {
@@ -78,7 +78,7 @@ export default function MainGallery() {
                                 title={artwork.title}
                                 artist={artwork.artist}
                                 rating={formatRating(artwork.averageRating)}
-                                imageUrl={`https://be-art-room-production.up.railway.app/artworks/${artwork.artworkId}/image`}
+                                imageUrl={`http://localhost:8080/artworks/${artwork.artworkId}/image`}
                             />
                         ))}
                     </div>
